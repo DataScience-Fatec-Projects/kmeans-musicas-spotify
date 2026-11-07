@@ -3,7 +3,10 @@
 
 Para cada fase do tasks.md existe uma issue-pai (uma por seção da aula, mais Setup e Entrega).
 Cada tarefa `T0NN` vira uma sub-issue dessa issue-pai. Todas as issues entram no Project
-"Projeto Final - Algoritmo K-Means" com Status, Priority e Target date preenchidos.
+"Projeto Final - Algoritmo K-Means" com Status, Prioridade e Prazo preenchidos.
+
+Prioridade e Prazo são campos do próprio Project, não os issue fields da org (Priority,
+Target date), porque board público não aceita issue fields restritos.
 
 É idempotente: issues que já existem (pais pelo título exato, tarefas pelo prefixo `T0NN:`)
 não são recriadas. Pode rodar de novo sempre que o tasks.md ganhar tarefas, por exemplo
@@ -78,6 +81,10 @@ LABELS = {
 
 # Milestone 1 começa em Ready; o resto fica em Backlog.
 STATUS_POR_MILESTONE = {"M1 Dados e modelo": "Ready"}
+
+# Campos locais do Project (criados pelo script se faltarem)
+CAMPO_PRIORIDADE = "Prioridade"
+CAMPO_PRAZO = "Prazo"
 PRIORITY_OPTIONS = [("P1", "Alta: rigor técnico ou prazo", "RED"),
                     ("P2", "Média: clareza e interpretação", "YELLOW"),
                     ("P3", "Baixa: peso pequeno na rubrica", "GRAY")]
@@ -274,31 +281,84 @@ class Project:
                 return o["id"]
         return None
 
-    def ensure_priority_options(self, dry: bool) -> None:
-        current = [o["name"] for o in self.fields["Priority"].get("options", [])]
+    def ensure_local_fields(self, dry: bool) -> None:
+        """Cria os campos Prazo (data) e Prioridade (P1/P2/P3) do Project, se faltarem."""
         wanted = [p for p, _, _ in PRIORITY_OPTIONS]
-        if all(w in current for w in wanted):
+        created = False
+        if CAMPO_PRAZO not in self.fields:
+            print(f"  + campo {CAMPO_PRAZO} (data) no Project")
+            if not dry:
+                gh("project", "field-create", str(PROJECT_NUMBER), "--owner", PROJECT_OWNER,
+                   "--name", CAMPO_PRAZO, "--data-type", "DATE")
+                created = True
+        if CAMPO_PRIORIDADE not in self.fields:
+            print(f"  + campo {CAMPO_PRIORIDADE} ({'/'.join(wanted)}) no Project")
+            if not dry:
+                gh("project", "field-create", str(PROJECT_NUMBER), "--owner", PROJECT_OWNER,
+                   "--name", CAMPO_PRIORIDADE, "--data-type", "SINGLE_SELECT",
+                   "--single-select-options", ",".join(wanted))
+                created = True
+        if created:
+            self.reload_fields()
+        if CAMPO_PRIORIDADE in self.fields:
+            # Logo depois de criar o campo, aplica descrição e cor às opções. Depois disso só
+            # mexe se os nomes mudarem: regravar as opções troca os IDs e apagaria os valores
+            # já atribuídos às issues.
+            self.ensure_priority_options(dry, force=created)
+
+    def ensure_priority_options(self, dry: bool, force: bool = False) -> None:
+        """Garante as opções P1/P2/P3 (com descrição e cor)."""
+        current = [o["name"] for o in self.fields[CAMPO_PRIORIDADE].get("options", [])]
+        wanted = [p for p, _, _ in PRIORITY_OPTIONS]
+        if current == wanted and not force:
             return
-        print(f"  ~ campo Priority do Project: {current or 'sem opções'} -> {wanted}")
+        print(f"  ~ opções de {CAMPO_PRIORIDADE}: {current or 'sem opções'} -> {wanted}")
         if dry:
             return
         opts = ", ".join(
             f'{{name: "{n}", description: "{d}", color: {c}}}' for n, d, c in PRIORITY_OPTIONS)
         query = ("mutation { updateProjectV2Field(input: {fieldId: \"%s\", singleSelectOptions: [%s]})"
                  " { projectV2Field { ... on ProjectV2SingleSelectField { id } } } }"
-                 % (self.fields["Priority"]["id"], opts))
+                 % (self.fields[CAMPO_PRIORIDADE]["id"], opts))
         gh("api", "graphql", "-f", f"query={query}")
         self.reload_fields()
 
-    def add_and_set(self, issue_url: str, status: str, priority: str, target: str) -> None:
-        item = gh_json("project", "item-add", str(PROJECT_NUMBER), "--owner", PROJECT_OWNER,
-                       "--url", issue_url, "--format", "json")
-        base = ["project", "item-edit", "--id", item["id"], "--project-id", self.id]
-        for fname, value in (("Status", status), ("Priority", priority)):
-            oid = self.option_id(fname, value)
-            if oid:
-                gh(*base, "--field-id", self.fields[fname]["id"], "--single-select-option-id", oid)
-        gh(*base, "--field-id", self.fields["Target date"]["id"], "--date", target)
+    def item_id_for(self, issue_url: str) -> str:
+        """ID do item da issue no Project, adicionando se preciso. O workflow nativo
+        "Auto-add sub-issues to project" às vezes adiciona a sub-issue antes do script; nesse
+        caso o item-add falha com "already exists" e o item é buscado pela issue."""
+        try:
+            return gh_json("project", "item-add", str(PROJECT_NUMBER), "--owner", PROJECT_OWNER,
+                           "--url", issue_url, "--format", "json")["id"]
+        except SystemExit as exc:
+            if "already exists" not in str(exc):
+                raise
+        owner, name = REPO.split("/")
+        number = int(issue_url.rstrip("/").rsplit("/", 1)[-1])
+        query = ("query($o:String!,$r:String!,$n:Int!){repository(owner:$o,name:$r){issue(number:$n)"
+                 "{projectItems(first:20){nodes{id project{id}}}}}}")
+        data = gh_json("api", "graphql", "-f", f"query={query}", "-f", f"o={owner}",
+                       "-f", f"r={name}", "-F", f"n={number}")
+        for node in data["data"]["repository"]["issue"]["projectItems"]["nodes"]:
+            if node["project"]["id"] == self.id:
+                return node["id"]
+        raise SystemExit(f"item da issue #{number} não encontrado no Project")
+
+    def add_and_set(self, issue_url: str, status: str, priority: str, target: str) -> bool:
+        """Adiciona a issue ao Project e preenche os campos. Uma falha aqui não interrompe o
+        sync: a issue já existe, e o aviso permite corrigir o board à mão."""
+        try:
+            item_id = self.item_id_for(issue_url)
+            base = ["project", "item-edit", "--id", item_id, "--project-id", self.id]
+            for fname, value in (("Status", status), (CAMPO_PRIORIDADE, priority)):
+                oid = self.option_id(fname, value)
+                if oid:
+                    gh(*base, "--field-id", self.fields[fname]["id"], "--single-select-option-id", oid)
+            gh(*base, "--field-id", self.fields[CAMPO_PRAZO]["id"], "--date", target)
+            return True
+        except SystemExit as exc:
+            print(f"      ⚠ board não atualizado para {issue_url}: {exc}")
+            return False
 
 
 # --------------------------------------------------------------------------- main
@@ -324,6 +384,7 @@ def create_issue(title: str, body: str, labels: list[str], milestone: str,
         args += ["--parent", str(parent)]
     url = gh(*args, input_text=body).strip().splitlines()[-1]
     number = int(url.rstrip("/").rsplit("/", 1)[-1])
+    print(f"        -> #{number}")
     return {"number": number, "url": url, "title": title}
 
 
@@ -331,6 +392,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--tasks", default=f"{FEATURE_DIR}/tasks.md", help="caminho do tasks.md")
     ap.add_argument("--dry-run", action="store_true", help="só mostra o que seria feito")
+    ap.add_argument("--reparar-board", action="store_true",
+                    help="preenche Status/Prioridade/Prazo de issues existentes que estão sem "
+                         "Prioridade no Project (itens que o script nunca configurou)")
     args = ap.parse_args()
 
     groups = parse_tasks(Path(args.tasks))
@@ -339,14 +403,29 @@ def main() -> int:
     print(f"{args.tasks}: {total} tarefas em {len(groups)} grupos"
           + (" (dry-run, nada será alterado)" if args.dry_run else ""))
 
-    print("\n[1/3] Labels, milestones e campo Priority")
+    print("\n[1/3] Labels, milestones e campos do Project")
     ensure_labels(args.dry_run)
     ensure_milestones(args.dry_run)
     project = Project()
-    project.ensure_priority_options(args.dry_run)
+    project.ensure_local_fields(args.dry_run)
 
     print(f"\n[2/3] Issues-pai e sub-issues -> Project “{project.title}”")
     by_title, by_task = existing_issues()
+    sem_prioridade: set[str] = set()
+    if args.reparar_board:
+        itens = gh_json("project", "item-list", str(PROJECT_NUMBER), "--owner", PROJECT_OWNER,
+                        "--format", "json", "--limit", "1000")["items"]
+        no_board = {i["content"].get("url") for i in itens}
+        sem_prioridade = {i["content"].get("url") for i in itens
+                          if not i.get(CAMPO_PRIORIDADE.lower())}
+        sem_prioridade |= {i["url"] for i in by_title.values()} - no_board
+
+    def reparar(issue: dict, status: str, priority: str, due: str) -> None:
+        if issue["url"] in sem_prioridade:
+            print(f"      ~ board: #{issue['number']} -> {status}, {priority}, {due}")
+            if not args.dry_run:
+                project.add_and_set(issue["url"], status, priority, due)
+
     created = 0
     for key in order:
         g = groups.get(key)
@@ -358,6 +437,7 @@ def main() -> int:
         parent = by_title.get(p["title"])
         if parent:
             print(f"  = #{parent['number']} {p['title']}")
+            reparar(parent, status, p["priority"], due)
         else:
             print(f"  + [pai] {p['title']}  ({p['milestone']}, {status}, {p['priority']})")
             if not args.dry_run:
@@ -368,7 +448,10 @@ def main() -> int:
         for t in g.tasks:
             title = f"{t.tid}: {short_title(t.text)}"
             if t.tid in by_task:
-                print(f"      = #{by_task[t.tid]['number']} {by_task[t.tid]['title']}")
+                existente = by_task[t.tid]
+                print(f"      = #{existente['number']} {existente['title']}")
+                reparar(existente, "Done" if existente["state"] == "CLOSED" else status,
+                        p["priority"], due)
                 continue
             flag = " [P]" if t.parallel else ""
             done = " (já concluída no tasks.md: criada e fechada)" if t.done else ""

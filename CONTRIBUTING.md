@@ -91,6 +91,11 @@ Se o `tasks.md` ganhar tarefas novas (à mão ou pelo `/speckit-converge`):
 ```bash
 python scripts/sync_issues.py --dry-run   # confira o que será criado
 python scripts/sync_issues.py             # cria só o que falta
+python scripts/sync_issues.py --reparar-board   # preenche Status/Prioridade/Prazo que ficaram vazios
 ```
 
 Requer o `gh` autenticado com os escopos `repo` e `project` (`gh auth refresh -s project`).
+
+> Prioridade e Prazo são campos **do próprio board**. Os issue fields da org (Priority, Target
+> date) foram retirados deste projeto porque o GitHub não deixa um board público usar issue
+> fields restritos.
