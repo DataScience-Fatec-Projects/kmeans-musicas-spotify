@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Board do projeto
+    url: https://github.com/orgs/DataScience-Fatec-Projects/projects/3
+    about: Veja o que já está planejado antes de abrir uma issue nova.

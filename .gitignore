@@ -1,0 +1,15 @@
+# Ambiente local
+.venv/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+*_executada.ipynb
+
+# Claude Code: as skills do spec-kit (.claude/skills) são versionadas; configurações locais não
+.claude/settings.local.json
+
+# Sistema
+.DS_Store
+Thumbs.db
