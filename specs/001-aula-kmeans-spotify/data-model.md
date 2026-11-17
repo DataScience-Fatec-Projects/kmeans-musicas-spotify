@@ -62,6 +62,13 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
   desvio-padrão ≈ 1 (verificado com uma tabela, FR-036).
 - `scaler` é guardado para reverter os centroides (`inverse_transform`).
 
+### Escolha de k: `inercias`, `silhuetas`, `K_ESCOLHIDO`
+- `inercias`: lista com a inércia de `KMeans(k, n_init=10, random_state=RANDOM_STATE).fit(X)` para
+  k = 1..10 (IV.1).
+- `silhuetas`: lista com `silhouette_score` para k = 2..10, numa amostra de
+  `TAMANHO_AMOSTRA_SILHUETA` com `RANDOM_STATE` (IV.1).
+- `K_ESCOLHIDO`: inteiro decidido pelos 3 critérios do FR-040 (k = 5 esperado, R2).
+
 ### Modelo e clusters: `modelo`, `rotulos`, `centroides_*`
 - `modelo = KMeans(n_clusters=K_ESCOLHIDO, n_init=10, random_state=RANDOM_STATE).fit(X)`
 - `rotulos = modelo.labels_`, com um valor por faixa de `df_faixas`. Ficam guardados também em
@@ -86,6 +93,8 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
 ### Exemplo de brinquedo (Seção I): `X_brinquedo`
 - `make_blobs` com cerca de 150 pontos 2D e `random_state=RANDOM_STATE`. Usado só na
   implementação do zero, na comparação com o scikit-learn (ARI) e nas células "Experimente".
+- `kmeans_do_zero(X, k, semente, max_iter, tol)`: função local à Seção I que devolve os rótulos,
+  os centroides finais, os centroides iniciais e o número de iterações (R6).
 
 ## Estados
 

@@ -264,8 +264,10 @@ exemplos e gêneros predominantes, e há uma lista de limitações e de próximo
 **Seção II — Ferramentas**
 
 - **FR-020**: MUST listar as bibliotecas usadas, com uma frase sobre o papel de cada uma.
-- **FR-021**: MUST apresentar como o scikit-learn implementa o K-Means: a classe, os parâmetros
-  principais e os atributos de resultado.
+- **FR-021**: MUST abrir com uma breve introdução ao scikit-learn (o que é e o padrão comum da API:
+  instanciar → `fit` → `predict`/atributos terminados em `_`) e então apresentar como ele implementa
+  o K-Means em `sklearn.cluster.KMeans`: a classe, os parâmetros principais e os atributos de
+  resultado.
 - **FR-022**: MUST imprimir as versões das bibliotecas e definir uma única semente aleatória para
   todo o notebook.
 
@@ -293,7 +295,11 @@ exemplos e gêneros predominantes, e há uma lista de limitações e de próximo
 **Seção IV — Implementação**
 
 - **FR-040**: MUST rodar o Método do Cotovelo num intervalo de k que inclua pelo menos k = 1..10 e
-  justificar o k escolhido por escrito.
+  justificar o k escolhido por escrito, combinando três critérios nesta ordem: (1) a faixa de k
+  onde a queda da inércia desacelera; (2) a silhueta (FR-041) entre os candidatos dessa faixa;
+  (3) se cada cluster tem um perfil interpretável. A justificativa MUST citar os valores de
+  inércia e silhueta dos candidatos e dizer por que pelo menos um k alternativo foi descartado. Se
+  a curva não tiver joelho nítido, o texto MUST dizer isso.
 - **FR-041**: MUST complementar o cotovelo com a silhueta calculada numa amostra de tamanho e
   semente fixos.
 - **FR-042**: MUST instanciar o modelo com o k escolhido e a semente fixa, treinar com os dados

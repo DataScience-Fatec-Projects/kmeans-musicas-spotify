@@ -15,60 +15,60 @@ Público: o autor da spec e quem revisar PR. Profundidade: portão formal antes 
 
 ## Cobertura do enunciado (Completeness)
 
-- [ ] CHK001 Cada um dos 5 títulos de seção do enunciado (I–V) está exigido literalmente e na ordem? [Completeness, Spec §FR-002, Contrato §1]
-- [ ] CHK002 Há requisito para explicar aprendizado não supervisionado **e** clustering (os dois conceitos da Seção I)? [Completeness, Spec §FR-010]
-- [ ] CHK003 Os 4 passos do K-Means pedidos (inicialização, atribuição, atualização, parada) estão listados no requisito? [Completeness, Spec §FR-011]
-- [ ] CHK004 O Método do Cotovelo é exigido tanto na teoria (Seção I) quanto na prática (Seção IV)? [Consistency, Spec §FR-012, §FR-040]
-- [ ] CHK005 Há requisito para a "breve introdução" ao scikit-learn com foco em `sklearn.cluster.KMeans`? [Completeness, Spec §FR-021]
-- [ ] CHK006 Há requisito para listar **e explicar** cada biblioteca importada? [Completeness, Spec §FR-020]
-- [ ] CHK007 Origem do dataset com link, descrição das variáveis e pré-processamento estão cobertos como requisitos separados e verificáveis? [Completeness, Spec §FR-031, §FR-032, §FR-033]
-- [ ] CHK008 A justificativa da padronização para o K-Means é exigida explicitamente, e não só a aplicação do StandardScaler? [Clarity, Spec §FR-036]
-- [ ] CHK009 Instanciar, treinar e obter centroides e `.labels_` estão exigidos como saídas visíveis? [Completeness, Spec §FR-042]
-- [ ] CHK010 As duas visualizações obrigatórias (separação 2D e centroides × pontos) estão especificadas como gráficos **distintos**? [Clarity, Spec §FR-043]
-- [ ] CHK011 Interpretação "com base no dataset original" está traduzida em requisito mensurável (escala original, valores citados)? [Measurability, Spec §FR-050, §FR-051]
-- [ ] CHK012 Limitações e próximos passos têm quantidade mínima definida? [Measurability, Spec §FR-054]
-- [ ] CHK013 O nome completo dos alunos no início é requisito, com critério verificável? [Completeness, Spec §FR-001, Contrato §2]
-- [ ] CHK014 A entrega por link **público** do Colab está especificada, com a versão salva com outputs? [Completeness, Spec §FR-003, §FR-004, §SC-006]
+- [x] CHK001 Cada um dos 5 títulos de seção do enunciado (I–V) está exigido literalmente e na ordem? [Completeness, Spec §FR-002, Contrato §1]
+- [x] CHK002 Há requisito para explicar aprendizado não supervisionado **e** clustering (os dois conceitos da Seção I)? [Completeness, Spec §FR-010]
+- [x] CHK003 Os 4 passos do K-Means pedidos (inicialização, atribuição, atualização, parada) estão listados no requisito? [Completeness, Spec §FR-011]
+- [x] CHK004 O Método do Cotovelo é exigido tanto na teoria (Seção I) quanto na prática (Seção IV)? [Consistency, Spec §FR-012, §FR-040]
+- [x] CHK005 Há requisito para a "breve introdução" ao scikit-learn com foco em `sklearn.cluster.KMeans`? [Completeness, Spec §FR-021]
+- [x] CHK006 Há requisito para listar **e explicar** cada biblioteca importada? [Completeness, Spec §FR-020]
+- [x] CHK007 Origem do dataset com link, descrição das variáveis e pré-processamento estão cobertos como requisitos separados e verificáveis? [Completeness, Spec §FR-031, §FR-032, §FR-033]
+- [x] CHK008 A justificativa da padronização para o K-Means é exigida explicitamente, e não só a aplicação do StandardScaler? [Clarity, Spec §FR-036]
+- [x] CHK009 Instanciar, treinar e obter centroides e `.labels_` estão exigidos como saídas visíveis? [Completeness, Spec §FR-042]
+- [x] CHK010 As duas visualizações obrigatórias (separação 2D e centroides × pontos) estão especificadas como gráficos **distintos**? [Clarity, Spec §FR-043]
+- [x] CHK011 Interpretação "com base no dataset original" está traduzida em requisito mensurável (escala original, valores citados)? [Measurability, Spec §FR-050, §FR-051]
+- [x] CHK012 Limitações e próximos passos têm quantidade mínima definida? [Measurability, Spec §FR-054]
+- [x] CHK013 O nome completo dos alunos no início é requisito, com critério verificável? [Completeness, Spec §FR-001, Contrato §2]
+- [x] CHK014 A entrega por link **público** do Colab está especificada, com a versão salva com outputs? [Completeness, Spec §FR-003, §FR-004, §SC-006]
 
 ## Rubrica: Rigor Técnico, 40% (Clarity / Measurability)
 
-- [ ] CHK015 O critério de escolha de k está definido de forma que outro avaliador chegaria à mesma conclusão (cotovelo + silhueta + interpretabilidade, com intervalos de k)? [Clarity, Spec §FR-040, §FR-041, Research §R2]
-- [ ] CHK016 Está especificado que a padronização é ajustada só com as features de treino e reaproveitada para reverter os centroides? [Consistency, Data-model §Matriz padronizada]
-- [ ] CHK017 As regras de limpeza (ausentes, linhas idênticas, `tempo` = 0, deduplicação por faixa) estão todas listadas, com a ordem de aplicação definida? [Clarity, Spec §FR-033, Research §R1]
-- [ ] CHK018 A exclusão de `track_genre` do treino está exigida e justificada (evitar vazamento de rótulo)? [Clarity, Constituição §V, Spec §FR-035]
-- [ ] CHK019 Os parâmetros do modelo que afetam o resultado (`n_init`, semente) estão fixados nos requisitos ou no plano? [Completeness, Data-model §Modelo]
-- [ ] CHK020 O requisito de comparar a implementação do zero com o scikit-learn define uma métrica que ignora a numeração dos rótulos? [Clarity, Spec §Edge Cases, Research §R6]
+- [x] CHK015 O critério de escolha de k está definido de forma que outro avaliador chegaria à mesma conclusão (cotovelo + silhueta + interpretabilidade, com intervalos de k)? [Clarity, Spec §FR-040, §FR-041, Research §R2]
+- [x] CHK016 Está especificado que a padronização é ajustada só com as features de treino e reaproveitada para reverter os centroides? [Consistency, Data-model §Matriz padronizada]
+- [x] CHK017 As regras de limpeza (ausentes, linhas idênticas, `tempo` = 0, deduplicação por faixa) estão todas listadas, com a ordem de aplicação definida? [Clarity, Spec §FR-033, Research §R1]
+- [x] CHK018 A exclusão de `track_genre` do treino está exigida e justificada (evitar vazamento de rótulo)? [Clarity, Constituição §V, Spec §FR-035]
+- [x] CHK019 Os parâmetros do modelo que afetam o resultado (`n_init`, semente) estão fixados nos requisitos ou no plano? [Completeness, Data-model §Modelo]
+- [x] CHK020 O requisito de comparar a implementação do zero com o scikit-learn define uma métrica que ignora a numeração dos rótulos? [Clarity, Spec §Edge Cases, Research §R6]
 
 ## Rubrica: Clareza da Explicação, 30%
 
-- [ ] CHK021 "Linguagem acessível" está operacionalizada (termo técnico definido na primeira vez, público-alvo definido)? [Clarity, Constituição §II, Spec §Assumptions]
-- [ ] CHK022 A regra "markdown antes de todo código e comentário depois de toda saída relevante" é verificável (automática ou por revisão)? [Measurability, Spec §FR-005, Contrato §2]
-- [ ] CHK023 O critério de sucesso do leitor-teste define quem é o leitor, quantas pessoas e quais perguntas? [Measurability, Spec §SC-003, Quickstart §D]
-- [ ] CHK024 A análise de complexidade tem conteúdo mínimo definido (custos por iteração, total, memória, cotovelo, silhueta)? [Completeness, Spec §FR-014]
+- [x] CHK021 "Linguagem acessível" está operacionalizada (termo técnico definido na primeira vez, público-alvo definido)? [Clarity, Constituição §II, Spec §Assumptions]
+- [x] CHK022 A regra "markdown antes de todo código e comentário depois de toda saída relevante" é verificável (automática ou por revisão)? [Measurability, Spec §FR-005, Contrato §2]
+- [x] CHK023 O critério de sucesso do leitor-teste define quem é o leitor, quantas pessoas e quais perguntas? [Measurability, Spec §SC-003, Quickstart §D]
+- [x] CHK024 A análise de complexidade tem conteúdo mínimo definido (custos por iteração, total, memória, cotovelo, silhueta)? [Completeness, Spec §FR-014]
 
 ## Rubrica: Qualidade da Aplicação, 20%
 
-- [ ] CHK025 A relevância do tema está argumentada como requisito (motivação de uso real)? [Completeness, Spec §FR-030]
-- [ ] CHK026 Os requisitos de qualidade visual dos gráficos (título, eixos em pt-BR, legenda, legibilidade com muitos pontos) estão especificados? [Clarity, Spec §FR-044]
-- [ ] CHK027 O destaque brasileiro define a lista exata de gêneros e de contrastes e a forma de comparação? [Clarity, Spec §FR-034, Data-model §Gênero × cluster]
-- [ ] CHK028 A ambiguidade do rótulo `funk` (EUA × Brasil) está registrada para não gerar conclusão errada? [Edge Case, Spec §Assumptions]
+- [x] CHK025 A relevância do tema está argumentada como requisito (motivação de uso real)? [Completeness, Spec §FR-030]
+- [x] CHK026 Os requisitos de qualidade visual dos gráficos (título, eixos em pt-BR, legenda, legibilidade com muitos pontos) estão especificados? [Clarity, Spec §FR-044]
+- [x] CHK027 O destaque brasileiro define a lista exata de gêneros e de contrastes e a forma de comparação? [Clarity, Spec §FR-034, Data-model §Gênero × cluster]
+- [x] CHK028 A ambiguidade do rótulo `funk` (EUA × Brasil) está registrada para não gerar conclusão errada? [Edge Case, Spec §Assumptions]
 
 ## Rubrica: Organização do Notebook, 10%
 
-- [ ] CHK029 Existe sumário e a hierarquia de títulos está fixada em contrato? [Completeness, Spec §FR-002, Contrato §1]
-- [ ] CHK030 O número mínimo e a posição das células "🧪 Experimente" estão definidos? [Measurability, Spec §FR-007, Contrato §4]
+- [x] CHK029 Existe sumário e a hierarquia de títulos está fixada em contrato? [Completeness, Spec §FR-002, Contrato §1]
+- [x] CHK030 O número mínimo e a posição das células "🧪 Experimente" estão definidos? [Measurability, Spec §FR-007, Contrato §4]
 
 ## Reprodutibilidade e execução (Non-Functional)
 
-- [ ] CHK031 O limite de tempo (total < 5 min, célula < 2 min) está definido, com o ambiente de medição (Colab gratuito)? [Measurability, Spec §SC-001, §Edge Cases]
-- [ ] CHK032 O comportamento quando a URL do dataset está indisponível está especificado? [Edge Case, Spec §Edge Cases, Research §R9]
-- [ ] CHK033 A reprodutibilidade define o que deve ser idêntico entre execuções (tamanhos, centroides, gráficos)? [Measurability, Spec §SC-004]
-- [ ] CHK034 As amostragens (silhueta, gráficos) têm tamanho e semente especificados? [Clarity, Research §R3]
+- [x] CHK031 O limite de tempo (total < 5 min, célula < 2 min) está definido, com o ambiente de medição (Colab gratuito)? [Measurability, Spec §SC-001, §Edge Cases]
+- [x] CHK032 O comportamento quando a URL do dataset está indisponível está especificado? [Edge Case, Spec §Edge Cases, Research §R9]
+- [x] CHK033 A reprodutibilidade define o que deve ser idêntico entre execuções (tamanhos, centroides, gráficos)? [Measurability, Spec §SC-004]
+- [x] CHK034 As amostragens (silhueta, gráficos) têm tamanho e semente especificados? [Clarity, Research §R3]
 
 ## Consistência entre artefatos (Consistency)
 
-- [ ] CHK035 Os nomes de variáveis do contrato §3 batem com as entidades do data-model? [Consistency, Contrato §3, Data-model]
-- [ ] CHK036 Escopo excluído (app, widgets, outros algoritmos como entrega) aparece de forma consistente na spec, na constituição e no plano? [Consistency, Spec §Assumptions, Constituição §VI, Spec §FR-007]
+- [x] CHK035 Os nomes de variáveis do contrato §3 batem com as entidades do data-model? [Consistency, Contrato §3, Data-model]
+- [x] CHK036 Escopo excluído (app, widgets, outros algoritmos como entrega) aparece de forma consistente na spec, na constituição e no plano? [Consistency, Spec §Assumptions, Constituição §VI, Spec §FR-007]
 
 ## Notes
 
@@ -78,3 +78,6 @@ Público: o autor da spec e quem revisar PR. Profundidade: portão formal antes 
 - `checklists/requirements.md` has a separate built-in lifecycle maintained by `/speckit-specify` and `/speckit-clarify`
 - Revisão do autor (2026-11-07): uma leitura prévia não achou lacunas além das já corrigidas na
   spec. Os itens ficam desmarcados para o revisor (usuário) confirmar antes do `/speckit-implement`.
+- Revisão do revisor (2026-11-16): 36/36 itens conferidos. Três lacunas corrigidas antes de marcar:
+  FR-021 (introdução ao scikit-learn), FR-040 (critério de escolha de k em 3 passos) e data-model
+  (`inercias`, `silhuetas`, `K_ESCOLHIDO` e `kmeans_do_zero`, para bater com o contrato §3).

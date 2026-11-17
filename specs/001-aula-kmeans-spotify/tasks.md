@@ -87,7 +87,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 
 - [ ] T013 [US4] IV.1 Método do Cotovelo (k = 1..10) — `aula.ipynb` §IV.1: `inercias` com `KMeans(n_init=10, random_state=RANDOM_STATE)` e gráfico inércia × k (FR-044), com comentário honesto sobre a curva suave, sem joelho nítido (FR-040, R2)
 - [ ] T014 [US4] IV.1 Silhueta em amostra (k = 2..10) — `aula.ipynb` §IV.1: `silhuetas` com `silhouette_score(..., sample_size=TAMANHO_AMOSTRA_SILHUETA, random_state=RANDOM_STATE)` e gráfico (FR-044), explicando o porquê da amostra (a silhueta exata é O(n²)) (FR-041, R3)
-- [ ] T015 [US4] IV.1 Decisão justificada de K_ESCOLHIDO — `aula.ipynb` §IV.1: combinar cotovelo, silhueta e interpretabilidade (os experimentos indicam k = 5, R2), com justificativa por escrito
+- [ ] T015 [US4] IV.1 Decisão justificada de K_ESCOLHIDO — `aula.ipynb` §IV.1: combinar, nesta ordem, cotovelo, silhueta e interpretabilidade (os experimentos indicam k = 5, R2), com justificativa por escrito citando inércia e silhueta dos candidatos e por que o k alternativo (k = 6) foi descartado (FR-040)
 - [ ] T016 [US4] IV.2 Treino do K-Means: rótulos, tamanhos e centroides — `aula.ipynb` §IV.2: `modelo = KMeans(n_clusters=K_ESCOLHIDO, n_init=10, random_state=RANDOM_STATE).fit(X)`, `rotulos = modelo.labels_`, `df_faixas['cluster'] = rotulos`, `centroides_padronizados = modelo.cluster_centers_`. Mostrar a tabela de tamanho de cada cluster (contagem e %) **e a tabela dos centroides**, com comentário (FR-042)
 - [ ] T017 [US4] IV.2 🧪 Experimente: outro valor de k — `aula.ipynb` §IV.2: célula com `K_TESTE` editável que re-treina e mostra tamanhos e centroides ao lado dos do `K_ESCOLHIDO` (FR-007, contrato §4)
 - [ ] T018 [US4] IV.3 Gráfico de separação dos clusters — `aula.ipynb` §IV.3: calcular as 2 features com maior desvio entre `centroides_padronizados`, sortear `amostra_idx` (`TAMANHO_AMOSTRA_GRAFICOS`, `RANDOM_STATE`, explicando em markdown o porquê do tamanho) e plotar a dispersão colorida por cluster com `alpha` (FR-044), com comentário (inclusive se `speechiness` liderar por causa do cluster de fala) (FR-043a, R5)
@@ -139,7 +139,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 **Independent Test**: executar a configuração e a Seção II. As versões são impressas e cada biblioteca e parâmetro está explicado
 
 - [ ] T033 [P] [US2] II.1 Bibliotecas e o papel de cada uma — `aula.ipynb` §II.1: tabela com numpy, pandas, matplotlib, seaborn e os módulos do scikit-learn usados, com o papel de cada um na aula, referenciando a célula "⚙️ Configuração do ambiente" (FR-020)
-- [ ] T034 [US2] II.2 O KMeans do scikit-learn: parâmetros e atributos — `aula.ipynb` §II.2: `sklearn.cluster.KMeans`, com os parâmetros (`n_clusters`, `init='k-means++'`, `n_init`, `max_iter`, `tol`, `random_state`), os atributos (`labels_`, `cluster_centers_`, `inertia_`, `n_iter_`), o padrão `fit`/`predict` e k-means++ × inicialização aleatória, ligando com a I.3 (FR-021)
+- [ ] T034 [US2] II.2 O KMeans do scikit-learn: parâmetros e atributos — `aula.ipynb` §II.2: breve introdução ao scikit-learn (o que é, API comum instanciar → `fit` → `predict`), depois `sklearn.cluster.KMeans`, com os parâmetros (`n_clusters`, `init='k-means++'`, `n_init`, `max_iter`, `tol`, `random_state`), os atributos (`labels_`, `cluster_centers_`, `inertia_`, `n_iter_`), o padrão `fit`/`predict` e k-means++ × inicialização aleatória, ligando com a I.3 (FR-021)
 
 **Checkpoint**: todas as seções completas
 
