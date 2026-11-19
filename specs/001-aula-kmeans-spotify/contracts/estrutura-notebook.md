@@ -58,6 +58,13 @@ são copiados do enunciado, inclusive as maiúsculas e minúsculas ("V. Análise
 | Nenhum output de erro (`output_type == "error"`) salvo | ✔auto |
 | Nenhum widget ou plotly (`ipywidgets`, `plotly`) | ✔auto |
 | Toda saída relevante é comentada logo depois | revisão no PR |
+| Nenhuma célula com "🚧" e toda célula de código executada e salva com outputs (FR-004) | ✔auto, só com `--entrega` |
+
+Durante o desenvolvimento, o esqueleto marca cada subseção ainda não feita com
+"> 🚧 **Em construção** — ver T0NN (#N)". As 4 células "🧪 Experimente" já nascem no lugar certo, também
+marcadas com 🚧, para que o validador padrão passe em todo PR. O modo
+`python scripts/validar_notebook.py --entrega …` é o portão da versão final (T041) e reprova se
+sobrar algum 🚧 ou célula de código sem execução.
 
 ## 3. Variáveis por seção (o que cada uma recebe e entrega)
 
