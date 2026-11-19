@@ -1,0 +1,15 @@
+# Ambiente local e de CI parecido com o runtime padrão do Google Colab (research R8).
+# Sem versões fixas, de propósito: o alvo é acompanhar o que o Colab traz.
+# O notebook em si não instala nada; no Colab, essas bibliotecas já vêm prontas.
+
+# Análise (as 5 bibliotecas do enunciado)
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+
+# Validação e execução do notebook fora do Colab
+nbformat
+nbconvert
+ipykernel
