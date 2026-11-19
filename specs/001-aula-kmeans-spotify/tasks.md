@@ -43,7 +43,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 **Purpose**: ambiente de validação, validador estrutural e esqueleto do notebook
 
 - [X] T001 Ambiente de validação local e de CI — `requirements.txt` na raiz (pandas, numpy, scikit-learn, matplotlib, seaborn, nbformat, nbconvert, ipykernel, sem versões fixas, R8), conferindo se o `.gitignore` já cobre `.venv/` e `*_executada.ipynb`
-- [ ] T002 [P] Validador estrutural do notebook — `scripts/validar_notebook.py` com todas as checagens ✔auto do contrato §1 e §2: títulos `## I.`…`## V.` em ordem e com o texto exato do enunciado; primeira célula markdown com "Integrantes"; toda célula de código precedida por markdown não vazio; `RANDOM_STATE =` em exatamente 1 célula; `URL_DATASET` do Hugging Face sem `files.upload`/`drive.mount`; ≥ 4 markdowns começando com "🧪 Experimente"; nenhum output `error`; nenhum `ipywidgets`/`plotly`. Imprime `OK` ou a lista de falhas e sai com código 0 ou 1
+- [X] T002 [P] Validador estrutural do notebook — `scripts/validar_notebook.py` com todas as checagens ✔auto do contrato §1 e §2: títulos `## I.`…`## V.` em ordem e com o texto exato do enunciado; primeira célula markdown com "Integrantes"; toda célula de código precedida por markdown não vazio; `RANDOM_STATE =` em exatamente 1 célula; `URL_DATASET` do Hugging Face sem `files.upload`/`drive.mount`; ≥ 4 markdowns começando com "🧪 Experimente"; nenhum output `error`; nenhum `ipywidgets`/`plotly`. Imprime `OK` ou a lista de falhas e sai com código 0 ou 1
 - [ ] T003 Esqueleto do notebook com capa e sumário — `aula.ipynb`: todos os títulos do contrato §1 em markdown (com uma linha "🚧 em construção — ver issue" em cada subseção), a capa (título, disciplina ICD-004, Prof. Humberto Zanetti, Fatec Jundiaí, "Integrantes:" com o nome completo do autor e um lugar para outros, data, link do repo) e o sumário com links para cada seção
 
 ---
@@ -155,7 +155,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 - [ ] T038 Reprodutibilidade e tempo de execução — `aula.ipynb` (quickstart §B e §C): executar 2× do zero localmente comparando tamanhos, centroides e gráficos (SC-004), e executar no Colab gratuito medindo o tempo total (< 5 min, SC-001). Registrar no PR
 - [ ] T039 Leitor-teste — quickstart §D (SC-003): pelo menos 1 colega lê a aula no link e responde às 3 perguntas. Registrar as respostas na issue
 - [ ] T040 [P] README com resultados e link do Colab — `README.md` e `link_colab.txt`: k escolhido, nomes dos clusters e 1–2 figuras exportadas em `docs/img/`, mantendo a fonte e a licença do dataset (constituição, restrições de dados). Depende de T028 e T030
-- [ ] T041 Capa final e versão executada na main — `aula.ipynb`: nome completo de todos os integrantes na capa, notebook executado e salvo com outputs na `main`, `scripts/validar_notebook.py` OK e link público aberto em janela anônima (SC-006)
+- [ ] T041 Capa final e versão executada na main — `aula.ipynb`: nome completo de todos os integrantes na capa, notebook executado e salvo com outputs na `main`, `scripts/validar_notebook.py --entrega` OK (sem 🚧 e com todas as células executadas) e link público aberto em janela anônima (SC-006)
 - [ ] T042 Entrega do link público na plataforma da disciplina — `link_colab.txt`: enviar até 24/11/2026 23:59 (SC-007)
 
 ---
