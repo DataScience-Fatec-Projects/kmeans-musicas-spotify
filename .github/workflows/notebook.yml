@@ -1,0 +1,64 @@
+# Portão automático dos PRs (constituição, "Fluxo de Trabalho e Portões de Qualidade"):
+# 1) checagem estrutural do contrato e 2) execução do notebook do zero, como o Colab faria.
+name: Notebook
+
+on:
+  pull_request:
+    paths:
+      - "notebooks/**"
+      - "scripts/validar_notebook.py"
+      - "requirements.txt"
+      - ".github/workflows/notebook.yml"
+  push:
+    branches: [main]
+    paths:
+      - "notebooks/**"
+      - "scripts/validar_notebook.py"
+      - "requirements.txt"
+      - ".github/workflows/notebook.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: notebook-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validar-e-executar:
+    name: Validar e executar a aula
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NOTEBOOK: notebooks/aula_kmeans_spotify.ipynb
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"  # mesmo Python do runtime padrão do Colab
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Checagem estrutural (contrato)
+        run: python scripts/validar_notebook.py "$NOTEBOOK"
+
+      - name: Executar o notebook do zero
+        # 120 s por célula garante o limite de 2 min por etapa (spec, Edge Cases).
+        run: >
+          jupyter nbconvert --to notebook --execute
+          --ExecutePreprocessor.timeout=120
+          --output aula_executada.ipynb "$NOTEBOOK"
+
+      - name: Guardar o notebook executado
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aula-executada
+          path: notebooks/aula_executada.ipynb
+          if-no-files-found: ignore
+          retention-days: 7
