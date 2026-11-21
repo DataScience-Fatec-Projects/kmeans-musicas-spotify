@@ -138,7 +138,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 
 **Independent Test**: executar a configuração e a Seção II. As versões são impressas e cada biblioteca e parâmetro está explicado
 
-- [ ] T033 [P] [US2] II.1 Bibliotecas e o papel de cada uma — `aula.ipynb` §II.1: tabela com numpy, pandas, matplotlib, seaborn e os módulos do scikit-learn usados, com o papel de cada um na aula, referenciando a célula "⚙️ Configuração do ambiente" (FR-020)
+- [X] T033 [P] [US2] II.1 Bibliotecas e o papel de cada uma — `aula.ipynb` §II.1: tabela com numpy, pandas, matplotlib, seaborn e os módulos do scikit-learn usados, com o papel de cada um na aula, referenciando a célula "⚙️ Configuração do ambiente" (FR-020)
 - [ ] T034 [US2] II.2 O KMeans do scikit-learn: parâmetros e atributos — `aula.ipynb` §II.2: breve introdução ao scikit-learn (o que é, API comum instanciar → `fit` → `predict`), depois `sklearn.cluster.KMeans`, com os parâmetros (`n_clusters`, `init='k-means++'`, `n_init`, `max_iter`, `tol`, `random_state`), os atributos (`labels_`, `cluster_centers_`, `inertia_`, `n_iter_`), o padrão `fit`/`predict` e k-means++ × inicialização aleatória, ligando com a I.3 (FR-021)
 
 **Checkpoint**: todas as seções completas
