@@ -67,7 +67,7 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
   k = 1..10 (IV.1).
 - `silhuetas`: lista com `silhouette_score` para k = 2..10, numa amostra de
   `TAMANHO_AMOSTRA_SILHUETA` com `RANDOM_STATE` (IV.1).
-- `K_ESCOLHIDO`: inteiro decidido pelos 3 critérios do FR-040 (k = 5 esperado, R2).
+- `K_ESCOLHIDO`: inteiro decidido pelos 3 critérios do FR-040 (k = 7, R2).
 
 ### Modelo e clusters: `modelo`, `rotulos`, `centroides_*`
 - `modelo = KMeans(n_clusters=K_ESCOLHIDO, n_init=10, random_state=RANDOM_STATE).fit(X)`
