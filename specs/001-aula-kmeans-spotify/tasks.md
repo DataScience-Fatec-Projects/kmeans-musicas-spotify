@@ -92,7 +92,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 - [X] T017 [US4] IV.2 🧪 Experimente: outro valor de k — `aula.ipynb` §IV.2: célula com `K_TESTE` editável que re-treina e mostra tamanhos e centroides ao lado dos do `K_ESCOLHIDO` (FR-007, contrato §4)
 - [X] T018 [US4] IV.3 Gráfico de separação dos clusters — `aula.ipynb` §IV.3: calcular as 2 features com maior desvio entre `centroides_padronizados`, sortear `amostra_idx` (`TAMANHO_AMOSTRA_GRAFICOS`, `RANDOM_STATE`, explicando em markdown o porquê do tamanho) e plotar a dispersão colorida por cluster com `alpha` (FR-044), com comentário (inclusive se `speechiness` liderar por causa do cluster de fala) (FR-043a, R5)
 - [X] T019 [US4] IV.4 Gráfico de centroides em relação aos pontos (PCA 2D) — `aula.ipynb` §IV.4: PCA 2D ajustado em `X`, projetar `amostra_idx` e os centroides, marcar cada centroide com um "X" grande, rótulo e legenda (FR-044), variância explicada no título, com comentário (FR-043b, R5)
-- [ ] T020 [US4] IV.4 🧪 Experimente: com e sem padronização — `aula.ipynb` §IV.4 (fim): célula com `USAR_PADRONIZACAO = True/False` que treina sem padronização e compara tamanhos e centroides, mostrando `tempo` e `loudness` dominando (FR-007, contrato §4)
+- [X] T020 [US4] IV.4 🧪 Experimente: com e sem padronização — `aula.ipynb` §IV.4 (fim): célula com `USAR_PADRONIZACAO = True/False` que treina sem padronização e compara tamanhos e centroides, mostrando `tempo` e `loudness` dominando (FR-007, contrato §4)
 
 **Checkpoint**: US3 + US4 completas, ou seja, o núcleo de "Rigor Técnico" (40%) está entregue
 
