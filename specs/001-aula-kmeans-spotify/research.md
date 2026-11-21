@@ -19,16 +19,27 @@ CSV completo. São referência para o plano. Os valores definitivos são os que 
 
 ## R2. Escolha de k
 
-- **Decision**: varrer k = 1..10 (inércia) e k = 2..10 (silhueta numa amostra de 10.000 pontos
-  com `RANDOM_STATE`). Decidir combinando cotovelo, silhueta e interpretabilidade. Os
-  experimentos indicam **k = 5** como o candidato mais forte (k = 6 é a alternativa).
-- **Rationale**: a curva de inércia é suave (807.660 → 632.735 → 561.696 → 505.598 → 455.891 →
-  414.346 … para k = 1..6), sem joelho nítido. A silhueta fica baixa (0,16 a 0,19 para k = 3..6),
-  o que é típico de dados de áudio contínuos. Com k = 5 surgem 5 perfis musicais nítidos (R4).
-  k = 6 só separa um grupo "ao vivo" (liveness alto). O notebook MUST mostrar essa ambiguidade
-  com honestidade, porque ela é um bom gancho didático para as limitações.
-- **Alternatives considered**: só o cotovelo (ambíguo demais); o método gap statistic (caro e
-  fora do enunciado); fixar k por conhecimento de domínio sem mostrar a curva (viola o enunciado).
+- **Decision** (revista em 2026-11-21, na implementação da Seção IV): **k = 7**. Varrer k = 1..10
+  (inércia) e k = 2..10 (silhueta numa amostra de 10.000 pontos com `RANDOM_STATE`) e decidir
+  pelos 3 critérios do FR-040, nesta ordem.
+- **Rationale** (números da base limpa, 89.583 faixas):
+  1. **Cotovelo**: inércia 806.247 → 632.596 → 561.059 → 504.715 → 455.853 → 414.123 → 376.640 →
+     355.565 … para k = 1..8. Cada passo de k = 2 a k = 7 remove 9–11% da inércia; depois de
+     k = 7 a queda cai para 4–6%. Não há joelho nítido: há uma dobra forte em k = 2 e outra, suave,
+     em k = 7.
+  2. **Silhueta**: k = 2 tem 0,26, mas dois grupos são genéricos demais para descrever perfis de
+     som. Entre k ≥ 3, a maior é a de **k = 7 (0,196)**, contra 0,189 (k = 6) e 0,177 (k = 5). A
+     ordem se repete em 5 amostras diferentes (médias 0,197 / 0,190 / 0,179). A silhueta é baixa em
+     geral (< 0,2), típico de dados de áudio contínuos com grupos sobrepostos.
+  3. **Interpretabilidade**: os 7 grupos têm perfis musicais claros (R4). Em relação a k = 5, k = 7
+     separa a eletrônica instrumental (techno) e um grupo "ao vivo" dominado por pagode, sertanejo
+     e samba. Com outras sementes do K-Means os grupos se repetem (ARI ≥ 0,99).
+  - A previsão inicial (k = 5, com k = 6 como alternativa) foi feita antes de o FR-040 fixar a
+    ordem dos critérios. Com a ordem fixada, os três critérios apontam para k = 7. O notebook MUST
+    mostrar a ambiguidade da curva com honestidade.
+- **Alternatives considered**: k = 5 (perfis mais simples, mas silhueta menor e sem o grupo "ao
+  vivo"); k = 6 (intermediário); só o cotovelo (ambíguo demais); o método gap statistic (caro e
+  fora do enunciado).
 
 ## R3. Custo computacional e amostragem
 
@@ -37,29 +48,35 @@ CSV completo. São referência para o plano. Os valores definitivos são os que 
   `TAMANHO_AMOSTRA_SILHUETA = 10_000` e `TAMANHO_AMOSTRA_GRAFICOS = 6_000`, sempre com
   `RANDOM_STATE`. Uma única `amostra_idx` serve aos dois gráficos da Seção IV, para que mostrem os
   mesmos pontos.
-- **Rationale**: um `fit` com k = 5 leva cerca de 0,3 s e a varredura k = 1..10 leva cerca de 10 s
+- **Rationale**: um `fit` com k = 5 a 7 leva menos de 1 s e a varredura k = 1..10 leva cerca de 10 s
   localmente. A silhueta exata é O(n²) e, com 89 mil pontos, passaria de minutos e de GBs de
   memória. Com 10 mil pontos leva cerca de 1,2 s por k. Dispersão com 89 mil pontos vira um
   borrão. Tudo cabe com folga no limite de 5 minutos do SC-001.
 - **Alternatives considered**: MiniBatchKMeans (desnecessário nesse volume e acrescenta um
   conceito extra); silhueta exata (inviável).
 
-## R4. Perfis esperados com k = 5 (referência para a Seção V)
+## R4. Perfis esperados com k = 7 (referência para a Seção V)
 
-| Cluster (exp.) | Tamanho | Perfil (escala original) | Gêneros típicos |
+Numeração dos clusters com `RANDOM_STATE = 42`. Os percentuais dizem quanto das faixas do gênero
+caem no cluster (cada gênero soma 100% entre os clusters).
+
+| Cluster | Tamanho | Perfil (desvios da média) | Gêneros típicos |
 |---|---|---|---|
-| Acústico/calmo | ~20,7 mil | energy 0,39 · acousticness 0,67 · loudness −10,5 dB | mpb, brazil (parte) |
-| Fala/comédia | ~1,1 mil | speechiness 0,83 · liveness 0,67 | comedy (81%) |
-| Intenso/pesado | ~26,8 mil | energy 0,82 · loudness −6,0 dB · valence 0,32 · tempo 136 | metal (73%) |
-| Dançante/alegre | ~33,7 mil | danceability 0,69 · valence 0,69 · energy 0,73 | forro (83%), hip-hop (78%), funk (74%), samba (63%), pagode (59%), sertanejo (52%) |
-| Instrumental/ambiente | ~7,3 mil | instrumentalness 0,79 · acousticness 0,82 · loudness −20,5 dB | sleep (84%), classical (74%) |
+| 0 Dançante/alegre | 27.523 (30,7%) | valence +0,86 · danceability +0,81 | reggaeton (85%), latino (83%), hip-hop (72%), funk (69%), forro (68%) |
+| 1 Acústico/calmo | 18.082 (20,2%) | acousticness +1,06 · energy −1,02 | tango (78%), romance (77%), jazz (72%), mpb (32%) |
+| 2 Eletrônica instrumental | 10.094 (11,3%) | instrumentalness +1,93 · acousticness −0,63 | minimal-techno (86%), detroit-techno (76%), techno (62%) |
+| 3 Fala/comédia | 1.045 (1,2%) | speechiness +6,69 · liveness +2,32 | comedy (81%) |
+| 4 Intenso/pesado | 20.162 (22,5%) | energy +0,71 · loudness +0,61 · tempo +0,62 · acousticness −0,74 | metalcore (85%), metal (72%), edm (38%) |
+| 5 Ambiente/clássico | 6.464 (7,2%) | loudness −2,47 · instrumentalness +1,90 · energy −1,82 | new-age (78%), classical (74%), sleep (73%) |
+| 6 Ao vivo | 6.213 (6,9%) | liveness +2,71 · energy +0,46 | pagode (50%), sertanejo (44%), samba (42%), mpb (28%) |
 
 - **Decision**: o destaque brasileiro (FR-034) compara brazil, mpb, sertanejo, pagode, samba,
   forro e funk com os contrastes classical, metal, sleep, hip-hop, edm e comedy, num heatmap com a
   proporção de faixas do gênero em cada cluster (cada linha soma 1).
-- **Rationale**: esses contrastes "puxam" clusters distintos e deixam a leitura imediata. Os
-  gêneros brasileiros se dividem entre "dançante" e "acústico", o que rende boa discussão (MPB mais
-  acústica, forró e funk mais dançantes).
+- **Rationale**: os contrastes "puxam" clusters distintos (classical/sleep → 5, metal → 4,
+  comedy → 3, hip-hop → 0). Os gêneros brasileiros se dividem em três: forró e funk são dançantes
+  (cluster 0); mpb se divide entre dançante, acústico e ao vivo; pagode, sertanejo e samba têm a
+  maior parte no grupo "ao vivo", o que reflete o peso das gravações ao vivo nesses gêneros.
 
 ## R5. Visualizações obrigatórias (FR-043)
 

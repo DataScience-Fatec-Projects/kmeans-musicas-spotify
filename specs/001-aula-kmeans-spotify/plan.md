@@ -9,8 +9,8 @@
 O produto é um notebook do Google Colab que funciona como uma aula de K-Means, nas seções I–V do
 enunciado, aplicada a ~89,6 mil faixas do Spotify descritas por 9 features de áudio. A Seção I
 implementa o K-Means "do zero" num exemplo 2D e analisa a complexidade. As Seções III–IV limpam,
-padronizam e escolhem k (cotovelo, silhueta em amostra e interpretabilidade, com k = 5 como
-candidato). A Seção V interpreta os perfis na escala original e cruza com os gêneros, dando
+padronizam e escolhem k (cotovelo, silhueta em amostra e interpretabilidade, com k = 7 como
+escolha). A Seção V interpreta os perfis na escala original e cruza com os gêneros, dando
 destaque à música brasileira. Uma checagem estrutural automatizada e a execução em CI garantem os
 portões da constituição para qualquer colaborador.
 
