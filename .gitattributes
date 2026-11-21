@@ -1,0 +1,3 @@
+# O CSV de reserva fica byte a byte igual ao original (sem conversão de fim de linha),
+# para que o SHA-256 registrado em data/README.md continue valendo.
+data/*.csv -text
