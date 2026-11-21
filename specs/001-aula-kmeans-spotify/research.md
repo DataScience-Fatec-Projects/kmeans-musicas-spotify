@@ -129,8 +129,17 @@ CSV completo. São referência para o plano. Os valores definitivos são os que 
 
 ## R9. Dataset indisponível
 
-- **Decision**: a célula de carga envolve o `read_csv` num try/except que mostra uma mensagem em
-  pt-BR com o link da página do dataset e relança o erro. O notebook entregue fica salvo com
-  outputs (FR-004).
+- **Decision** (revista em 2026-11-21): a célula de carga tenta duas fontes públicas, em ordem:
+  `URL_DATASET` (Hugging Face) e `URL_DATASET_RESERVA`, uma cópia idêntica, byte a byte, guardada
+  em `data/spotify_tracks.csv` e lida pelo `raw.githubusercontent.com` do repositório (SHA-256 e
+  atribuição em `data/README.md`). Cada tentativa fica num try/except; se as duas falharem, uma
+  mensagem em pt-BR com o link da página do dataset encerra a execução. O notebook entregue fica
+  salvo com outputs (FR-004).
 - **Rationale**: a URL do Hugging Face redireciona para uma CDN e funciona sem login (verificado
-  em 2026-11-03 e 2026-11-07). Se cair, quem lê o link continua vendo os resultados salvos.
+  em 2026-11-03 e 2026-11-07), mas o projeto não deve depender de um único serviço externo para
+  ser reexecutado. São só 20 MB, a licença BSD permite redistribuir com atribuição, e a cópia
+  continua sendo uma URL pública (constituição I). Testado: com o Hugging Face fora do ar, os dados
+  vêm da reserva; com as duas fontes fora, aparece a mensagem.
+- **Alternatives considered**: só a mensagem de erro (a aula deixaria de rodar se o Hugging Face
+  caísse); ler a cópia por caminho local (não funciona no Colab aberto pelo link do GitHub, que
+  não clona o repositório).

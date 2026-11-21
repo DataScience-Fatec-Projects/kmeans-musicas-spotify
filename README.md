@@ -32,6 +32,8 @@ novo.
 [`maharshipandya/spotify-tracks-dataset`](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset)
 (Hugging Face, licença BSD). São 114 mil faixas de 114 gêneros, com características de áudio
 coletadas pela API do Spotify. O notebook lê o CSV direto da URL pública, sem login e sem upload.
+Por garantia, uma cópia idêntica fica em [`data/`](data/README.md) e é usada automaticamente se
+o Hugging Face não responder.
 
 ## Como usar
 

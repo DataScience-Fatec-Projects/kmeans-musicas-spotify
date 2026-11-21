@@ -54,8 +54,12 @@ correspondente (`spec.md`, `plan.md`, contrato ou `tasks.md`) **no mesmo PR**.
 ```bash
 uv venv --python 3.12 .venv && uv pip install -r requirements.txt
 .venv/Scripts/python scripts/validar_notebook.py notebooks/aula_kmeans_spotify.ipynb
-.venv/Scripts/jupyter nbconvert --to notebook --execute --output aula_executada.ipynb notebooks/aula_kmeans_spotify.ipynb
+.venv/Scripts/jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=120 notebooks/aula_kmeans_spotify.ipynb
 ```
+
+O notebook vai para o PR **já executado do zero, com as saídas salvas**. Assim, quem revisa vê
+as tabelas e os números na aba *Files changed* sem precisar rodar nada. Se executar pelo VS Code
+ou pelo Jupyter, use "Reiniciar e executar tudo" antes de salvar.
 
 No Linux/Mac use `.venv/bin/`. Mais detalhes no
 [`quickstart.md`](specs/001-aula-kmeans-spotify/quickstart.md).

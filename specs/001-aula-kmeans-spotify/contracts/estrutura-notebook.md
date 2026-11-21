@@ -70,10 +70,10 @@ sobrar algum 🚧 ou célula de código sem execução.
 
 | Seção | Recebe | Entrega (nomes fixos) |
 |---|---|---|
-| ⚙️ Configuração | — | imports, `RANDOM_STATE = 42`, `URL_DATASET`, `FEATURES` (9), `GENEROS_BR`, `GENEROS_CONTRASTE`, `TAMANHO_AMOSTRA_SILHUETA = 10_000`, `TAMANHO_AMOSTRA_GRAFICOS = 6_000`, estilo dos gráficos |
+| ⚙️ Configuração | — | imports, `RANDOM_STATE = 42`, `URL_DATASET`, `URL_DATASET_RESERVA`, `FEATURES` (9), `GENEROS_BR`, `GENEROS_CONTRASTE`, `TAMANHO_AMOSTRA_SILHUETA = 10_000`, `TAMANHO_AMOSTRA_GRAFICOS = 6_000`, estilo dos gráficos |
 | I | `RANDOM_STATE` | `X_brinquedo`, `kmeans_do_zero()` (local à seção) |
 | II | — | nenhuma nova (explica a API) |
-| III | `URL_DATASET`, `FEATURES` | `df_bruto`, `df_pares`, `df_faixas`, `scaler`, `X` |
+| III | `URL_DATASET`, `URL_DATASET_RESERVA`, `FEATURES` | `df_bruto`, `df_pares`, `df_faixas`, `scaler`, `X` |
 | IV | `X`, `df_faixas`, `RANDOM_STATE`, `TAMANHO_AMOSTRA_*` | `inercias`, `silhuetas`, `K_ESCOLHIDO`, `modelo`, `rotulos`, `df_faixas['cluster']`, `centroides_padronizados`, `amostra_idx` |
 | V | `df_faixas` (com `cluster`), `df_pares`, `rotulos`, `centroides_padronizados`, `scaler`, `modelo` | `centroides_originais`, `perfil_clusters`, `NOMES_CLUSTERS`, `df_pares['cluster']`, `genero_x_cluster` |
 

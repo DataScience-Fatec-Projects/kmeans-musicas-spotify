@@ -215,8 +215,10 @@ exemplos e gêneros predominantes, e há uma lista de limitações e de próximo
   usa um critério complementar mais a interpretabilidade para decidir.
 - **Cluster muito pequeno** (nos testes, apareceu um grupo de ~1.000 faixas com muita fala para
   k ≥ 5): se aparecer, ele é interpretado e não descartado em silêncio.
-- **URL do dataset indisponível**: a célula de carga mostra uma mensagem clara com a fonte
-  original. O notebook já salvo com outputs continua legível mesmo sem executar.
+- **URL do dataset indisponível**: a célula de carga tenta o Hugging Face e, se ele falhar, uma
+  cópia idêntica guardada no próprio repositório (`data/spotify_tracks.csv`, lida pela URL pública
+  do GitHub). Se as duas falharem, mostra uma mensagem clara com a fonte original. O notebook já
+  salvo com outputs continua legível mesmo sem executar.
 - **Execução lenta no Colab gratuito**: nenhuma etapa obrigatória pode passar de 2 minutos. As
   métricas caras (silhueta) usam amostra.
 - **Implementação do zero vs. scikit-learn com rótulos trocados**: a numeração dos clusters é
