@@ -94,7 +94,8 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
 - `make_blobs` com cerca de 150 pontos 2D e `random_state=RANDOM_STATE`. Usado só na
   implementação do zero, na comparação com o scikit-learn (ARI) e nas células "Experimente".
 - `kmeans_do_zero(X, k, semente, max_iter, tol)`: função local à Seção I que devolve os rótulos,
-  os centroides finais, os centroides iniciais e o número de iterações (R6).
+  os centroides finais, os centroides iniciais, o número de iterações e o histórico de cada iteração
+  (rótulos, centroides antes e depois), usado no gráfico passo a passo (R6).
 
 ## Estados
 

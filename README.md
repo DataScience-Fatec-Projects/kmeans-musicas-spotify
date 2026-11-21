@@ -93,7 +93,7 @@ o contrato do notebook e abra um PR.
 
 ## Autoria
 
-- [Wellington Torres](https://github.com/WellingtonTorres): Ciência de Dados, Fatec Jundiaí
+- [Wellington Junior Torres de Melo](https://github.com/WellingtonTorres): Ciência de Dados, Fatec Jundiaí
 
 ---
 
