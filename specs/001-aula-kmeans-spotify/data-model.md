@@ -9,7 +9,7 @@ trabalhem em seções diferentes sem quebrar as outras (ver
 ## Fluxo
 
 ```text
-URL_DATASET ──read_csv──► df_bruto (114.000 × 20)
+URL_DATASET (ou URL_DATASET_RESERVA) ──read_csv──► df_bruto (114.000 × 20)
         │ remove ausentes, linhas idênticas e tempo = 0
         ▼
    df_pares (≈113.392 pares faixa–gênero) ──drop_duplicates('track_id')──► df_faixas (≈89.583)
