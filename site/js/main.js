@@ -1,7 +1,7 @@
 // Ponto de entrada: carrega os dados exportados do notebook e liga os módulos da página.
 import { formatar } from "./formato.js";
-
-const AVISO_SEM_DADOS = "Não foi possível carregar os dados. O texto continua valendo; os gráficos e os simuladores não.";
+import { iniciarIdioma, idiomaAtual } from "./idioma.js";
+import { t } from "./textos.js";
 
 /** Busca o aula.json (caminho relativo: a página fica numa subpasta do domínio). */
 export async function carregarDados() {
@@ -33,22 +33,23 @@ function avisarSemDados() {
     const aviso = document.createElement("p");
     aviso.className = "aviso";
     aviso.dataset.i18n = "aviso.sem_dados";
-    aviso.textContent = AVISO_SEM_DADOS;
+    aviso.textContent = t("aviso.sem_dados", "pt");
     el.replaceChildren(aviso);
   });
 }
 
 async function iniciar() {
-  let dados;
+  let dados = null;
   try {
     dados = await carregarDados();
   } catch (erro) {
     console.error(erro);
     avisarSemDados();
-    return;
   }
-  aplicarCores(dados);
-  preencherDados(dados, "pt");
+  // A cada troca de idioma, os números voltam a ser escritos no formato certo.
+  document.addEventListener("idioma", () => { if (dados) preencherDados(dados, idiomaAtual()); });
+  if (dados) aplicarCores(dados);
+  iniciarIdioma();
 }
 
 iniciar();

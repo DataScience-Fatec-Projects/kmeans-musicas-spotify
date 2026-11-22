@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>K-Means: 89.583 músicas, 7 perfis de som · Wellington Melo</title>
+  <title data-i18n="meta.titulo">K-Means: 89.583 músicas, 7 perfis de som · Wellington Melo</title>
   <meta name="description" content="Agrupei 89.583 músicas do Spotify só pelo som, sem informar nenhum gênero, e o K-Means encontrou 7 perfis. Veja as decisões, os gráficos e mexa nos simuladores.">
   <meta name="color-scheme" content="dark">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
@@ -163,10 +163,10 @@
         <h2 class="cap-titulo" data-i18n="limites.titulo">Limites</h2>
         <p class="cap-frase" data-i18n="limites.frase">Os grupos fazem sentido, mas o método tem limites, e todos apareceram aqui.</p>
         <ol class="lista-limites">
-          <li><b data-i18n="limites.1t">A escolha de k foi ambígua.</b><span data-i18n="limites.1p">O cotovelo não teve uma dobra nítida. Outra pessoa, pesando os critérios de outro jeito, poderia defender 5 ou 6 grupos.</span></li>
-          <li><b data-i18n="limites.2t">Os grupos se sobrepõem.</b><span data-i18n="limites.2p">A silhueta é <span data-dado="k.silhuetas.6" data-casas="3">0,196</span>, numa escala que vai até 1. Uma música pode ser dançante e intensa, mas o K-Means obriga cada uma a ter um grupo só.</span></li>
-          <li><b data-i18n="limites.3t">O método supõe grupos "redondos".</b><span data-i18n="limites.3p">Grupos alongados ou muito espalhados, como o de fala, acabam cortados de forma artificial.</span></li>
-          <li><b data-i18n="limites.4t">Nem toda característica descreve estilo.</b><span data-i18n="limites.4p">A característica "ao vivo" mede a gravação. Por isso um grupo inteiro reflete o palco, e não o gênero.</span></li>
+          <li><b data-i18n="limites.1t">A escolha de k foi ambígua.</b><p data-i18n="limites.1p">O cotovelo não teve uma dobra nítida. Outra pessoa, pesando os critérios de outro jeito, poderia defender 5 ou 6 grupos.</p></li>
+          <li><b data-i18n="limites.2t">Os grupos se sobrepõem.</b><p data-i18n="limites.2p">A silhueta é <span data-dado="k.silhuetas.6" data-casas="3">0,196</span>, numa escala que vai até 1. Uma música pode ser dançante e intensa, mas o K-Means obriga cada uma a ter um grupo só.</p></li>
+          <li><b data-i18n="limites.3t">O método supõe grupos "redondos".</b><p data-i18n="limites.3p">Grupos alongados ou muito espalhados, como o de fala, acabam cortados de forma artificial.</p></li>
+          <li><b data-i18n="limites.4t">Nem toda característica descreve estilo.</b><p data-i18n="limites.4p">A característica "ao vivo" mede a gravação. Por isso um grupo inteiro reflete o palco, e não o gênero.</p></li>
         </ol>
         <p class="cap-texto largo" data-i18n="limites.proximo"><strong>O que eu faria em seguida:</strong> testar modelos que aceitam sobreposição e dispensam a escolha de k (GMM e DBSCAN), e treinar de novo sem a característica "ao vivo", para ver onde o pagode, o samba e o sertanejo vão parar quando só o estilo conta.</p>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula7">Ver na aula (seção V.4) ↗</a>

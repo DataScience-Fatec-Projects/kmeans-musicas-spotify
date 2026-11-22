@@ -30,6 +30,6 @@ test("todo data-dado aponta para um campo numérico que existe no aula.json", ()
 });
 test("a página declara o idioma e tem título e descrição", () => {
   assert.match(html, /<html lang="pt-BR"/);
-  assert.match(html, /<title>[^<]{10,}<\/title>/);
+  assert.match(html, /<title[^>]*>[^<]{10,}<\/title>/);
   assert.match(html, /<meta name="description" content="[^"]{40,}"/);
 });

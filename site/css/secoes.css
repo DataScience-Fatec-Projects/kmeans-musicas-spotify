@@ -85,7 +85,7 @@
 }
 .lista-limites li::before { content: counter(lim, decimal-leading-zero); color: var(--fraco); font-size: 13px; padding-top: 6px; }
 .lista-limites b { font-size: clamp(19px, 2vw, 28px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
-.lista-limites span { color: #d0d0d0; }
+.lista-limites p { color: #d0d0d0; margin: 0; }
 
 /* ───────── Gráficos ───────── */
 .grafico { margin: 0; min-width: 0; }
@@ -114,7 +114,7 @@
   .abertura-autor { left: 32px; right: 32px; bottom: 44px; }
   .abertura-rolar { left: 32px; right: auto; bottom: 22px; }
   .lista-limites li { grid-template-columns: 2.4em minmax(0, 1fr); }
-  .lista-limites span { grid-column: 2; }
+  .lista-limites p { grid-column: 2; }
   .abertura-nomes span { font-size: 11px; padding: 2px 7px; }
 }
 
