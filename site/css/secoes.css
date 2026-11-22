@@ -1,0 +1,124 @@
+/* Seções: abertura, capítulos, gráficos e simuladores. */
+
+/* ───────── Abertura ───────── */
+.abertura { height: 340vh; position: relative; }
+.abertura-fixa { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.letreiro {
+  position: absolute; top: 0; left: 0; right: 0;
+  font-weight: 900; font-size: 20.4vw; line-height: 0.74; letter-spacing: -0.055em;
+  white-space: nowrap; text-align: center; margin-top: -0.02em;
+  color: var(--texto); user-select: none;
+  transform-origin: top center;
+}
+.abertura-pontos { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.abertura-nomes { position: absolute; inset: 0; pointer-events: none; }
+.abertura-nomes span {
+  position: absolute; transform: translate(-50%, -50%);
+  font-size: 13px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap;
+  padding: 3px 9px; border-radius: 999px; background: rgba(12, 12, 12, 0.78);
+  border: 1px solid var(--cor); color: var(--texto);
+}
+.abertura-texto { position: absolute; left: var(--margem); bottom: 13vh; right: var(--margem); pointer-events: none; }
+.abertura-texto h1 { margin: 0; font-weight: 400; }
+.abertura-numero {
+  display: block; font-weight: 900; letter-spacing: -0.055em; line-height: 0.82;
+  font-size: clamp(76px, 17vw, 300px);
+}
+.abertura-legenda { display: block; margin-top: 16px; font-size: clamp(19px, 2.3vw, 34px); letter-spacing: -0.02em; }
+.abertura-resultado { margin: 10px 0 0; font-size: clamp(16px, 1.5vw, 21px); color: var(--fraco); }
+.abertura-resultado strong { color: var(--texto); }
+.abertura-autor, .abertura-rolar {
+  position: absolute; bottom: 26px; margin: 0; font-size: 12px; color: var(--fraco);
+}
+.abertura-autor { left: var(--margem); }
+.abertura-rolar { right: var(--margem); }
+
+/* ───────── Capítulos ───────── */
+.capitulo {
+  display: grid; grid-template-columns: var(--col) minmax(0, 1fr) var(--col);
+  padding: 16vh 0 10vh; border-top: 1px solid var(--linha);
+  scroll-margin-top: 40px;
+}
+.cap-num {
+  padding-left: 20px; font-size: 13px; font-weight: 600; color: var(--fraco);
+  position: sticky; top: 76px; align-self: start;
+}
+.cap-corpo { min-width: 0; padding: 0 clamp(0px, 1.2vw, 20px); }
+.cap-titulo {
+  margin: 0 0 22px; font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--fraco);
+}
+.cap-frase {
+  margin: 0 0 9vh; max-width: 22em; font-weight: 500;
+  font-size: clamp(28px, 4.1vw, 68px); line-height: 1.04; letter-spacing: -0.035em;
+}
+.cap-colunas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+.cap-texto { color: #d0d0d0; max-width: 46ch; }
+.cap-texto p { margin: 0 0 1.1em; }
+.cap-texto.largo { max-width: 62ch; margin: 0 0 5vh; }
+.cap-texto strong, .cap-texto b { color: var(--texto); }
+.cap-link {
+  display: inline-block; margin-top: 6vh; font-size: 14px; color: var(--fraco);
+  text-decoration: none; border-bottom: 1px solid var(--linha); padding-bottom: 3px;
+}
+.cap-link:hover { color: var(--texto); border-color: var(--texto); }
+[data-dado] { font-variant-numeric: tabular-nums; }
+
+/* Lista dos 7 grupos */
+.lista-grupos { list-style: none; margin: 0 0 8vh; padding: 0; border-top: 1px solid var(--linha); }
+.lista-grupos li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding: 13px 0 13px 22px; border-bottom: 1px solid var(--linha); position: relative;
+}
+.lista-grupos li::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 11px; height: 11px;
+  margin-top: -5px; border-radius: 50%; background: var(--cor);
+}
+.lista-grupos b { font-size: clamp(20px, 2.6vw, 38px); font-weight: 600; letter-spacing: -0.03em; }
+.lista-grupos span { color: var(--fraco); font-size: 14px; white-space: nowrap; }
+
+/* Lista dos limites */
+.lista-limites { list-style: none; counter-reset: lim; margin: 0 0 7vh; padding: 0; border-top: 1px solid var(--linha); }
+.lista-limites li {
+  counter-increment: lim; display: grid; grid-template-columns: 3em minmax(0, 1fr) minmax(0, 1.3fr); gap: 16px;
+  padding: 22px 0; border-bottom: 1px solid var(--linha);
+}
+.lista-limites li::before { content: counter(lim, decimal-leading-zero); color: var(--fraco); font-size: 13px; padding-top: 6px; }
+.lista-limites b { font-size: clamp(19px, 2vw, 28px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
+.lista-limites span { color: #d0d0d0; }
+
+/* ───────── Gráficos ───────── */
+.grafico { margin: 0; min-width: 0; }
+.grafico.largo { margin-bottom: 2vh; }
+.grafico svg { display: block; width: 100%; height: auto; overflow: visible; }
+.grafico figcaption { margin-top: 12px; font-size: 12.5px; color: var(--fraco); max-width: 60ch; }
+.grafico text { font-family: var(--fonte); fill: var(--texto); }
+.grafico .eixo { fill: var(--fraco); font-size: 12px; }
+.grafico .rotulo { font-size: 13px; }
+.grafico .valor { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.grafico .linha-eixo { stroke: var(--linha); stroke-width: 1; }
+.aviso { color: var(--fraco); font-size: 14px; border: 1px dashed var(--linha); padding: 18px; margin: 0; }
+
+/* ───────── Responsivo ───────── */
+@media (max-width: 900px) {
+  .cap-colunas { grid-template-columns: minmax(0, 1fr); }
+  .cap-texto { max-width: 60ch; }
+}
+@media (max-width: 760px) {
+  .capitulo { grid-template-columns: 20px minmax(0, 1fr) 20px; padding: 11vh 0 8vh; }
+  .cap-num { position: static; grid-column: 2; padding: 0 0 6px 12px; }
+  .cap-corpo { grid-column: 2; padding: 0 12px; }
+  .cap-frase { margin-bottom: 6vh; }
+  .letreiro { font-size: 21vw; top: 52px; }
+  .abertura-texto { bottom: 15vh; left: 32px; right: 32px; }
+  .abertura-autor { left: 32px; right: 32px; bottom: 44px; }
+  .abertura-rolar { left: 32px; right: auto; bottom: 22px; }
+  .lista-limites li { grid-template-columns: 2.4em minmax(0, 1fr); }
+  .lista-limites span { grid-column: 2; }
+  .abertura-nomes span { font-size: 11px; padding: 2px 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abertura { height: auto; }
+  .abertura-fixa { position: relative; }
+}

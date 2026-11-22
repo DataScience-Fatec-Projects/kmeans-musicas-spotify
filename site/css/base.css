@@ -1,0 +1,113 @@
+/* Base: variáveis, tipografia, grade de linhas, navegação e rodapé. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --fundo: #0c0c0c;
+  --texto: #f2f2f2;
+  --fraco: #9a9a9a;
+  --linha: rgba(255, 255, 255, 0.13);
+  --cartao: #151515;
+  /* As 7 cores dos grupos: o main.js as sobrescreve com as do aula.json. */
+  --g0: #1f77b4; --g1: #ff7f0e; --g2: #2ca02c; --g3: #d62728; --g4: #9467bd; --g5: #8c564b; --g6: #e377c2;
+  /* Grade: 8 colunas; a margem é uma coluna. */
+  --col: calc(100vw / 8);
+  --margem: var(--col);
+  --fonte: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-size: 17px;
+  line-height: 1.5;
+  font-feature-settings: "tnum", "ss01";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--texto); outline-offset: 3px; }
+strong, b { font-weight: 650; }
+em { font-style: normal; border-bottom: 1px solid var(--fraco); }
+
+/* Grade de linhas finas, fixa atrás de tudo. */
+.grade { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.grade i { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--linha); }
+.grade i:nth-child(1) { left: calc(var(--col) * 1); }
+.grade i:nth-child(2) { left: calc(var(--col) * 3); }
+.grade i:nth-child(3) { left: calc(var(--col) * 5); }
+.grade i:nth-child(4) { left: calc(var(--col) * 7); }
+
+/* Navegação: fixa no topo, alinhada às colunas da grade. */
+.topo {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  display: flex; align-items: center;
+  height: 52px; padding: 0 var(--margem);
+  background: color-mix(in srgb, var(--fundo) 82%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linha);
+  font-size: 13px; font-weight: 600; letter-spacing: -0.01em;
+}
+.marca {
+  position: absolute; left: 20px;
+  font-weight: 900; letter-spacing: -0.04em; text-decoration: none; font-size: 15px;
+}
+.nav { display: flex; align-items: center; gap: clamp(14px, 3vw, 44px); width: 100%; }
+.nav a { text-decoration: none; white-space: nowrap; }
+.nav a:hover { text-decoration: underline; }
+.idiomas { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--fraco); }
+.idiomas button {
+  font: inherit; color: var(--fraco); background: none; border: 0; padding: 6px 2px; cursor: pointer;
+}
+.idiomas button[aria-pressed="true"] { color: var(--texto); text-decoration: underline; text-underline-offset: 0.3em; }
+
+main, .rodape { position: relative; z-index: 1; }
+
+/* Rodapé */
+.rodape {
+  padding: 18vh var(--margem) 8vh;
+  border-top: 1px solid var(--linha);
+}
+.rodape-nome {
+  margin: 0; font-weight: 900; letter-spacing: -0.045em; line-height: 0.92;
+  font-size: clamp(44px, 9.5vw, 170px);
+}
+.rodape-contexto { color: var(--fraco); margin: 28px 0 44px; max-width: 46ch; }
+.rodape-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-width: calc(var(--col) * 4); }
+.rodape-links li { border-top: 1px solid var(--linha); }
+.rodape-links li:last-child { border-bottom: 1px solid var(--linha); }
+.rodape-links a { display: block; padding: 14px 0; text-decoration: none; font-size: 19px; letter-spacing: -0.01em; }
+.rodape-links a:hover { padding-left: 10px; transition: padding 0.2s; }
+.rodape-credito { color: var(--fraco); font-size: 13px; margin: 56px 0 0; max-width: 70ch; }
+
+@media (max-width: 760px) {
+  :root { --margem: 20px; }
+  body { font-size: 16px; }
+  .grade i:nth-child(1) { left: 19px; }
+  .grade i:nth-child(2), .grade i:nth-child(3) { display: none; }
+  .grade i:nth-child(4) { left: auto; right: 19px; }
+  .marca { display: none; }
+  .topo { padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
+  .topo::-webkit-scrollbar { display: none; }
+  .nav { gap: 16px; }
+  .rodape-links { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}

@@ -16,3 +16,6 @@ Thumbs.db
 
 # Esboços do brainstorming visual (não versionar)
 .superpowers/
+
+# Capturas de tela do site (scripts/capturar_site.py)
+site/.capturas/

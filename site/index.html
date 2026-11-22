@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>K-Means: 89.583 músicas, 7 perfis de som · Wellington Melo</title>
+  <meta name="description" content="Agrupei 89.583 músicas do Spotify só pelo som, sem informar nenhum gênero, e o K-Means encontrou 7 perfis. Veja as decisões, os gráficos e mexa nos simuladores.">
+  <meta name="color-scheme" content="dark">
+  <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/secoes.css">
+</head>
+<body>
+  <div class="grade" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+  <header class="topo">
+    <a class="marca" href="#abertura" aria-label="K-Means, início">K-MEANS</a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#abertura" data-i18n="nav.resultado">Resultado</a>
+      <a href="#dados" data-i18n="nav.caminho">Caminho</a>
+      <a href="#simuladores" data-i18n="nav.simuladores">Simuladores</a>
+      <a href="#limites" data-i18n="nav.limites">Limites</a>
+      <a href="#contato" data-i18n="nav.contato">Contato</a>
+      <span class="idiomas" role="group" aria-label="Idioma / Language">
+        <button type="button" data-idioma="pt" aria-pressed="true">PT</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+      </span>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ───────────── Abertura ───────────── -->
+    <section id="abertura" class="abertura">
+      <div class="abertura-fixa">
+        <div class="letreiro" aria-hidden="true">K-MEANS</div>
+        <canvas class="abertura-pontos" aria-hidden="true"></canvas>
+        <div class="abertura-nomes" aria-hidden="true"></div>
+        <div class="abertura-texto">
+          <h1>
+            <span class="abertura-numero" data-abertura-numero><span data-dado="limpeza.faixas" data-casas="0">89.583</span></span>
+            <span class="abertura-legenda" data-abertura-legenda data-i18n="abertura.legenda">músicas. Nenhum gênero informado.</span>
+          </h1>
+          <p class="abertura-resultado" data-i18n="abertura.resultado">Um algoritmo encontrou <strong><span data-dado="meta.k" data-casas="0">7</span> perfis de som</strong>.</p>
+        </div>
+        <p class="abertura-autor" data-i18n="abertura.autor">Projeto de ciência de dados de Wellington Junior Torres de Melo</p>
+        <p class="abertura-rolar" data-i18n="abertura.rolar">Role para ver os pontos se organizarem ↓</p>
+      </div>
+    </section>
+
+    <!-- ───────────── 01 Dados ───────────── -->
+    <section id="dados" class="capitulo">
+      <div class="cap-num">01</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="dados.titulo">Dados</h2>
+        <p class="cap-frase" data-i18n="dados.frase">Uma faixa por linha. E o gênero fica fora do treino, para o algoritmo não receber a resposta de presente.</p>
+        <div class="cap-colunas">
+          <div class="cap-texto">
+            <p data-i18n="dados.p1">O conjunto de dados traz <span data-dado="limpeza.linhas" data-casas="0">114.000</span> linhas, mas a mesma música aparece em mais de um gênero. Depois de tirar linhas com valor ausente, repetidas ou com andamento zero, sobram <span data-dado="limpeza.pares" data-casas="0">113.392</span> pares de faixa e gênero, que correspondem a <span data-dado="limpeza.faixas" data-casas="0">89.583</span> faixas únicas.</p>
+            <p data-i18n="dados.p2">O modelo treina com as faixas únicas e com <span data-dado="limpeza.features" data-casas="0">9</span> características de áudio: dançabilidade, energia, volume, presença de fala, acústica, instrumental, ao vivo, positividade e andamento. Os <span data-dado="limpeza.generos" data-casas="0">114</span> gêneros só voltam no fim, para conferir se os grupos fazem sentido.</p>
+          </div>
+          <figure class="grafico" data-grafico="funil"></figure>
+        </div>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula">Ver na aula (seção III) ↗</a>
+      </div>
+    </section>
+
+    <!-- ───────────── 02 Escala ───────────── -->
+    <section id="escala" class="capitulo">
+      <div class="cap-num">02</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="escala.titulo">Escala</h2>
+        <p class="cap-frase" data-i18n="escala.frase">O K-Means mede distância. Sem padronizar, só o volume e o andamento seriam ouvidos.</p>
+        <div class="cap-colunas">
+          <div class="cap-texto">
+            <p data-i18n="escala.p1">O andamento vai de 30 a 243 BPM, e a maioria das outras características vai de 0 a 1. Na distância entre duas faixas da base, sem padronizar, o volume responde por <span data-dado="escala.sem_padronizar.2" data-casas="1">50,0</span>% e o andamento por <span data-dado="escala.sem_padronizar.8" data-casas="1">49,4</span>%. As outras sete características, juntas, não chegam a 1%.</p>
+            <p data-i18n="escala.p2">Com a padronização (média 0 e desvio-padrão 1), todas passam a pesar na mesma moeda. Treinando sem ela, os 7 grupos viram 7 faixas de andamento, e a concordância com o modelo padronizado cai para um ARI de <span data-dado="escala.ari_sem_padronizar" data-casas="3">0,039</span>, numa escala em que 1 é idêntico e 0 é acaso.</p>
+          </div>
+          <figure class="grafico" data-grafico="contribuicao"></figure>
+        </div>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula3">Ver na aula (seções III.5 e IV.4) ↗</a>
+      </div>
+    </section>
+
+    <!-- ───────────── 03 Quantos grupos ───────────── -->
+    <section id="quantos" class="capitulo">
+      <div class="cap-num">03</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="quantos.titulo">Quantos grupos</h2>
+        <p class="cap-frase" data-i18n="quantos.frase">O número de grupos não está escrito nos dados. Usei três critérios, e os três apontaram para <span data-dado="meta.k" data-casas="0">7</span>.</p>
+        <div class="cap-colunas">
+          <div class="cap-texto">
+            <p data-i18n="quantos.p1"><strong>Cotovelo.</strong> A curva da inércia é suave, sem uma dobra nítida, o que é comum em dados reais. Ela mostra que, depois de 7 grupos, cada grupo a mais rende pouco, e deixa como candidatos k = 5, 6 e 7.</p>
+            <p data-i18n="quantos.p2"><strong>Silhueta.</strong> Entre os candidatos, ela cresce de <span data-dado="k.silhuetas.4" data-casas="3">0,177</span> para <span data-dado="k.silhuetas.5" data-casas="3">0,189</span> e chega a <span data-dado="k.silhuetas.6" data-casas="3">0,196</span> com k = 7, a maior para três grupos ou mais.</p>
+            <p data-i18n="quantos.p3"><strong>Interpretação.</strong> Com 7 grupos, cada um tem um perfil que dá para descrever e nomear. Com menos, perfis diferentes se misturam.</p>
+          </div>
+          <figure class="grafico" data-grafico="k"></figure>
+        </div>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula4">Ver na aula (seção IV.1) ↗</a>
+      </div>
+    </section>
+
+    <!-- ───────────── 04 Os 7 grupos ───────────── -->
+    <section id="grupos" class="capitulo">
+      <div class="cap-num">04</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="grupos.titulo">Os 7 grupos</h2>
+        <p class="cap-frase" data-i18n="grupos.frase">Cada grupo ganhou um nome, e todo nome cita os valores que o justificam.</p>
+        <ol class="lista-grupos">
+          <li style="--cor: var(--g0)"><b data-i18n="grupo.0">Dançante e alegre</b><span><span data-dado="grupos.0.faixas" data-casas="0">27.523</span> · <span data-dado="grupos.0.pct" data-casas="1">30,7</span>%</span></li>
+          <li style="--cor: var(--g1)"><b data-i18n="grupo.1">Acústico e calmo</b><span><span data-dado="grupos.1.faixas" data-casas="0">18.082</span> · <span data-dado="grupos.1.pct" data-casas="1">20,2</span>%</span></li>
+          <li style="--cor: var(--g2)"><b data-i18n="grupo.2">Instrumental enérgico</b><span><span data-dado="grupos.2.faixas" data-casas="0">10.094</span> · <span data-dado="grupos.2.pct" data-casas="1">11,3</span>%</span></li>
+          <li style="--cor: var(--g3)"><b data-i18n="grupo.3">Fala e comédia</b><span><span data-dado="grupos.3.faixas" data-casas="0">1.045</span> · <span data-dado="grupos.3.pct" data-casas="1">1,2</span>%</span></li>
+          <li style="--cor: var(--g4)"><b data-i18n="grupo.4">Intenso e pesado</b><span><span data-dado="grupos.4.faixas" data-casas="0">20.162</span> · <span data-dado="grupos.4.pct" data-casas="1">22,5</span>%</span></li>
+          <li style="--cor: var(--g5)"><b data-i18n="grupo.5">Ambiente e clássico</b><span><span data-dado="grupos.5.faixas" data-casas="0">6.464</span> · <span data-dado="grupos.5.pct" data-casas="1">7,2</span>%</span></li>
+          <li style="--cor: var(--g6)"><b data-i18n="grupo.6">Ao vivo</b><span><span data-dado="grupos.6.faixas" data-casas="0">6.213</span> · <span data-dado="grupos.6.pct" data-casas="1">6,9</span>%</span></li>
+        </ol>
+        <p class="cap-texto largo" data-i18n="grupos.p1">O mapa abaixo é a impressão digital de cada grupo: quantos desvios-padrão o centro do grupo está acima (vermelho) ou abaixo (azul) da média de todas as faixas, em cada característica. O grupo <em>Fala e comédia</em> tem só <span data-dado="grupos.3.pct" data-casas="1">1,2</span>% das faixas, mas fica quase 7 desvios acima da média em presença de fala: é pequeno porque é muito diferente de todo o resto.</p>
+        <figure class="grafico largo" data-grafico="perfis"></figure>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula5">Ver na aula (seções V.1 e V.2) ↗</a>
+      </div>
+    </section>
+
+    <!-- ───────────── 05 Brasil ───────────── -->
+    <section id="brasil" class="capitulo">
+      <div class="cap-num">05</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="brasil.titulo">Brasil</h2>
+        <p class="cap-frase" data-i18n="brasil.frase">Sem ver nenhum gênero, o algoritmo colocou o pagode, o sertanejo e o samba no mesmo grupo. O motivo não é o estilo.</p>
+        <div class="cap-colunas">
+          <div class="cap-texto">
+            <p data-i18n="brasil.p1">Primeiro, a conferência: os grupos fazem sentido musical. <span data-dado="generos.12.pct.3" data-casas="0">81</span>% do gênero comedy caiu em <em>Fala e comédia</em>, <span data-dado="generos.7.pct.5" data-casas="0">74</span>% do classical em <em>Ambiente e clássico</em> e <span data-dado="generos.8.pct.4" data-casas="0">72</span>% do metal em <em>Intenso e pesado</em>.</p>
+            <p data-i18n="brasil.p2">Na música brasileira, o forró (<span data-dado="generos.5.pct.0" data-casas="0">68</span>%) e o funk (<span data-dado="generos.6.pct.0" data-casas="0">69</span>%) são dançantes. Já o pagode (<span data-dado="generos.3.pct.6" data-casas="0">50</span>%), o sertanejo (<span data-dado="generos.2.pct.6" data-casas="0">44</span>%) e o samba (<span data-dado="generos.4.pct.6" data-casas="0">42</span>%) têm o grupo <em>Ao vivo</em> como principal.</p>
+            <p data-i18n="brasil.p3">Testei a hipótese com os próprios dados. No pagode, <span data-dado="ao_vivo.3.no_grupo" data-casas="0">89</span>% das faixas desse grupo têm "ao vivo" no nome da faixa ou do álbum, contra <span data-dado="ao_vivo.3.fora" data-casas="0">35</span>% nos outros grupos. O algoritmo encontrou <strong>como a música foi gravada</strong>, e não o estilo dela.</p>
+          </div>
+          <figure class="grafico" data-grafico="generos"></figure>
+        </div>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula6">Ver na aula (seção V.3) ↗</a>
+      </div>
+    </section>
+
+    <!-- ───────────── 06 Simuladores ───────────── -->
+    <section id="simuladores" class="capitulo">
+      <div class="cap-num">06</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="sim.titulo">Mexa você mesmo</h2>
+        <p class="cap-frase" data-i18n="sim.frase">Dois simuladores rodam aqui no navegador, com os dados e o modelo da análise.</p>
+
+        <h3 class="sim-titulo" data-i18n="sim.passo.titulo">O K-Means passo a passo</h3>
+        <p class="cap-texto largo" data-i18n="sim.passo.p">Escolha o número de grupos, sorteie os centros iniciais e avance um passo de cada vez. Com 3 grupos, experimente o sorteio 3: o algoritmo converge, mas para numa solução pior que a melhor possível. É por isso que, na prática, se rodam várias inicializações.</p>
+        <div class="simulador" data-simulador="passo"><p class="aviso" data-i18n="aviso.sem_js">Este simulador precisa de JavaScript.</p></div>
+
+        <h3 class="sim-titulo" data-i18n="sim.grupo.titulo">Em que grupo cairia a sua música?</h3>
+        <p class="cap-texto largo" data-i18n="sim.grupo.p">Descreva uma música com os 9 controles. O simulador faz a mesma conta do modelo: padroniza os valores e procura o centro mais próximo. Essa conta dá o mesmo grupo que o modelo em 100% das <span data-dado="limpeza.faixas" data-casas="0">89.583</span> faixas.</p>
+        <div class="simulador" data-simulador="grupo"><p class="aviso" data-i18n="aviso.sem_js">Este simulador precisa de JavaScript.</p></div>
+      </div>
+    </section>
+
+    <!-- ───────────── 07 Limites ───────────── -->
+    <section id="limites" class="capitulo">
+      <div class="cap-num">07</div>
+      <div class="cap-corpo">
+        <h2 class="cap-titulo" data-i18n="limites.titulo">Limites</h2>
+        <p class="cap-frase" data-i18n="limites.frase">Os grupos fazem sentido, mas o método tem limites, e todos apareceram aqui.</p>
+        <ol class="lista-limites">
+          <li><b data-i18n="limites.1t">A escolha de k foi ambígua.</b><span data-i18n="limites.1p">O cotovelo não teve uma dobra nítida. Outra pessoa, pesando os critérios de outro jeito, poderia defender 5 ou 6 grupos.</span></li>
+          <li><b data-i18n="limites.2t">Os grupos se sobrepõem.</b><span data-i18n="limites.2p">A silhueta é <span data-dado="k.silhuetas.6" data-casas="3">0,196</span>, numa escala que vai até 1. Uma música pode ser dançante e intensa, mas o K-Means obriga cada uma a ter um grupo só.</span></li>
+          <li><b data-i18n="limites.3t">O método supõe grupos "redondos".</b><span data-i18n="limites.3p">Grupos alongados ou muito espalhados, como o de fala, acabam cortados de forma artificial.</span></li>
+          <li><b data-i18n="limites.4t">Nem toda característica descreve estilo.</b><span data-i18n="limites.4p">A característica "ao vivo" mede a gravação. Por isso um grupo inteiro reflete o palco, e não o gênero.</span></li>
+        </ol>
+        <p class="cap-texto largo" data-i18n="limites.proximo"><strong>O que eu faria em seguida:</strong> testar modelos que aceitam sobreposição e dispensam a escolha de k (GMM e DBSCAN), e treinar de novo sem a característica "ao vivo", para ver onde o pagode, o samba e o sertanejo vão parar quando só o estilo conta.</p>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula7">Ver na aula (seção V.4) ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ───────────── Contato ───────────── -->
+  <footer id="contato" class="rodape">
+    <p class="rodape-nome">Wellington Junior<br>Torres de Melo</p>
+    <p class="rodape-contexto" data-i18n="rodape.contexto">Ciência de Dados · Projeto final de Análise de Algoritmos, Fatec Jundiaí, 2026</p>
+    <ul class="rodape-links">
+      <li><a href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="rodape.colab">Abrir a aula completa no Colab ↗</a></li>
+      <li><a href="https://github.com/DataScience-Fatec-Projects/kmeans-musicas-spotify" target="_blank" rel="noopener" data-i18n="rodape.repo">Repositório do projeto ↗</a></li>
+      <li><a href="#PENDENTE" data-contato="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      <li><a href="#PENDENTE" data-contato="email" data-i18n="rodape.email">E-mail ↗</a></li>
+      <li><a href="https://github.com/WellingtonTorres" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+    <p class="rodape-credito" data-i18n="rodape.credito">Dados: Spotify Tracks Dataset, de Maharshi Pandya (Hugging Face, licença BSD). Página feita em HTML, CSS e JavaScript puro; todos os números vêm do notebook da análise.</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
