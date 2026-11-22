@@ -39,8 +39,7 @@ Os títulos de nível 1 e 2 são fixos. Os de nível 3 podem ser ajustados.
 ### V.1 Perfil de cada cluster
 ### V.2 Dando nome aos grupos
 ### V.3 Clusters × gêneros (com destaque para a música brasileira)
-### V.4 Limitações do K-Means
-### V.5 Próximos passos
+### V.4 Limitações e melhorias
 ## Referências
 ```
 

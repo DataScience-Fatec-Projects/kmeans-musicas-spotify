@@ -22,7 +22,7 @@ brasileira.
 | **II. Ferramentas** | numpy, pandas, matplotlib, seaborn e o `KMeans` do scikit-learn |
 | **III. Dados** | Dataset, dicionário de variáveis, limpeza (duplicatas, valores inválidos) e padronização com `StandardScaler` |
 | **IV. Aplicação** | Escolha de k (cotovelo e silhueta), treino, visualização dos clusters e dos centroides |
-| **V. Análise** | Perfil e nome de cada grupo, cruzamento com gêneros (sertanejo, pagode, samba, forró, MPB…), limitações e próximos passos |
+| **V. Análise** | Perfil e nome de cada grupo, cruzamento com gêneros (sertanejo, pagode, samba, forró, MPB…), limitações e melhorias |
 
 Ao longo do notebook há células **🧪 Experimente**: blocos com um parâmetro para mudar e rodar de
 novo.
