@@ -42,7 +42,6 @@ const pt = {
   "graf.generos.legenda": "% das faixas de cada gênero em cada grupo. Acima da linha, os gêneros brasileiros; abaixo, gêneros internacionais de contraste.",
   "graf.generos.desc": "Mapa de calor de 13 gêneros pelos 7 grupos. No grupo {grupo}: pagode {pagode}%, sertanejo {sertanejo}% e samba {samba}%.",
 
-  "abertura.numero_final": "perfis de som",
 };
 
 // ───────── Inglês: textos dinâmicos e tradução dos textos do HTML ─────────
@@ -74,7 +73,6 @@ const en = {
   "graf.generos.legenda": "% of each genre's tracks in each cluster. Above the line, Brazilian genres; below, international genres for contrast.",
   "graf.generos.desc": "Heatmap of 13 genres across the 7 clusters. In the {grupo} cluster: pagode {pagode}%, sertanejo {sertanejo}% and samba {samba}%.",
 
-  "abertura.numero_final": "sound profiles",
 
   // ── Textos do HTML ──
   "meta.titulo": "K-Means: 89,583 tracks, 7 sound profiles · Wellington Melo",
@@ -85,6 +83,7 @@ const en = {
   "nav.contato": "Contact",
 
   "abertura.legenda": "tracks. No genre given.",
+  "abertura.fim": "sound profiles, found from audio alone.",
   "abertura.resultado": `An algorithm found <strong>${d("meta.k")} sound profiles</strong>.`,
   "abertura.autor": "A data science project by Wellington Junior Torres de Melo",
   "abertura.rolar": "Scroll to watch the points sort themselves ↓",
