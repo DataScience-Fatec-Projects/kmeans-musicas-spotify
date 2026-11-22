@@ -29,7 +29,7 @@ seção correspondente da aula.
 
 - Angular ou qualquer framework (decisão registrada na seção 4). Um explorador de clusters em
   Angular fica como projeto separado, na issue #51 (a #50 é o app Streamlit).
-- Versão em inglês, blog, formulário de contato, analytics, cookies.
+- Blog, formulário de contato, analytics, cookies.
 - Chamar a API do Spotify ou qualquer backend. A página é estática.
 - Substituir o notebook ou mudar qualquer coisa nele.
 
@@ -48,7 +48,9 @@ seção correspondente da aula.
   dos arquivos MUST ser relativos, porque a página fica numa subpasta do domínio.
 - **Sem etapa de build e sem dependência externa em tempo de execução**: nenhum CDN, nenhuma
   biblioteca de terceiros, nenhuma fonte carregada de outro domínio.
-- **Idioma**: português do Brasil, com números no formato brasileiro (89.583; 0,196).
+- **Idioma** (pedido do autor na aprovação): português do Brasil e inglês, com um seletor
+  **PT / EN** sempre visível na navegação. Os números seguem o idioma (89.583 e 0,196 em
+  português; 89,583 e 0.196 em inglês). O notebook continua só em português.
 - **Fonte dos dados**: o notebook `notebooks/aula_kmeans_spotify.ipynb` é a única fonte da
   verdade. O dataset é o `maharshipandya/spotify-tracks-dataset` (licença BSD), e a atribuição
   MUST aparecer na página.
@@ -175,6 +177,14 @@ licença. Os endereços do LinkedIn e do e-mail são informados pelo autor (pend
   Santal.
 - **Animação**: scroll comandando o progresso, sem biblioteca. Com `prefers-reduced-motion`, os
   pontos já aparecem agrupados e nada se move.
+- **Dois idiomas**: o HTML traz o texto em português, que é o padrão e o que aparece sem
+  JavaScript. A tradução para o inglês fica num dicionário próprio (um arquivo por idioma ou
+  atributos no HTML, à escolha do construtor), e o seletor troca todo o texto sem recarregar,
+  inclusive os rótulos dos gráficos, os nomes dos 7 grupos e os textos dos simuladores. A escolha
+  fica guardada no navegador e também pode vir pelo endereço (`?lang=en`), para o autor poder
+  mandar o link já em inglês. Na primeira visita, vale o idioma do navegador: inglês para quem
+  não usa português. O atributo `lang` da página acompanha a troca. Nomes de músicas, artistas e
+  gêneros do dataset não são traduzidos.
 - **Sem JavaScript**: o texto e os números de todos os capítulos continuam legíveis (estão no
   HTML). Só os gráficos e os simuladores dependem de script.
 - **Responsivo**: funciona de 360 px a telas largas. No celular, a grade vira uma coluna e o
@@ -185,7 +195,8 @@ licença. Os endereços do LinkedIn e do e-mail são informados pelo autor (pend
 ## 7. O que fica com o construtor
 
 - A divisão dos arquivos dentro de `site/` e a organização do JavaScript.
-- A redação final de cada capítulo, dentro do roteiro da 5.3.
+- A redação final de cada capítulo, dentro do roteiro da 5.3, e a tradução para o inglês (os
+  nomes dos grupos em inglês inclusive), que o autor revisa antes da publicação.
 - Detalhes de movimento (curvas, duração, o que entra antes).
 - A forma exata de cada gráfico, desde que mostre os números da 5.3.
 - Como testar: no mínimo, capturas de tela em largura de computador e de celular, a checagem do
@@ -197,6 +208,9 @@ licença. Os endereços do LinkedIn e do e-mail são informados pelo autor (pend
 ## 8. Pendências com o autor
 
 - Endereço do perfil no LinkedIn e o e-mail que deve aparecer no rodapé.
-- Quando o trabalho entra na `main`: antes ou depois da entrega de 24/11. A constituição (VI) diz
-  que o escopo até a entrega é só o notebook, e a #51 dizia "depois da entrega". Proposta do
-  agente: construir numa branch agora e fazer o merge e a publicação a partir de 25/11.
+
+## 9. Aprovação
+
+Aprovado pelo autor em 2026-11-22, com o acréscimo do seletor de idioma PT / EN. Fica valendo a
+proposta de calendário: construir numa branch agora e fazer o merge na `main` e a publicação a
+partir de 25/11, depois da entrega da disciplina (constituição VI).
