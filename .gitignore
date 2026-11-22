@@ -13,3 +13,6 @@ __pycache__/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Esboços do brainstorming visual (não versionar)
+.superpowers/
