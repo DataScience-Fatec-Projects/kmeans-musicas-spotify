@@ -89,13 +89,17 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
 - `TAMANHO_AMOSTRA_SILHUETA = 10_000`: silhueta na IV.1 (a exata é O(n²)).
 - `TAMANHO_AMOSTRA_GRAFICOS = 6_000`: `amostra_idx`, sorteada uma vez com `RANDOM_STATE` na IV.3
   e reaproveitada na IV.4. É o bastante para ver a forma de cada cluster sem virar um borrão.
+  Na IV.3, o par de maior dispersão entre os centroides (`eixo_x`, `eixo_y`) separa os grupos
+  extremos (`ja_separados`), e `PARES_EXTRAS` mostra os `outros_clusters` em mais dois pares.
 
 ### Exemplo de brinquedo (Seção I): `X_brinquedo`
 - `make_blobs` com cerca de 150 pontos 2D e `random_state=RANDOM_STATE`. Usado só na
   implementação do zero, na comparação com o scikit-learn (ARI) e nas células "Experimente".
-- `kmeans_do_zero(X, k, semente, max_iter, tol)`: função local à Seção I que devolve os rótulos,
+- `kmeans_do_zero(X, k, semente, max_iter, tol, contador=None)`: função local à Seção I que devolve os rótulos,
   os centroides finais, os centroides iniciais, o número de iterações e o histórico de cada iteração
   (rótulos, centroides antes e depois), usado no gráfico passo a passo (R6).
+  O `contador` opcional (um dicionário) soma o tamanho da matriz de distâncias a cada iteração e
+  é usado na I.4 para contar os cálculos durante a execução (FR-014).
 
 ## Estados
 
