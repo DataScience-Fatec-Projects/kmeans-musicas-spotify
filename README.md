@@ -25,7 +25,9 @@ brasileira.
 | **V. Análise** | Perfil e nome de cada grupo, cruzamento com gêneros (sertanejo, pagode, samba, forró, MPB…), limitações e melhorias |
 
 Ao longo do notebook há células **🧪 Experimente**: blocos com um parâmetro para mudar e rodar de
-novo.
+novo. E dois **simuladores** em HTML, que rodam no navegador sem executar nada: o K-Means passo a
+passo, sobre os pontos de brinquedo (I.3), e "em que grupo cairia a sua música?", com controles
+para as 9 características de áudio e os centroides reais do modelo (V.2).
 
 ## Dataset
 

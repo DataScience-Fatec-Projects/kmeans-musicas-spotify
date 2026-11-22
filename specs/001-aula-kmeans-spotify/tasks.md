@@ -156,6 +156,8 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 - [X] T039 Leitor-teste — quickstart §D (SC-003): pelo menos 1 colega lê a aula no link e responde às 3 perguntas. Registrar as respostas na issue
 - [X] T040 [P] README com resultados e link do Colab — `README.md` e `link_colab.txt`: k escolhido, nomes dos clusters e 1–2 figuras exportadas em `docs/img/`, mantendo a fonte e a licença do dataset (constituição, restrições de dados). Depende de T028 e T030
 - [X] T041 Capa final e versão executada na main — `aula.ipynb`: nome completo de todos os integrantes na capa, notebook executado e salvo com outputs na `main`, `scripts/validar_notebook.py --entrega` OK (sem 🚧 e com todas as células executadas) e link público aberto em janela anônima (SC-006)
+- [X] T043 Simulador "K-Means passo a passo" — `aula.ipynb` §I.3: célula de formulário com HTML/CSS/JavaScript puro (sem bibliotecas externas) sobre os pontos de `X_brinquedo`. O leitor escolhe k e avança Inicializar → Atribuir → Atualizar vendo a inércia, ou clica para criar pontos. Markdown antes, comentário depois e saída salva (FR-008)
+- [X] T044 Simulador "Em que grupo cairia a sua música?" — `aula.ipynb` §V.2: 9 controles deslizantes na escala original, padronização com a média e o desvio do `scaler` e centroide mais próximo de `modelo`, com faixas de exemplo para carregar. Conferência em Python de que a mesma conta reproduz `modelo.predict` em todas as faixas (FR-008)
 - [ ] T042 Entrega do link público na plataforma da disciplina — `link_colab.txt`: enviar até 24/11/2026 23:59 (SC-007)
 
 ---

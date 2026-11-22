@@ -101,6 +101,14 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
   O `contador` opcional (um dicionário) soma o tamanho da matriz de distâncias a cada iteração e
   é usado na I.4 para contar os cálculos durante a execução (FR-014).
 
+### Simuladores HTML (FR-008)
+- `dados_passo_a_passo` (I.3): os pontos de `X_brinquedo` (4 casas) e as cores; o sorteio dos
+  centroides iniciais é feito no navegador.
+- `dados_simulador` (V.2): para cada feature, o intervalo do controle, a média (`scaler.mean_`) e o
+  desvio (`scaler.scale_`), mais `centroides_padronizados`, `NOMES_CLUSTERS`, `CORES_CLUSTERS` e uma
+  faixa típica de cada cluster. Uma célula visível confere que a mesma conta (padronizar e achar o
+  centroide mais próximo) reproduz `modelo.predict` em todas as faixas.
+
 ## Estados
 
 Não há ciclo de vida persistente. A única "transição" é a sequência de execução do notebook:

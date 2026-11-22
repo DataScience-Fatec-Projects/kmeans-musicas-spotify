@@ -212,6 +212,26 @@ def checar_interativos(nb) -> list[str]:
     return []
 
 
+RE_SCRIPT_EXTERNO = re.compile(r"<script[^>]*\bsrc\s*=", re.IGNORECASE)
+
+
+def checar_simuladores(nb) -> list[str]:
+    """Simuladores HTML/JS (FR-008): célula de formulário e nenhum script externo."""
+    falhas = []
+    for i, c in enumerate(nb.cells):
+        if c.cell_type != "code":
+            continue
+        htmls = [c.source] + [
+            "".join(o.get("data", {}).get("text/html", ""))
+            for o in c.get("outputs", [])
+        ]
+        if any(RE_SCRIPT_EXTERNO.search(h) for h in htmls):
+            falhas.append(f"Célula {i + 1}: simulador carrega script externo (<script src>), proibido pela FR-008.")
+        if "<script" in c.source and not c.source.lstrip().startswith("# @title"):
+            falhas.append(f"Célula {i + 1}: simulador HTML precisa ser célula de formulário (# @title), FR-008.")
+    return falhas
+
+
 def checar_entrega(nb) -> list[str]:
     falhas = [
         f"Célula {i + 1} ainda está marcada como em construção ({MARCADOR_EM_CONSTRUCAO})."
@@ -236,6 +256,7 @@ CHECAGENS = [
     checar_experimente,
     checar_outputs_de_erro,
     checar_interativos,
+    checar_simuladores,
 ]
 
 

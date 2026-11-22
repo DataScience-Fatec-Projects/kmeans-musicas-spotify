@@ -45,6 +45,7 @@ Regras do notebook (vêm da constituição e o validador confere):
 | Use os **nomes de variáveis do contrato** (`df_faixas`, `X`, `modelo`…) | outra pessoa depende deles na seção seguinte |
 | Nada de nova semente: use `RANDOM_STATE` | reprodutibilidade |
 | Nada de upload, Drive, widgets ou plotly | tem que rodar e aparecer no link público |
+| Simulador em HTML só como complemento, em célula de formulário e sem bibliotecas externas (FR-008) | o GitHub não executa JavaScript, e o conteúdo essencial tem que estar no texto e nos gráficos |
 
 Se precisar mudar uma decisão (k, features, um nome de variável), atualize o artefato
 correspondente (`spec.md`, `plan.md`, contrato ou `tasks.md`) **no mesmo PR**.
