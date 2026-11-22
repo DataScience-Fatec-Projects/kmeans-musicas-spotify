@@ -126,7 +126,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 - [X] T029 [US5] V.3 Cruzamento clusters × gêneros — `aula.ipynb` §V.3: `df_pares['cluster']` por merge com `df_faixas[['track_id', 'cluster']]`, `genero_x_cluster = pd.crosstab(df_pares.track_genre, df_pares.cluster, normalize='index')` e tabela dos 5 gêneros mais frequentes de cada cluster (FR-053)
 - [X] T030 [US5] V.3 Destaque para os gêneros brasileiros — `aula.ipynb` §V.3: heatmap de `GENEROS_BR + GENEROS_CONTRASTE` × cluster com `NOMES_CLUSTERS` nos eixos (FR-044), um comentário (por exemplo, MPB mais acústica e forró/funk mais dançantes) e a nota sobre o rótulo `funk` (EUA × Brasil) (FR-034)
 - [X] T031 [US5] V.3 🧪 Experimente: gêneros à escolha — `aula.ipynb` §V.3: célula com `GENEROS_EXTRA` editável para o leitor ver onde caem gêneros à escolha (obrigatória, FR-007, contrato §4)
-- [X] T032 [US5] V.4–V.5 Limitações e próximos passos — `aula.ipynb` §V.4–V.5: ≥ 3 limitações ligadas ao problema (k fixo e escolhido com ambiguidade; clusters esféricos e de tamanho parecido; sensibilidade a outliers e escala; clusters pouco separados, com silhueta ≈ 0,18; gênero ≠ som) e ≥ 2 próximos passos (DBSCAN, GMM ou hierárquico; redução de dimensionalidade; outras features; app Streamlit) (FR-054)
+- [X] T032 [US5] V.4–V.5 Limitações e próximos passos (depois juntadas na V.4 "Limitações e melhorias") — `aula.ipynb` §V.4–V.5: ≥ 3 limitações ligadas ao problema (k fixo e escolhido com ambiguidade; clusters esféricos e de tamanho parecido; sensibilidade a outliers e escala; clusters pouco separados, com silhueta ≈ 0,18; gênero ≠ som) e ≥ 2 próximos passos (DBSCAN, GMM ou hierárquico; redução de dimensionalidade; outras features; app Streamlit) (FR-054)
 
 **Checkpoint**: aula completa de I a V
 
@@ -152,10 +152,10 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 - [X] T035 [P] Referências — `aula.ipynb` §Referências: enunciado, documentação do scikit-learn, dataset no Hugging Face e livro-base da disciplina
 - [X] T036 Revisão contra a rubrica e o enunciado — `aula.ipynb` × `specs/001-aula-kmeans-spotify/checklists/rubrica.md` e `docs/enunciado.md`: conferir cada item e ajustar o que faltar
 - [X] T037 Revisão de linguagem e do princípio II — `aula.ipynb` inteiro: pt-BR, termos definidos na primeira vez, markdown antes de cada código e comentário depois de cada saída relevante
-- [ ] T038 Reprodutibilidade e tempo de execução — `aula.ipynb` (quickstart §B e §C): executar 2× do zero localmente comparando tamanhos, centroides e gráficos (SC-004), e executar no Colab gratuito medindo o tempo total (< 5 min, SC-001). Registrar no PR
-- [ ] T039 Leitor-teste — quickstart §D (SC-003): pelo menos 1 colega lê a aula no link e responde às 3 perguntas. Registrar as respostas na issue
+- [X] T038 Reprodutibilidade e tempo de execução — `aula.ipynb` (quickstart §B e §C): executar 2× do zero localmente comparando tamanhos, centroides e gráficos (SC-004), e executar no Colab gratuito medindo o tempo total (< 5 min, SC-001). Registrar no PR
+- [X] T039 Leitor-teste — quickstart §D (SC-003): pelo menos 1 colega lê a aula no link e responde às 3 perguntas. Registrar as respostas na issue
 - [X] T040 [P] README com resultados e link do Colab — `README.md` e `link_colab.txt`: k escolhido, nomes dos clusters e 1–2 figuras exportadas em `docs/img/`, mantendo a fonte e a licença do dataset (constituição, restrições de dados). Depende de T028 e T030
-- [ ] T041 Capa final e versão executada na main — `aula.ipynb`: nome completo de todos os integrantes na capa, notebook executado e salvo com outputs na `main`, `scripts/validar_notebook.py --entrega` OK (sem 🚧 e com todas as células executadas) e link público aberto em janela anônima (SC-006)
+- [X] T041 Capa final e versão executada na main — `aula.ipynb`: nome completo de todos os integrantes na capa, notebook executado e salvo com outputs na `main`, `scripts/validar_notebook.py --entrega` OK (sem 🚧 e com todas as células executadas) e link público aberto em janela anônima (SC-006)
 - [ ] T042 Entrega do link público na plataforma da disciplina — `link_colab.txt`: enviar até 24/11/2026 23:59 (SC-007)
 
 ---
