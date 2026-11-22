@@ -10,9 +10,9 @@ cerca de 90 mil músicas do Spotify pelas características de áudio (energia, d
 valência, acústica…) e mostra que perfis de som existem nelas, com destaque para a música
 brasileira.
 
-> 🚧 **Em construção.** Projeto Final da disciplina ICD-004 Análise de Algoritmos (Fatec Jundiaí,
-> Prof. Humberto Zanetti), com entrega em **24/11/2026**. O andamento está no
-> [board do projeto](https://github.com/orgs/DataScience-Fatec-Projects/projects/3).
+> Projeto Final da disciplina ICD-004 Análise de Algoritmos (Fatec Jundiaí, Prof. Humberto
+> Zanetti), com entrega em **24/11/2026**. Link da aula: [`link_colab.txt`](link_colab.txt).
+> O andamento está no [board do projeto](https://github.com/orgs/DataScience-Fatec-Projects/projects/3).
 
 ## O que a aula cobre
 
@@ -34,6 +34,42 @@ novo.
 coletadas pela API do Spotify. O notebook lê o CSV direto da URL pública, sem login e sem upload.
 Por garantia, uma cópia idêntica fica em [`data/`](data/README.md) e é usada automaticamente se
 o Hugging Face não responder.
+
+## Resultados
+
+Depois da limpeza, sobram **89.583 faixas** (uma por linha), descritas por 9 características de
+áudio padronizadas. O gênero (`track_genre`) fica **fora do treino** e só é usado depois, para
+conferir se os grupos fazem sentido musical.
+
+**k = 7.** A curva do cotovelo é suave e aponta para a faixa de 5 a 7 grupos. Nessa faixa, a
+silhueta é máxima em k = 7 (0,196), e os 7 perfis são todos interpretáveis.
+
+| Cluster | Nome | Faixas | Por quê (média do grupo × média geral) |
+|---|---|---:|---|
+| 0 | Dançante e alegre | 27.523 (30,7%) | dançabilidade 0,71 × 0,56 · positividade 0,70 × 0,47 |
+| 1 | Acústico e calmo | 18.082 (20,2%) | acústica 0,69 × 0,33 · energia 0,38 × 0,64 |
+| 2 | Instrumental enérgico | 10.094 (11,3%) | instrumental 0,80 × 0,17 · energia 0,74 × 0,64 |
+| 3 | Fala e comédia | 1.045 (1,2%) | presença de fala 0,85 × 0,09 · 56% das faixas explícitas |
+| 4 | Intenso e pesado | 20.162 (22,5%) | energia 0,82 × 0,64 · volume −5,3 dB × −8,5 dB · 141 BPM × 122 |
+| 5 | Ambiente e clássico | 6.464 (7,2%) | volume −21,3 dB × −8,5 dB · acústica 0,87 × 0,33 · instrumental 0,79 × 0,17 |
+| 6 | Ao vivo | 6.213 (6,9%) | ao vivo 0,74 × 0,22 |
+
+![Perfil dos clusters: centroides padronizados](docs/img/perfil_clusters.png)
+
+**Os grupos fazem sentido musical.** Sem nunca ter visto um gênero, o K-Means colocou 81% do
+`comedy` em *Fala e comédia*, 74% do `classical` em *Ambiente e clássico* e 72% do `metal` em
+*Intenso e pesado*.
+
+**A música brasileira se divide em três perfis:**
+
+- **Dançante**: forró (68%) e funk (69%). O rótulo `funk` mistura o funk norte-americano e o
+  brasileiro.
+- **Espalhada**: a mpb e o rótulo `brazil` se dividem entre vários grupos.
+- **Ao vivo**: pagode (50%), sertanejo (44%) e samba (42%). Nesses gêneros, 80% a 89% das faixas
+  do grupo *Ao vivo* têm "ao vivo" no nome da faixa ou do álbum. Esse grupo reflete **como a
+  música foi gravada**, não o estilo, e é uma das limitações discutidas na aula.
+
+![Gêneros brasileiros e de contraste por cluster](docs/img/generos_brasileiros.png)
 
 ## Como usar
 
