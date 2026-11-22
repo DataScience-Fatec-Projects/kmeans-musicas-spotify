@@ -149,7 +149,7 @@ seções do enunciado (US1 = Seção I … US5 = Seção V). As fases estão na 
 
 **Purpose**: qualidade final, verificação da rubrica e entrega
 
-- [ ] T035 [P] Referências — `aula.ipynb` §Referências: enunciado, documentação do scikit-learn, dataset no Hugging Face e livro-base da disciplina
+- [X] T035 [P] Referências — `aula.ipynb` §Referências: enunciado, documentação do scikit-learn, dataset no Hugging Face e livro-base da disciplina
 - [ ] T036 Revisão contra a rubrica e o enunciado — `aula.ipynb` × `specs/001-aula-kmeans-spotify/checklists/rubrica.md` e `docs/enunciado.md`: conferir cada item e ajustar o que faltar
 - [ ] T037 Revisão de linguagem e do princípio II — `aula.ipynb` inteiro: pt-BR, termos definidos na primeira vez, markdown antes de cada código e comentário depois de cada saída relevante
 - [ ] T038 Reprodutibilidade e tempo de execução — `aula.ipynb` (quickstart §B e §C): executar 2× do zero localmente comparando tamanhos, centroides e gráficos (SC-004), e executar no Colab gratuito medindo o tempo total (< 5 min, SC-001). Registrar no PR
