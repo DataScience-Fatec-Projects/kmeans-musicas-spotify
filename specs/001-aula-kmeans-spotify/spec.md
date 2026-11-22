@@ -230,8 +230,9 @@ exemplos e gêneros predominantes, e há uma lista de limitações e de próximo
 
 **Estrutura e entrega**
 
-- **FR-001**: O notebook MUST começar com uma capa: título da aula, disciplina, professor, nome
-  completo de todos os integrantes, data e link do repositório.
+- **FR-001**: O notebook MUST começar com o botão "Open In Colab" (padrão dos notebooks da
+  disciplina) e, logo depois, uma capa: título da aula, disciplina, professor, nome completo de
+  todos os integrantes, data e link do repositório.
 - **FR-002**: O notebook MUST ter as seções I a V do enunciado, nessa ordem e com os títulos do
   enunciado, e um sumário no início.
 - **FR-003**: O notebook MUST rodar do zero com "Executar tudo" num runtime padrão do Google Colab,

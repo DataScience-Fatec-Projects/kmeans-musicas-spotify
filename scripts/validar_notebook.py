@@ -80,13 +80,29 @@ def checar_titulos(nb) -> list[str]:
     return falhas
 
 
-def checar_capa(nb) -> list[str]:
+URL_COLAB = (
+    "https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify"
+    "/blob/main/notebooks/aula_kmeans_spotify.ipynb"
+)
+
+
+def checar_botao_colab(nb) -> list[str]:
+    """A 1ª célula é só o botão "Open In Colab", no padrão dos notebooks da disciplina."""
     if not nb.cells or nb.cells[0].cell_type != "markdown":
-        return ["A primeira célula precisa ser markdown (a capa)."]
+        return ["A primeira célula precisa ser markdown com o botão 'Open In Colab'."]
     texto = nb.cells[0].source
+    if "colab-badge.svg" not in texto or URL_COLAB not in texto:
+        return [f"A primeira célula precisa ter o botão 'Open In Colab' apontando para {URL_COLAB}."]
+    return []
+
+
+def checar_capa(nb) -> list[str]:
+    if len(nb.cells) < 2 or nb.cells[1].cell_type != "markdown":
+        return ["A segunda célula precisa ser markdown (a capa, logo depois do botão do Colab)."]
+    texto = nb.cells[1].source
     posicao = texto.find("Integrantes")
     if posicao < 0:
-        return ["A capa (primeira célula) precisa conter 'Integrantes' seguido dos nomes."]
+        return ["A capa (segunda célula) precisa conter 'Integrantes' seguido dos nomes."]
     depois = re.sub(r"^[\s*_:\-–—]+", "", texto[posicao + len("Integrantes"):])
     if not re.match(r"[A-Za-zÀ-ÿ]{2,}", depois):
         return ["A capa tem 'Integrantes', mas nenhum nome logo depois."]
@@ -212,6 +228,7 @@ def checar_entrega(nb) -> list[str]:
 
 CHECAGENS = [
     checar_titulos,
+    checar_botao_colab,
     checar_capa,
     checar_markdown_antes_do_codigo,
     checar_random_state,
