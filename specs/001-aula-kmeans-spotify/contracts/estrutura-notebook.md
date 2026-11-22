@@ -58,6 +58,7 @@ são copiados do enunciado, inclusive as maiúsculas e minúsculas ("V. Análise
 | Pelo menos 4 células markdown começando com "🧪 Experimente" (uma em I.3, IV.2, IV.4 e V.3) | ✔auto |
 | Nenhum output de erro (`output_type == "error"`) salvo | ✔auto |
 | Nenhum widget ou plotly (`ipywidgets`, `plotly`) | ✔auto |
+| Simuladores HTML/JS (FR-008): célula de formulário (`# @title`) e nenhum `<script src>` externo | ✔auto |
 | Toda saída relevante é comentada logo depois | revisão no PR |
 | Nenhuma célula com "🚧" e toda célula de código executada e salva com outputs (FR-004) | ✔auto, só com `--entrega` |
 

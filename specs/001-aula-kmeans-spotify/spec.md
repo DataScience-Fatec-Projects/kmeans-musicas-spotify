@@ -46,7 +46,8 @@ Fatos do dataset levantados em 2026-11-07, para embasar requisitos e casos de bo
 - Q: Quais features de áudio entram no K-Means? → A: As 9 contínuas (FR-035).
 - Q: O que conta como "interativo" na aula, além de executar as células? → A: Células
   "experimente". São blocos com um parâmetro editável e a instrução "mude e rode de novo". Não há
-  widgets nem gráficos que só aparecem executando (FR-007).
+  widgets nem gráficos que só aparecem executando (FR-007). *Revisto em 2026-11-22*: dois
+  simuladores em HTML/JS puro entram como complemento, no padrão dos notebooks da disciplina (FR-008).
 - Q: Como tratar faixas que aparecem em mais de um gênero na análise por gênero? → A: Rotular e
   devolver. O treino usa cada faixa uma única vez, e depois o rótulo do cluster volta para todas as
   linhas (faixa, gênero), então cada gênero mantém suas faixas na análise (FR-033, FR-053).
@@ -246,7 +247,15 @@ exemplos e gêneros predominantes, e há uma lista de limitações e de próximo
   editável no topo e uma instrução do que mudar e o que observar. São **4 blocos obrigatórios**: I.3
   (k e semente do exemplo de brinquedo), IV.2 (outro valor de k), IV.4 (com e sem padronização) e
   V.3 (gêneros à escolha do leitor). Todos os gráficos MUST ser estáticos, para aparecerem no
-  GitHub e no link sem executar. Widgets e gráficos que dependem de execução ficam fora do escopo.
+  GitHub e no link sem executar. Widgets (`ipywidgets`) e gráficos que dependem de execução
+  (`plotly`) ficam fora do escopo. Simuladores em HTML seguem a FR-008.
+- **FR-008** (revisto em 2026-11-22): A aula MAY ter simuladores em HTML, CSS e JavaScript puro, no
+  padrão dos notebooks da disciplina, como **complemento**. Eles MUST ficar em células de formulário
+  (`# @title`) com a saída salva, sem bibliotecas externas (nenhum `<script src>`), e MUST usar
+  dados vindos das variáveis do notebook. Nenhum conceito ou resultado pode existir só no
+  simulador: o conteúdo essencial continua nos textos, nos gráficos estáticos e nos 🧪 Experimente,
+  porque o GitHub não executa JavaScript. São dois: "K-Means passo a passo" (I.3) e "Em que grupo
+  cairia a sua música?" (V.2).
 
 **Seção I — Introdução**
 
