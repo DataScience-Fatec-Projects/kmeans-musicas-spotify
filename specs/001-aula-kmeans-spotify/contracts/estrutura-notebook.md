@@ -11,6 +11,7 @@ automaticamente os itens marcados com ✔auto.
 Os títulos de nível 1 e 2 são fixos. Os de nível 3 podem ser ajustados.
 
 ```text
+[Open In Colab]                                                        (botão, 1ª célula)
 # Aula: K-Means em Ciência de Dados — agrupando músicas do Spotify      (capa)
 ## Sumário
 ## ⚙️ Configuração do ambiente
@@ -50,7 +51,8 @@ são copiados do enunciado, inclusive as maiúsculas e minúsculas ("V. Análise
 
 | Regra | Verificação |
 |---|---|
-| A primeira célula é markdown e contém "Integrantes" seguido de pelo menos 1 nome | ✔auto |
+| A primeira célula é só o botão "Open In Colab" (`colab-badge.svg`) com o link do notebook na `main`, no padrão dos notebooks da disciplina | ✔auto |
+| A segunda célula (capa) é markdown e contém "Integrantes" seguido de pelo menos 1 nome | ✔auto |
 | Toda célula de código é precedida por uma célula de markdown (não vazia) | ✔auto |
 | `RANDOM_STATE =` aparece em exatamente 1 célula de código | ✔auto |
 | `URL_DATASET` aponta para o Hugging Face e não há `files.upload` / `drive.mount` | ✔auto |
