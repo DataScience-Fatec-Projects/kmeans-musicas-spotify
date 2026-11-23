@@ -21,12 +21,12 @@
       <a href="#simuladores" data-i18n="nav.simuladores">Simuladores</a>
       <a href="#limites" data-i18n="nav.limites">Limites</a>
       <a href="#contato" data-i18n="nav.contato">Contato</a>
-      <span class="idiomas" role="group" aria-label="Idioma / Language">
-        <button type="button" data-idioma="pt" aria-pressed="true">PT</button>
-        <span aria-hidden="true">/</span>
-        <button type="button" data-idioma="en" aria-pressed="false">EN</button>
-      </span>
     </nav>
+    <span class="idiomas" role="group" aria-label="Idioma / Language">
+      <button type="button" data-idioma="pt" aria-pressed="true">PT</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" data-idioma="en" aria-pressed="false">EN</button>
+    </span>
   </header>
 
   <main>
@@ -65,7 +65,7 @@
             <p data-i18n="dados.p1">O conjunto de dados traz <span data-dado="limpeza.linhas" data-casas="0">114.000</span> linhas, mas a mesma música aparece em mais de um gênero. Depois de tirar linhas com valor ausente, repetidas ou com andamento zero, sobram <span data-dado="limpeza.pares" data-casas="0">113.392</span> pares de faixa e gênero, que correspondem a <span data-dado="limpeza.faixas" data-casas="0">89.583</span> faixas únicas.</p>
             <p data-i18n="dados.p2">O modelo treina com as faixas únicas e com <span data-dado="limpeza.features" data-casas="0">9</span> características de áudio: dançabilidade, energia, volume, presença de fala, acústica, instrumental, ao vivo, positividade e andamento. Os <span data-dado="limpeza.generos" data-casas="0">114</span> gêneros só voltam no fim, para conferir se os grupos fazem sentido.</p>
           </div>
-          <figure class="grafico" data-grafico="funil"></figure>
+          <figure class="grafico" data-grafico="funil"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula">Ver na aula (seção III) ↗</a>
       </div>
@@ -82,7 +82,7 @@
             <p data-i18n="escala.p1">O andamento vai de 30 a 243 BPM, e a maioria das outras características vai de 0 a 1. Na distância entre duas faixas da base, sem padronizar, o volume responde por <span data-dado="escala.sem_padronizar.2" data-casas="1">50,0</span>% e o andamento por <span data-dado="escala.sem_padronizar.8" data-casas="1">49,4</span>%. As outras sete características, juntas, não chegam a 1%.</p>
             <p data-i18n="escala.p2">Com a padronização (média 0 e desvio-padrão 1), todas passam a pesar na mesma moeda. Treinando sem ela, os 7 grupos viram 7 faixas de andamento, e a concordância com o modelo padronizado cai para um ARI de <span data-dado="escala.ari_sem_padronizar" data-casas="3">0,039</span>, numa escala em que 1 é idêntico e 0 é acaso.</p>
           </div>
-          <figure class="grafico" data-grafico="contribuicao"></figure>
+          <figure class="grafico" data-grafico="contribuicao"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula3">Ver na aula (seções III.5 e IV.4) ↗</a>
       </div>
@@ -100,7 +100,7 @@
             <p data-i18n="quantos.p2"><strong>Silhueta.</strong> Entre os candidatos, ela cresce de <span data-dado="k.silhuetas.4" data-casas="3">0,177</span> para <span data-dado="k.silhuetas.5" data-casas="3">0,189</span> e chega a <span data-dado="k.silhuetas.6" data-casas="3">0,196</span> com k = 7, a maior para três grupos ou mais.</p>
             <p data-i18n="quantos.p3"><strong>Interpretação.</strong> Com 7 grupos, cada um tem um perfil que dá para descrever e nomear. Com menos, perfis diferentes se misturam.</p>
           </div>
-          <figure class="grafico" data-grafico="k"></figure>
+          <figure class="grafico" data-grafico="k"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula4">Ver na aula (seção IV.1) ↗</a>
       </div>
@@ -122,7 +122,7 @@
           <li style="--cor: var(--g6)"><b data-i18n="grupo.6">Ao vivo</b><span><span data-dado="grupos.6.faixas" data-casas="0">6.213</span> · <span data-dado="grupos.6.pct" data-casas="1">6,9</span>%</span></li>
         </ol>
         <p class="cap-texto largo" data-i18n="grupos.p1">O mapa abaixo é a impressão digital de cada grupo: quantos desvios-padrão o centro do grupo está acima (vermelho) ou abaixo (azul) da média de todas as faixas, em cada característica. O grupo <em>Fala e comédia</em> tem só <span data-dado="grupos.3.pct" data-casas="1">1,2</span>% das faixas, mas fica quase 7 desvios acima da média em presença de fala: é pequeno porque é muito diferente de todo o resto.</p>
-        <figure class="grafico largo" data-grafico="perfis"></figure>
+        <figure class="grafico largo" data-grafico="perfis"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula5">Ver na aula (seções V.1 e V.2) ↗</a>
       </div>
     </section>
@@ -139,7 +139,7 @@
             <p data-i18n="brasil.p2">Na música brasileira, o forró (<span data-dado="generos.5.pct.0" data-casas="0">68</span>%) e o funk (<span data-dado="generos.6.pct.0" data-casas="0">69</span>%) são dançantes. Já o pagode (<span data-dado="generos.3.pct.6" data-casas="0">50</span>%), o sertanejo (<span data-dado="generos.2.pct.6" data-casas="0">44</span>%) e o samba (<span data-dado="generos.4.pct.6" data-casas="0">42</span>%) têm o grupo <em>Ao vivo</em> como principal.</p>
             <p data-i18n="brasil.p3">Testei a hipótese com os próprios dados. No pagode, <span data-dado="ao_vivo.3.no_grupo" data-casas="0">89</span>% das faixas desse grupo têm "ao vivo" no nome da faixa ou do álbum, contra <span data-dado="ao_vivo.3.fora" data-casas="0">35</span>% nos outros grupos. O algoritmo encontrou <strong>como a música foi gravada</strong>, e não o estilo dela.</p>
           </div>
-          <figure class="grafico" data-grafico="generos"></figure>
+          <figure class="grafico" data-grafico="generos"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula6">Ver na aula (seção V.3) ↗</a>
       </div>

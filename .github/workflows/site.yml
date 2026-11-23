@@ -24,7 +24,7 @@ permissions:
 
 concurrency:
   group: site-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   testes:
@@ -51,7 +51,10 @@ jobs:
       - name: Testes do exportador
         run: python -m pytest tests/test_exportar_dados_site.py -q
 
+      # Só em PR: na main, uma correção de texto não pode deixar de ser publicada porque uma
+      # versão nova de biblioteca mudou algum decimal na reexecução do notebook.
       - name: O aula.json está em dia com o notebook?
+        if: github.event_name == 'pull_request'
         run: python scripts/exportar_dados_site.py --checar
 
   publicar:

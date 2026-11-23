@@ -27,6 +27,22 @@ export function preencherDados(dados, idioma, raiz = document) {
   });
 }
 
+/** Guarda o número de reserva (em português) que o HTML traz em cada [data-dado]. */
+function lerReservas() {
+  const reservas = {};
+  document.querySelectorAll("[data-dado]").forEach(el => {
+    if (el.textContent.trim()) reservas[el.dataset.dado] = el.textContent.trim();
+  });
+  return reservas;
+}
+
+/** Sem o JSON, repõe os números de reserva nos textos que a troca de idioma deixou vazios. */
+function preencherReservas(reservas) {
+  document.querySelectorAll("[data-dado]").forEach(el => {
+    if (!el.textContent.trim() && reservas[el.dataset.dado]) el.textContent = reservas[el.dataset.dado];
+  });
+}
+
 function aplicarCores(dados) {
   dados.grupos.forEach(g => document.documentElement.style.setProperty("--g" + g.id, g.cor));
 }
@@ -43,6 +59,7 @@ function avisarSemDados() {
 }
 
 async function iniciar() {
+  const reservas = lerReservas();
   let dados = null;
   try {
     dados = await carregarDados();
@@ -51,7 +68,10 @@ async function iniciar() {
     avisarSemDados();
   }
   // A cada troca de idioma, os números voltam a ser escritos no formato certo.
-  document.addEventListener("idioma", () => { if (dados) preencherDados(dados, idiomaAtual()); });
+  document.addEventListener("idioma", () => {
+    if (dados) preencherDados(dados, idiomaAtual());
+    else preencherReservas(reservas);
+  });
   if (dados) aplicarCores(dados);
   iniciarIdioma();
   if (!dados) return;

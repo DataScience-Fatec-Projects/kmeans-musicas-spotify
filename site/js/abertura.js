@@ -160,12 +160,16 @@ export function iniciarAbertura(secao, dados) {
     fixa.style.setProperty("--progresso", progresso.toFixed(3));
   }
 
-  const pedir = () => { if (!pedido) pedido = requestAnimationFrame(desenhar); };
+  const pedir = () => {
+    if (secao.getBoundingClientRect().bottom < 0) return; // abertura fora da tela: nada a redesenhar
+    if (!pedido) pedido = requestAnimationFrame(desenhar);
+  };
   window.addEventListener("scroll", pedir, { passive: true });
   window.addEventListener("resize", redimensionar);
   if ("ResizeObserver" in window) new ResizeObserver(redimensionar).observe(fixa);
   semMovimento.addEventListener("change", redimensionar);
   document.addEventListener("idioma", () => { escreverNomes(); pedir(); });
+  secao.classList.add("animada");
   escreverNomes();
   redimensionar();
 }

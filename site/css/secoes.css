@@ -1,7 +1,9 @@
 /* Seções: abertura, capítulos, gráficos e simuladores. */
 
 /* ───────── Abertura ───────── */
-.abertura { height: 340vh; position: relative; }
+/* O trecho só fica alto (para o scroll comandar a animação) quando o script liga a abertura. */
+.abertura { position: relative; }
+.abertura.animada { height: 340vh; }
 .abertura-fixa { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .letreiro {
   position: absolute; top: 0; left: 0; right: 0;
@@ -173,6 +175,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .abertura { height: auto; }
+  .abertura.animada { height: auto; }
   .abertura-fixa { position: relative; }
 }
+.abertura:not(.animada) .abertura-rolar { display: none; }
