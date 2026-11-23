@@ -47,3 +47,10 @@ def test_checar_tolera_ruido_numerico(dados):
     outro = copy.deepcopy(dados)
     outro["k"]["inercias"][3] *= 1 + 1e-6
     assert checar(dados, outro) == []
+def test_porcentagens_inteiras_arredondadas_pelo_python(dados):
+    for g in dados["generos"]:
+        assert g["pct_int"] == [int(f"{v:.0f}") for v in g["pct"]]
+    pagode = next(g for g in dados["generos"] if g["genero"] == "pagode")
+    assert pagode["pct_int"][0] == 34 and pagode["pct_int"][6] == 50
+    for a in dados["ao_vivo"]:
+        assert isinstance(a["no_grupo_int"], int) and isinstance(a["fora_int"], int)

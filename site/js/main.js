@@ -48,7 +48,6 @@ function aplicarCores(dados) {
 }
 
 function avisarSemDados() {
-  document.documentElement.classList.add("sem-dados");
   document.querySelectorAll("[data-grafico], [data-simulador]").forEach(el => {
     const aviso = document.createElement("p");
     aviso.className = "aviso";

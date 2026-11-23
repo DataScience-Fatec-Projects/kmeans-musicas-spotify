@@ -8,8 +8,3 @@ export function formatar(valor, casas, idioma) {
     .toLocaleString(LOCALES[idioma] ?? LOCALES.pt, { minimumFractionDigits: casas, maximumFractionDigits: casas, roundingMode: "halfEven" })
     .replace("-", "−");
 }
-
-/** Formata uma porcentagem que já está na escala de 0 a 100. */
-export function formatarPct(valor, casas, idioma) {
-  return formatar(valor, casas, idioma) + "%";
-}

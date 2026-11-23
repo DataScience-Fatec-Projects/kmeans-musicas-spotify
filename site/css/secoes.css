@@ -30,7 +30,7 @@
 .abertura-resultado, .abertura-rolar { opacity: calc(1 - var(--fim, 0)); }
 .abertura-numero {
   display: block; font-weight: 900; letter-spacing: -0.055em; line-height: 0.82;
-  font-size: clamp(76px, 17vw, 300px);
+  font-size: clamp(64px, min(17vw, 30vh), 300px);
 }
 .abertura-legenda { display: block; margin-top: 16px; line-height: 1.15; font-size: clamp(19px, 2.3vw, 34px); letter-spacing: -0.02em; }
 .abertura-resultado { margin: 10px 0 0; font-size: clamp(16px, 1.5vw, 21px); color: var(--fraco); }
@@ -179,3 +179,12 @@
   .abertura-fixa { position: relative; }
 }
 .abertura:not(.animada) .abertura-rolar { display: none; }
+
+/* Telas baixas (celular deitado, janela larga e curta): o texto não pode encostar no letreiro. */
+@media (max-height: 560px) {
+  .abertura-texto { bottom: 54px; }
+  .abertura-legenda { font-size: 18px; margin-top: 8px; }
+  .abertura-resultado { font-size: 14px; margin-top: 4px; }
+  .abertura-autor { display: none; }
+  .letreiro { font-size: min(20.4vw, 42vh); }
+}

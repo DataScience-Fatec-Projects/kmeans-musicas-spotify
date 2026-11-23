@@ -6,6 +6,13 @@
   <title data-i18n="meta.titulo">K-Means: 89.583 músicas, 7 perfis de som · Wellington Melo</title>
   <meta name="description" content="Agrupei 89.583 músicas do Spotify só pelo som, sem informar nenhum gênero, e o K-Means encontrou 7 perfis. Veja as decisões, os gráficos e mexa nos simuladores.">
   <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="K-Means: 89.583 músicas, 7 perfis de som">
+  <meta property="og:description" content="Agrupei 89.583 músicas do Spotify só pelo som, sem informar nenhum gênero. Veja as decisões, os gráficos e mexa nos simuladores.">
+  <meta property="og:url" content="https://datascience-fatec-projects.github.io/kmeans-musicas-spotify/">
+  <meta property="og:image" content="https://datascience-fatec-projects.github.io/kmeans-musicas-spotify/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/secoes.css">
@@ -14,8 +21,8 @@
   <div class="grade" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
   <header class="topo">
-    <a class="marca" href="#abertura" aria-label="K-Means, início">K-MEANS</a>
-    <nav class="nav" aria-label="Seções">
+    <a class="marca" href="#abertura" aria-label="K-Means, início" data-i18n-aria="aria.marca">K-MEANS</a>
+    <nav class="nav" aria-label="Seções" data-i18n-aria="aria.nav">
       <a href="#abertura" data-i18n="nav.resultado">Resultado</a>
       <a href="#dados" data-i18n="nav.caminho">Caminho</a>
       <a href="#simuladores" data-i18n="nav.simuladores">Simuladores</a>
@@ -67,7 +74,7 @@
           </div>
           <figure class="grafico" data-grafico="funil"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
-        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula">Ver na aula (seção III) ↗</a>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=1faf9b97" target="_blank" rel="noopener" data-i18n="link.aula">Ver na aula (seção III) ↗</a>
       </div>
     </section>
 
@@ -84,7 +91,7 @@
           </div>
           <figure class="grafico" data-grafico="contribuicao"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
-        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula3">Ver na aula (seções III.5 e IV.4) ↗</a>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=06560053" target="_blank" rel="noopener" data-i18n="link.aula3">Ver na aula (seções III.5 e IV.4) ↗</a>
       </div>
     </section>
 
@@ -102,7 +109,7 @@
           </div>
           <figure class="grafico" data-grafico="k"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
-        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula4">Ver na aula (seção IV.1) ↗</a>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=4c108f66" target="_blank" rel="noopener" data-i18n="link.aula4">Ver na aula (seção IV.1) ↗</a>
       </div>
     </section>
 
@@ -123,7 +130,7 @@
         </ol>
         <p class="cap-texto largo" data-i18n="grupos.p1">O mapa abaixo é a impressão digital de cada grupo: quantos desvios-padrão o centro do grupo está acima (vermelho) ou abaixo (azul) da média de todas as faixas, em cada característica. O grupo <em>Fala e comédia</em> tem só <span data-dado="grupos.3.pct" data-casas="1">1,2</span>% das faixas, mas fica quase 7 desvios acima da média em presença de fala: é pequeno porque é muito diferente de todo o resto.</p>
         <figure class="grafico largo" data-grafico="perfis"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
-        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula5">Ver na aula (seções V.1 e V.2) ↗</a>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=07a36066" target="_blank" rel="noopener" data-i18n="link.aula5">Ver na aula (seções V.1 e V.2) ↗</a>
       </div>
     </section>
 
@@ -135,13 +142,13 @@
         <p class="cap-frase" data-i18n="brasil.frase">Sem ver nenhum gênero, o algoritmo colocou o pagode, o sertanejo e o samba no mesmo grupo. O motivo não é o estilo.</p>
         <div class="cap-colunas">
           <div class="cap-texto">
-            <p data-i18n="brasil.p1">Primeiro, a conferência: os grupos fazem sentido musical. <span data-dado="generos.12.pct.3" data-casas="0">81</span>% do gênero comedy caiu em <em>Fala e comédia</em>, <span data-dado="generos.7.pct.5" data-casas="0">74</span>% do classical em <em>Ambiente e clássico</em> e <span data-dado="generos.8.pct.4" data-casas="0">72</span>% do metal em <em>Intenso e pesado</em>.</p>
-            <p data-i18n="brasil.p2">Na música brasileira, o forró (<span data-dado="generos.5.pct.0" data-casas="0">68</span>%) e o funk (<span data-dado="generos.6.pct.0" data-casas="0">69</span>%) são dançantes. Já o pagode (<span data-dado="generos.3.pct.6" data-casas="0">50</span>%), o sertanejo (<span data-dado="generos.2.pct.6" data-casas="0">44</span>%) e o samba (<span data-dado="generos.4.pct.6" data-casas="0">42</span>%) têm o grupo <em>Ao vivo</em> como principal.</p>
-            <p data-i18n="brasil.p3">Testei a hipótese com os próprios dados. No pagode, <span data-dado="ao_vivo.3.no_grupo" data-casas="0">89</span>% das faixas desse grupo têm "ao vivo" no nome da faixa ou do álbum, contra <span data-dado="ao_vivo.3.fora" data-casas="0">35</span>% nos outros grupos. O algoritmo encontrou <strong>como a música foi gravada</strong>, e não o estilo dela.</p>
+            <p data-i18n="brasil.p1">Primeiro, a conferência: os grupos fazem sentido musical. <span data-dado="generos.12.pct_int.3" data-casas="0">81</span>% do gênero comedy caiu em <em>Fala e comédia</em>, <span data-dado="generos.7.pct_int.5" data-casas="0">74</span>% do classical em <em>Ambiente e clássico</em> e <span data-dado="generos.8.pct_int.4" data-casas="0">72</span>% do metal em <em>Intenso e pesado</em>.</p>
+            <p data-i18n="brasil.p2">Na música brasileira, o forró (<span data-dado="generos.5.pct_int.0" data-casas="0">68</span>%) e o funk (<span data-dado="generos.6.pct_int.0" data-casas="0">69</span>%) são dançantes. Já o pagode (<span data-dado="generos.3.pct_int.6" data-casas="0">50</span>%), o sertanejo (<span data-dado="generos.2.pct_int.6" data-casas="0">44</span>%) e o samba (<span data-dado="generos.4.pct_int.6" data-casas="0">42</span>%) têm o grupo <em>Ao vivo</em> como principal.</p>
+            <p data-i18n="brasil.p3">Testei a hipótese com os próprios dados. No pagode, <span data-dado="ao_vivo.3.no_grupo_int" data-casas="0">89</span>% das faixas desse grupo têm "ao vivo" no nome da faixa ou do álbum, contra <span data-dado="ao_vivo.3.fora_int" data-casas="0">35</span>% nos outros grupos. O algoritmo encontrou <strong>como a música foi gravada</strong>, e não o estilo dela.</p>
           </div>
           <figure class="grafico" data-grafico="generos"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
-        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula6">Ver na aula (seção V.3) ↗</a>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=99a86764" target="_blank" rel="noopener" data-i18n="link.aula6">Ver na aula (seção V.3) ↗</a>
       </div>
     </section>
 
@@ -159,6 +166,7 @@
         <h3 class="sim-titulo" data-i18n="sim.grupo.titulo">Em que grupo cairia a sua música?</h3>
         <p class="cap-texto largo" data-i18n="sim.grupo.p">Descreva uma música com os 9 controles. O simulador faz a mesma conta do modelo: padroniza os valores e procura o centro mais próximo. Essa conta dá o mesmo grupo que o modelo em 100% das <span data-dado="limpeza.faixas" data-casas="0">89.583</span> faixas.</p>
         <div class="simulador" data-simulador="grupo"><p class="aviso" data-i18n="aviso.sem_js">Este simulador precisa de JavaScript.</p></div>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=fb576acb" target="_blank" rel="noopener" data-i18n="link.aula8">Ver na aula (seções I.3 e V.2) ↗</a>
       </div>
     </section>
 
@@ -175,7 +183,7 @@
           <li><b data-i18n="limites.4t">Nem toda característica descreve estilo.</b><p data-i18n="limites.4p">A característica "ao vivo" mede a gravação. Por isso um grupo inteiro reflete o palco, e não o gênero.</p></li>
         </ol>
         <p class="cap-texto largo" data-i18n="limites.proximo"><strong>O que eu faria em seguida:</strong> testar modelos que aceitam sobreposição e dispensam a escolha de k (GMM e DBSCAN), e treinar de novo sem a característica "ao vivo", para ver onde o pagode, o samba e o sertanejo vão parar quando só o estilo conta.</p>
-        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="link.aula7">Ver na aula (seção V.4) ↗</a>
+        <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=6e60b772" target="_blank" rel="noopener" data-i18n="link.aula7">Ver na aula (seção V.4) ↗</a>
       </div>
     </section>
   </main>

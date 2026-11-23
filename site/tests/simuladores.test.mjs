@@ -68,3 +68,13 @@ test("as mensagens guardam números crus, para serem formatados no idioma da hor
   const fonte = (await import("node:fs")).readFileSync(new URL("../js/sim-passo.js", import.meta.url), "utf8");
   assert.doesNotMatch(fonte, /dizer\([^)]*formatar\(/);
 });
+test("dá para acrescentar um ponto sem mouse: ponto ao acaso, dentro dos limites", () => {
+  const e = criarEstadoPasso(pontos, 3, 1);
+  const lim = { x0: -10, x1: 10, y0: -5, y1: 5 };
+  e.acrescentarPontoAoAcaso(lim);
+  e.acrescentarPontoAoAcaso(lim);
+  assert.equal(e.pontos.length, 152);
+  const [a, b] = e.pontos.slice(-2);
+  assert.ok(a[0] >= -10 && a[0] <= 10 && a[1] >= -5 && a[1] <= 5);
+  assert.notDeepEqual(a, b);
+});

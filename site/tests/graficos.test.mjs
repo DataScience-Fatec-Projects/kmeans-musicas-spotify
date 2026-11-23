@@ -38,3 +38,10 @@ test("cores dos mapas de calor sempre deixam o texto legível (contraste AA)", (
   for (let v = -3; v <= 7; v += 0.25) assert.ok(contraste(rgb(corDivergente(v)), rgb(corDoTexto(corDivergente(v)))) >= 4.5, "divergente " + v);
   for (let v = 0; v <= 100; v += 5) assert.ok(contraste(rgb(corSequencial(v)), rgb(corDoTexto(corSequencial(v)))) >= 4.5, "sequencial " + v);
 });
+test("cada gráfico tem um nome acessível nos dois idiomas", async () => {
+  const { tituloDoGrafico } = await import("../js/graficos.js");
+  for (const nome of ["funil", "contribuicao", "k", "perfis", "generos"]) {
+    assert.ok(tituloDoGrafico(nome, "pt").length > 8);
+    assert.notEqual(tituloDoGrafico(nome, "pt"), tituloDoGrafico(nome, "en"));
+  }
+});

@@ -1,5 +1,5 @@
 // Simulador "K-Means passo a passo": o mesmo da aula (notebook, I.3), no visual da página.
-import { inicializar, atribuir, atualizar, inercia } from "./kmeans.js";
+import { inicializar, atribuir, atualizar, inercia, criarSorteador } from "./kmeans.js";
 import { formatar } from "./formato.js";
 import { t } from "./textos.js";
 import { idiomaAtual } from "./idioma.js";
@@ -40,6 +40,11 @@ export function criarEstadoPasso(pontosIniciais, k, semente) {
       this.rotulos = null; this.anteriores = null;
       if (this.centroides) this.fase = "inicializado";
     },
+    /** Acrescenta um ponto sorteado dentro dos limites: o caminho para quem usa só o teclado. */
+    acrescentarPontoAoAcaso(lim) {
+      const sorteio = criarSorteador(7919 + this.pontos.length);
+      this.acrescentarPonto([lim.x0 + sorteio() * (lim.x1 - lim.x0), lim.y0 + sorteio() * (lim.y1 - lim.y0)]);
+    },
     restaurar() { this.pontos = copiar(pontosIniciais); this.zerar(); },
     limpar() { this.pontos = []; this.zerar(); },
     zerar() { this.centroides = this.anteriores = this.rotulos = null; this.iteracao = 0; this.fase = "vazio"; },
@@ -62,6 +67,7 @@ export function iniciarSimuladorPasso(elemento, dados) {
       <button type="button" class="sim-passo" data-id="atualizar" data-t="simp.atualizar"></button>
       <button type="button" data-id="rodar"></button>
       <button type="button" data-id="novo" data-t="simp.novo"></button>
+      <button type="button" data-id="acaso" data-t="simp.acaso"></button>
       <button type="button" data-id="restaurar" data-t="simp.restaurar"></button>
       <button type="button" data-id="limpar" data-t="simp.limpar"></button>
     </div>
@@ -187,6 +193,12 @@ export function iniciarSimuladorPasso(elemento, dados) {
   el("atualizar").onclick = () => { parar(); fazerAtualizar(); };
   el("rodar").onclick = rodar;
   el("novo").onclick = () => { el("semente").value = (Number(el("semente").value) || 0) + 1; fazerInicializar(); };
+  el("acaso").onclick = () => {
+    parar();
+    estado.acrescentarPontoAoAcaso(lim);
+    dizer(estado.centroides ? "simp.msg.ponto" : "simp.msg.ponto_sem", { n: estado.pontos.length });
+    desenhar();
+  };
   el("restaurar").onclick = () => { parar(); estado.restaurar(); dizer("simp.msg.restaurado"); desenhar(); };
   el("limpar").onclick = () => { parar(); estado.limpar(); dizer("simp.msg.limpo"); desenhar(); };
   el("k").onchange = fazerInicializar;

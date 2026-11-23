@@ -36,3 +36,19 @@ test("cada ponto sai da posição espalhada e chega à posição real", () => {
   const [x] = posicaoDoPonto(0, 0.5, destino, espalhados);
   assert.ok(x > 0.3 && x < 0.9);
 });
+test("os nomes dos grupos não ficam uns sobre os outros nem sobre o próprio centroide", async () => {
+  const { posicoesDosNomes } = await import("../js/abertura.js");
+  const n = normalizarPontos(dados.pontos, dados.grupos.map(g => g.pca));
+  for (const [largura, altura, cx] of [[1440, 900, { x: 576, y: 243, l: 777, a: 558 }], [360, 780, { x: 29, y: 156, l: 302, a: 217 }]]) {
+    const centros = n.centroides.map(c => [cx.x + c[0] * cx.l, cx.y + c[1] * cx.a]);
+    const tam = largura < 760 ? { l: 132, a: 22 } : { l: 170, a: 26 };
+    const pos = posicoesDosNomes(centros, largura, altura, tam);
+    assert.equal(pos.length, 7);
+    for (let i = 0; i < 7; i++) {
+      assert.ok(pos[i].x - tam.l / 2 >= 0 && pos[i].x + tam.l / 2 <= largura, "nome fora da tela");
+      assert.ok(Math.abs(pos[i].y - centros[i][1]) >= tam.a / 2 + 8 || Math.abs(pos[i].x - centros[i][0]) >= tam.l / 2 + 8, "nome sobre o próprio centroide " + i);
+      for (let j = i + 1; j < 7; j++)
+        assert.ok(Math.abs(pos[i].x - pos[j].x) >= tam.l || Math.abs(pos[i].y - pos[j].y) >= tam.a, "nomes sobrepostos: " + i + " e " + j);
+    }
+  }
+});

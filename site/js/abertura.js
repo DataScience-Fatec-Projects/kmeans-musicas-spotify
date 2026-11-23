@@ -49,6 +49,34 @@ export function posicaoDoPonto(i, progresso, destino, espalhados) {
   ];
 }
 
+/** Onde escrever o nome de cada grupo: perto do seu centroide, sem cobrir nenhum centroide
+ *  nem outro nome, e dentro da tela. Devolve o centro de cada rótulo, na ordem dos grupos. */
+export function posicoesDosNomes(centros, largura, altura, tam) {
+  const colide = (a, b) => Math.abs(a.x - b.x) < tam.l && Math.abs(a.y - b.y) < tam.a;
+  const cobre = (p, c) => Math.abs(p.x - c[0]) < tam.l / 2 + 8 && Math.abs(p.y - c[1]) < tam.a / 2 + 8;
+  const postos = [];
+  const ordem = centros.map((c, g) => g).sort((a, b) => centros[a][1] - centros[b][1]);
+  const resultado = new Array(centros.length);
+  for (const g of ordem) {
+    const [cx, cy] = centros[g];
+    let melhor = null;
+    for (let n = 1; n <= 8 && !melhor; n++) {
+      const dy = tam.a / 2 + 14 + (n - 1) * tam.a, dx = tam.l / 2 + 16 + (n - 1) * 24;
+      const candidatos = [[0, -dy], [0, dy], [dx, 0], [-dx, 0], [dx, -dy], [-dx, -dy], [dx, dy], [-dx, dy]];
+      for (const [ox, oy] of candidatos) {
+        const p = { x: Math.min(largura - tam.l / 2, Math.max(tam.l / 2, cx + ox)), y: cy + oy };
+        if (p.y < tam.a || p.y > altura - tam.a) continue;
+        if (centros.some(c => cobre(p, c)) || postos.some(q => colide(p, q))) continue;
+        melhor = p;
+        break;
+      }
+    }
+    resultado[g] = melhor || { x: Math.min(largura - tam.l / 2, Math.max(tam.l / 2, cx)), y: cy - tam.a };
+    postos.push(resultado[g]);
+  }
+  return resultado;
+}
+
 const hexParaRgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
 const CINZA = [122, 122, 122];
 
@@ -102,18 +130,12 @@ export function iniciarAbertura(secao, dados) {
   }
 
   function posicionarNomes(cx, visibilidade) {
-    // afasta na vertical os nomes que ficariam um em cima do outro
-    const ordem = destino.centroides.map((c, g) => ({ g, x: cx.x + c[0] * cx.l, y: cx.y + c[1] * cx.a }))
-      .sort((p, q) => p.y - q.y);
-    for (let i = 1; i < ordem.length; i++) {
-      for (let j = 0; j < i; j++) {
-        if (Math.abs(ordem[i].x - ordem[j].x) < 150 && ordem[i].y - ordem[j].y < 30) ordem[i].y = ordem[j].y + 30;
-      }
-    }
-    ordem.forEach(p => {
-      const el = rotulos[p.g];
-      el.style.left = Math.min(largura - 70, Math.max(70, p.x)) + "px";
-      el.style.top = (p.y - 22) + "px";
+    const centros = destino.centroides.map(c => [cx.x + c[0] * cx.l, cx.y + c[1] * cx.a]);
+    const tam = largura < 760 ? { l: 132, a: 22 } : { l: 170, a: 26 };
+    posicoesDosNomes(centros, largura, altura, tam).forEach((p, g) => {
+      const el = rotulos[g];
+      el.style.left = p.x + "px";
+      el.style.top = p.y + "px";
       el.style.opacity = visibilidade;
     });
   }
@@ -165,8 +187,9 @@ export function iniciarAbertura(secao, dados) {
     if (!pedido) pedido = requestAnimationFrame(desenhar);
   };
   window.addEventListener("scroll", pedir, { passive: true });
-  window.addEventListener("resize", redimensionar);
+  // um só gatilho de redimensionamento, para não redesenhar em dobro
   if ("ResizeObserver" in window) new ResizeObserver(redimensionar).observe(fixa);
+  else window.addEventListener("resize", redimensionar);
   semMovimento.addEventListener("change", redimensionar);
   document.addEventListener("idioma", () => { escreverNomes(); pedir(); });
   secao.classList.add("animada");

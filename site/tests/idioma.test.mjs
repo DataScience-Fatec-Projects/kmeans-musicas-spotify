@@ -41,3 +41,14 @@ test("t() troca variáveis e recusa chave inexistente", () => {
   assert.match(t("graf.k.desc", "pt", { k: "7", silhueta: "0,196" }), /7.*0,196/);
   assert.throws(() => t("nao.existe", "pt"));
 });
+test("rótulos de acessibilidade (aria-label) também são traduzidos", () => {
+  const chaves = [...html.matchAll(/data-i18n-aria="([^"]+)"/g)].map(m => m[1]);
+  assert.ok(chaves.length >= 2);
+  for (const c of chaves) { assert.ok(TEXTOS.pt[c], "sem pt: " + c); assert.ok(TEXTOS.en[c], "sem en: " + c); }
+});
+test("texto que falta em inglês cai para o português, em vez de quebrar a página", () => {
+  const guardado = TEXTOS.en["graf.k.eixo"];
+  delete TEXTOS.en["graf.k.eixo"];
+  try { assert.equal(t("graf.k.eixo", "en"), TEXTOS.pt["graf.k.eixo"]); }
+  finally { TEXTOS.en["graf.k.eixo"] = guardado; }
+});

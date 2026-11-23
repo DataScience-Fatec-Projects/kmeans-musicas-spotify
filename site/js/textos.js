@@ -52,6 +52,15 @@ const pt = {
   "simg.distancias": "Distância até o centro de cada grupo (menor = mais parecido)",
   "simg.padronizada": "A sua música padronizada: quantos desvios-padrão cada valor está acima (+) ou abaixo (−) da média de todas as faixas",
 
+  "aria.marca": "K-Means, início",
+  "aria.nav": "Seções",
+  "simp.acaso": "Ponto ao acaso",
+  "graf.funil.titulo": "Limpeza dos dados em três etapas",
+  "graf.contribuicao.titulo": "Parte de cada característica na distância, antes e depois de padronizar",
+  "graf.k.titulo": "Inércia e silhueta por número de grupos",
+  "graf.perfis.titulo": "Mapa de calor: perfil dos 7 grupos",
+  "graf.generos.titulo": "Mapa de calor: gêneros por grupo",
+  "graf.rolagem": "Gráfico largo: role para o lado para ver tudo",
   "graf.funil.linhas": "linhas no conjunto de dados",
   "graf.funil.pares": "pares de faixa e gênero, depois da limpeza",
   "graf.funil.faixas": "faixas únicas, usadas no treino",
@@ -65,7 +74,6 @@ const pt = {
   "graf.k.inercia": "Inércia: quanto menor, mais compactos os grupos",
   "graf.k.silhueta": "Silhueta: quanto maior, mais separados os grupos",
   "graf.k.eixo": "número de grupos (k)",
-  "graf.k.escolhido": "k escolhido",
   "graf.k.desc": "Inércia para k de 1 a 10 e silhueta para k de 2 a 10. Com k = {k}, o valor escolhido, a silhueta é {silhueta}.",
 
   "graf.perfis.legenda": "Centro de cada grupo em desvios-padrão em relação à média de todas as faixas. Vermelho: acima da média. Azul: abaixo.",
@@ -115,6 +123,15 @@ const en = {
   "simg.distancias": "Distance to each cluster center (smaller = more alike)",
   "simg.padronizada": "Your song, standardized: how many standard deviations each value sits above (+) or below (−) the mean of all tracks",
 
+  "aria.marca": "K-Means, home",
+  "aria.nav": "Sections",
+  "simp.acaso": "Random point",
+  "graf.funil.titulo": "Data cleaning in three steps",
+  "graf.contribuicao.titulo": "Share of each feature in the distance, before and after standardization",
+  "graf.k.titulo": "Inertia and silhouette by number of clusters",
+  "graf.perfis.titulo": "Heatmap: profile of the 7 clusters",
+  "graf.generos.titulo": "Heatmap: genres by cluster",
+  "graf.rolagem": "Wide chart: scroll sideways to see it all",
   "graf.funil.linhas": "rows in the dataset",
   "graf.funil.pares": "track–genre pairs, after cleaning",
   "graf.funil.faixas": "unique tracks, used for training",
@@ -128,7 +145,6 @@ const en = {
   "graf.k.inercia": "Inertia: lower means tighter clusters",
   "graf.k.silhueta": "Silhouette: higher means better separated clusters",
   "graf.k.eixo": "number of clusters (k)",
-  "graf.k.escolhido": "chosen k",
   "graf.k.desc": "Inertia for k from 1 to 10 and silhouette for k from 2 to 10. With k = {k}, the chosen value, the silhouette is {silhueta}.",
 
   "graf.perfis.legenda": "Center of each cluster in standard deviations from the mean of all tracks. Red: above the mean. Blue: below.",
@@ -178,9 +194,9 @@ const en = {
 
   "brasil.titulo": "Brazil",
   "brasil.frase": "Without seeing a single genre, the algorithm put pagode, sertanejo and samba in the same cluster. The reason isn't style.",
-  "brasil.p1": `First, a sanity check: the clusters make musical sense. ${d("generos.12.pct.3")}% of the comedy genre landed in <em>Speech &amp; comedy</em>, ${d("generos.7.pct.5")}% of classical in <em>Ambient &amp; classical</em> and ${d("generos.8.pct.4")}% of metal in <em>Intense &amp; heavy</em>.`,
-  "brasil.p2": `In Brazilian music, forró (${d("generos.5.pct.0")}%) and funk (${d("generos.6.pct.0")}%) are danceable. But pagode (${d("generos.3.pct.6")}%), sertanejo (${d("generos.2.pct.6")}%) and samba (${d("generos.4.pct.6")}%) have <em>Live</em> as their main cluster.`,
-  "brasil.p3": `I tested the hypothesis with the data itself. In pagode, ${d("ao_vivo.3.no_grupo")}% of the tracks in that cluster have "ao vivo" (live) in the track or album name, against ${d("ao_vivo.3.fora")}% in the other clusters. The algorithm found <strong>how the music was recorded</strong>, not its style.`,
+  "brasil.p1": `First, a sanity check: the clusters make musical sense. ${d("generos.12.pct_int.3")}% of the comedy genre landed in <em>Speech &amp; comedy</em>, ${d("generos.7.pct_int.5")}% of classical in <em>Ambient &amp; classical</em> and ${d("generos.8.pct_int.4")}% of metal in <em>Intense &amp; heavy</em>.`,
+  "brasil.p2": `In Brazilian music, forró (${d("generos.5.pct_int.0")}%) and funk (${d("generos.6.pct_int.0")}%) are danceable. But pagode (${d("generos.3.pct_int.6")}%), sertanejo (${d("generos.2.pct_int.6")}%) and samba (${d("generos.4.pct_int.6")}%) have <em>Live</em> as their main cluster.`,
+  "brasil.p3": `I tested the hypothesis with the data itself. In pagode, ${d("ao_vivo.3.no_grupo_int")}% of the tracks in that cluster have "ao vivo" (live) in the track or album name, against ${d("ao_vivo.3.fora_int")}% in the other clusters. The algorithm found <strong>how the music was recorded</strong>, not its style.`,
   "link.aula6": "See it in the lesson, in Portuguese (section V.3) ↗",
 
   "sim.titulo": "Try it yourself",
@@ -204,6 +220,7 @@ const en = {
   "limites.4p": "The liveness feature measures the recording. That is why a whole cluster reflects the stage, not the genre.",
   "limites.proximo": "<strong>What I would do next:</strong> try models that allow overlap and don't require choosing k (GMM and DBSCAN), and retrain without the liveness feature, to see where pagode, samba and sertanejo end up when only style counts.",
   "link.aula7": "See it in the lesson, in Portuguese (section V.4) ↗",
+  "link.aula8": "See it in the lesson, in Portuguese (sections I.3 and V.2) ↗",
 
   "rodape.contexto": "Data Science · Final project for Algorithm Analysis, Fatec Jundiaí (Brazil), 2026",
   "rodape.colab": "Open the full lesson on Colab (in Portuguese) ↗",
@@ -213,9 +230,10 @@ const en = {
 
 export const TEXTOS = { pt, en };
 
-/** Texto dinâmico no idioma dado, com as {variáveis} trocadas. Chave inexistente é erro. */
+/** Texto dinâmico no idioma dado, com as {variáveis} trocadas. Se faltar no idioma, usa o
+ *  português; chave que não existe em nenhum dos dois é erro de programação. */
 export function t(chave, idioma, variaveis = {}) {
-  const texto = (TEXTOS[idioma] ?? TEXTOS.pt)[chave];
+  const texto = TEXTOS[idioma]?.[chave] || TEXTOS.pt[chave];
   if (typeof texto !== "string" || !texto) throw new Error("Texto sem tradução: " + chave + " (" + idioma + ")");
   return texto.replace(/\{(\w+)\}/g, (_, nome) => (nome in variaveis ? variaveis[nome] : "{" + nome + "}"));
 }
