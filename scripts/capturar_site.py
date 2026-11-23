@@ -140,10 +140,10 @@ def main() -> int:
                .replace("__ROLAR__", str(a.rolar)).replace("__SCRIPT__", extra))
 
     global MOLDURA
-    estreita = True  # sempre na moldura: a captura headless não acompanha a rolagem da janela
     MOLDURA = MOLDURA.replace("__L__", str(a.largura)).replace("__A__", str(a.altura))
     servidor = criar_servidor(injetar, a.sem_dados)
-    url = (f"http://127.0.0.1:{servidor.server_address[1]}/" + ("_moldura" if estreita else "")
+    # sempre na moldura: a captura headless não acompanha a rolagem da janela
+    url = (f"http://127.0.0.1:{servidor.server_address[1]}/_moldura"
            + (f"?lang={a.lang}" if a.lang else ""))
     SAIDA.mkdir(exist_ok=True)
     nome = a.nome or "-".join(filter(None, [

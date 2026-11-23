@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { formatar, formatarPct } from "../js/formato.js";
+import { formatar } from "../js/formato.js";
 
 test("formata inteiros por idioma", () => {
   assert.equal(formatar(89583, 0, "pt"), "89.583");
@@ -13,10 +13,6 @@ test("formata decimais por idioma", () => {
 test("usa o sinal de menos tipográfico", () => {
   assert.equal(formatar(-8.5, 1, "pt"), "−8,5");
   assert.equal(formatar(-8.5, 1, "en"), "−8.5");
-});
-test("formata porcentagem", () => {
-  assert.equal(formatarPct(30.7, 1, "pt"), "30,7%");
-  assert.equal(formatarPct(30.7, 1, "en"), "30.7%");
 });
 test("arredonda meios para o par, como o Python do notebook (34,5 → 34; 31,5 → 32)", () => {
   assert.equal(formatar(34.5, 0, "pt"), "34");

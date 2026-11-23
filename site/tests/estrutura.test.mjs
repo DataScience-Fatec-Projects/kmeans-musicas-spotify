@@ -46,3 +46,20 @@ test("a abertura só fica alta (trecho preso) quando o script a anima", () => {
   assert.doesNotMatch(css, /\.abertura \{[^}]*height: 340vh/);
   assert.match(css, /\.abertura\.animada \{[^}]*height: 340vh/);
 });
+test("os links 'ver na aula' apontam para células que existem no notebook", () => {
+  const nb = JSON.parse(ler("../notebooks/aula_kmeans_spotify.ipynb"));
+  const ids = new Set(nb.cells.map(c => c.id));
+  const ancoras = [...html.matchAll(/ipynb#scrollTo=([\w-]+)"/g)].map(m => m[1]);
+  assert.equal(ancoras.length, 7);
+  for (const id of ancoras) assert.ok(ids.has(id), "célula inexistente: " + id);
+});
+test("tem favicon e metadados para a prévia do link", () => {
+  assert.match(html, /<link rel="icon" href="favicon\.svg"/);
+  for (const p of ["og:title", "og:description", "og:image", "og:url", "og:type"])
+    assert.match(html, new RegExp('<meta property="' + p + '" content="[^"]+"'), p);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image"/);
+});
+test("porcentagens mostradas sem casas decimais usam o inteiro já arredondado pelo notebook", () => {
+  for (const m of html.matchAll(/data-dado="((?:generos|ao_vivo)\.[^"]+)" data-casas="0"/g))
+    assert.match(m[1], /_int/, "use o campo _int: " + m[1]);
+});

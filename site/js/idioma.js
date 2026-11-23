@@ -30,6 +30,8 @@ export function aplicarIdioma(idioma, raiz = document) {
     const traducao = atual === "pt" ? originais.get(el) : TEXTOS.en[el.dataset.i18n];
     if (traducao != null && el.innerHTML !== traducao) el.innerHTML = traducao;
   });
+  raiz.querySelectorAll("[data-i18n-aria]").forEach(el =>
+    el.setAttribute("aria-label", TEXTOS[atual][el.dataset.i18nAria] || TEXTOS.pt[el.dataset.i18nAria]));
   const descricao = document.querySelector('meta[name="description"]');
   if (descricao) descricao.setAttribute("content", TEXTOS[atual]["meta.descricao"]);
   document.documentElement.lang = atual === "pt" ? "pt-BR" : "en";

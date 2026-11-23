@@ -2,3 +2,4 @@
 # para que o SHA-256 registrado em data/README.md continue valendo.
 data/*.csv -text
 site/fonts/*.woff2 binary
+site/*.png binary

@@ -61,7 +61,7 @@ export function descreverPerfis(dados, idioma) {
 
 export function descreverGeneros(dados, idioma) {
   const aoVivo = dados.grupos.length - 1; // o grupo "Ao vivo" é o último
-  const pct = genero => formatar(dados.generos.find(g => g.genero === genero).pct[aoVivo], 0, idioma);
+  const pct = genero => formatar(dados.generos.find(g => g.genero === genero).pct_int[aoVivo], 0, idioma);
   return t("graf.generos.desc", idioma, { grupo: t("grupo." + aoVivo, idioma), pagode: pct("pagode"), sertanejo: pct("sertanejo"), samba: pct("samba") });
 }
 
@@ -159,7 +159,7 @@ function generos(dados, idioma, L) {
     L, rotLinha: 86, descricao: descreverGeneros(dados, idioma), separarApos: dados.generos.filter(g => g.br).length,
     linhas: dados.generos.map(g => ({ nome: g.genero })),
     colunas: dados.grupos.map(g => t("grupo." + g.id, idioma)),
-    valor: (i, j) => dados.generos[i].pct[j],
+    valor: (i, j) => dados.generos[i].pct_int[j],
     cor: corSequencial,
     texto: v => formatar(v, 0, idioma),
   });
@@ -173,6 +173,11 @@ const GRAFICOS = {
   generos: { desenhar: generos, minimo: 560, legenda: "graf.generos.legenda" },
 };
 
+/** Nome curto de cada gráfico, lido por leitores de tela. */
+export function tituloDoGrafico(nome, idioma) {
+  return t("graf." + nome + ".titulo", idioma);
+}
+
 /** Desenha (ou redesenha) todos os gráficos da página no idioma dado. */
 export function desenharGraficos(dados, idioma, raiz = document) {
   raiz.querySelectorAll("[data-grafico]").forEach(figura => {
@@ -182,7 +187,12 @@ export function desenharGraficos(dados, idioma, raiz = document) {
     const largura = Math.max(disponivel, g.minimo);
     const legenda = g.legenda ? `<figcaption>${escapar(t(g.legenda, idioma))}</figcaption>` : "";
     // gráfico mais largo que a coluna (mapas de calor no celular): rola dentro da própria figura
-    figura.innerHTML = `<div class="grafico-rolagem"${largura > disponivel ? ' tabindex="0"' : ""}>${g.desenhar(dados, idioma, largura)}</div>${legenda}`;
+    const titulo = escapar(tituloDoGrafico(figura.dataset.grafico, idioma)).replace(/"/g, "&quot;");
+    const desenho = g.desenhar(dados, idioma, largura)
+      .replace('role="img">', `role="img" aria-label="${titulo}"><title>${titulo}</title>`);
+    const rolavel = largura > disponivel
+      ? ` tabindex="0" role="group" aria-label="${escapar(t("graf.rolagem", idioma))}"` : "";
+    figura.innerHTML = `<div class="grafico-rolagem"${rolavel}>${desenho}</div>${legenda}`;
   });
 }
 
