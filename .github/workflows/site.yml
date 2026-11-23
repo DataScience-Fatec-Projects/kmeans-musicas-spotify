@@ -1,0 +1,75 @@
+name: Site (portfólio)
+
+# Testa a página de portfólio (pasta site/) e, na main, publica no GitHub Pages.
+# Não roda em mudanças só do notebook: um ajuste na aula nunca falha por causa do site.
+
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - "scripts/exportar_dados_site.py"
+      - "tests/test_exportar_dados_site.py"
+      - ".github/workflows/site.yml"
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "scripts/exportar_dados_site.py"
+      - "tests/test_exportar_dados_site.py"
+      - ".github/workflows/site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testes:
+    name: Testar o site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Testes da página (node --test)
+        run: node --test "site/tests/*.test.mjs"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Testes do exportador
+        run: python -m pytest tests/test_exportar_dados_site.py -q
+
+      - name: O aula.json está em dia com o notebook?
+        run: python scripts/exportar_dados_site.py --checar
+
+  publicar:
+    name: Publicar no GitHub Pages
+    needs: testes
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: publicacao
+        uses: actions/deploy-pages@v4

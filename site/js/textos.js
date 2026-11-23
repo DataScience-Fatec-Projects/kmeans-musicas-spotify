@@ -207,7 +207,6 @@ const en = {
   "rodape.contexto": "Data Science · Final project for Algorithm Analysis, Fatec Jundiaí (Brazil), 2026",
   "rodape.colab": "Open the full lesson on Colab (in Portuguese) ↗",
   "rodape.repo": "Project repository ↗",
-  "rodape.email": "Email ↗",
   "rodape.credito": "Data: Spotify Tracks Dataset by Maharshi Pandya (Hugging Face, BSD license). Page built with plain HTML, CSS and JavaScript; every number comes from the analysis notebook.",
 };
 

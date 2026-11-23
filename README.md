@@ -12,6 +12,8 @@ brasileira.
 
 > Projeto Final da disciplina ICD-004 Análise de Algoritmos (Fatec Jundiaí, Prof. Humberto
 > Zanetti), com entrega em **24/11/2026**. Link da aula: [`link_colab.txt`](link_colab.txt).
+> Página de apresentação do projeto, em português e inglês:
+> **<https://datascience-fatec-projects.github.io/kmeans-musicas-spotify/>**.
 > O andamento está no [board do projeto](https://github.com/orgs/DataScience-Fatec-Projects/projects/3).
 
 ## O que a aula cobre
@@ -114,6 +116,7 @@ specs/001-aula-kmeans-spotify/        # spec, plano, pesquisa, contrato, tarefas
 .claude/skills/                       # comandos /speckit-* para o Claude Code
 scripts/                              # validação do notebook e sincronização de issues
 docs/enunciado.md                     # enunciado original
+site/                                 # página de portfólio (GitHub Pages), ver site/README.md
 ```
 
 ## Roadmap
