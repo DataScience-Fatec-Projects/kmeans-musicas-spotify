@@ -63,12 +63,12 @@ _dados = {
                "grupo": [int(v) for v in rotulos[amostra_idx]]},
     "generos": [
         {"genero": g, "br": g in GENEROS_BR,
-         "pct": [round(100 * float(genero_x_cluster.loc[g, c]), 1) for c in range(K_ESCOLHIDO)]}
+         "pct": [round(100 * float(genero_x_cluster.loc[g, c]), 4) for c in range(K_ESCOLHIDO)]}
         for g in _generos
     ],
     "ao_vivo": [
-        {"genero": g, "no_grupo": round(100 * float(ao_vivo_br.loc[g, "no cluster Ao vivo"]), 1),
-         "fora": round(100 * float(ao_vivo_br.loc[g, "nos outros clusters"]), 1)}
+        {"genero": g, "no_grupo": round(100 * float(ao_vivo_br.loc[g, "no cluster Ao vivo"]), 4),
+         "fora": round(100 * float(ao_vivo_br.loc[g, "nos outros clusters"]), 4)}
         for g in GENEROS_BR
     ],
     "simulador_passo": dados_passo_a_passo,

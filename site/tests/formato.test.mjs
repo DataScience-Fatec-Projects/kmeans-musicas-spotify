@@ -18,3 +18,8 @@ test("formata porcentagem", () => {
   assert.equal(formatarPct(30.7, 1, "pt"), "30,7%");
   assert.equal(formatarPct(30.7, 1, "en"), "30.7%");
 });
+test("arredonda meios para o par, como o Python do notebook (34,5 → 34; 31,5 → 32)", () => {
+  assert.equal(formatar(34.5, 0, "pt"), "34");
+  assert.equal(formatar(31.5, 0, "pt"), "32");
+  assert.equal(formatar(0.5, 0, "en"), "0");
+});
