@@ -13,3 +13,4 @@ seaborn
 nbformat
 nbconvert
 ipykernel
+pytest
