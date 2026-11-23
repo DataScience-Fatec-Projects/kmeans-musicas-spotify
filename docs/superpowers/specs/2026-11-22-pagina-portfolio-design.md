@@ -214,3 +214,6 @@ licença. Os endereços do LinkedIn e do e-mail são informados pelo autor (pend
 Aprovado pelo autor em 2026-11-22, com o acréscimo do seletor de idioma PT / EN. Fica valendo a
 proposta de calendário: construir numa branch agora e fazer o merge na `main` e a publicação a
 partir de 25/11, depois da entrega da disciplina (constituição VI).
+
+**Revisto no mesmo dia (2026-11-22):** o autor liberou construir e publicar já, sem esperar
+25/11. Os links de LinkedIn e e-mail do rodapé (5.5) ficam de fora até ele informar os endereços.

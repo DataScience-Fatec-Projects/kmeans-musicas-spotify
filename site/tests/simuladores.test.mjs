@@ -64,3 +64,7 @@ test("toda mensagem dos simuladores existe nos dois idiomas", () => {
   assert.ok(chaves.length >= 20, "poucas chaves: " + chaves.length);
   for (const k of chaves) assert.ok(TEXTOS.en[k], "sem inglês: " + k);
 });
+test("as mensagens guardam números crus, para serem formatados no idioma da hora", async () => {
+  const fonte = (await import("node:fs")).readFileSync(new URL("../js/sim-passo.js", import.meta.url), "utf8");
+  assert.doesNotMatch(fonte, /dizer\([^)]*formatar\(/);
+});

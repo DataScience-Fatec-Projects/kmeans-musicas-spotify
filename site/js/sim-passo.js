@@ -133,7 +133,9 @@ export function iniciarSimuladorPasso(elemento, dados) {
     el("rodar").textContent = t(timer ? "simp.pausar" : "simp.rodar", idioma);
     el("iteracao").textContent = estado.iteracao;
     el("inercia").textContent = estado.inercia === null ? "–" : formatar(estado.inercia, 1, idioma);
-    el("status").innerHTML = t(mensagem.chave, idioma, mensagem.vars);
+    const vars = Object.fromEntries(Object.entries(mensagem.vars).map(([nome, v]) =>
+      [nome, typeof v === "number" && !Number.isInteger(v) ? formatar(v, 2, idioma) : v]));
+    el("status").innerHTML = t(mensagem.chave, idioma, vars);
     tela.setAttribute("aria-label", t("simp.tela", idioma, { n: estado.pontos.length, k: estado.k }));
     el("atribuir").disabled = !estado.centroides || ["convergiu", "atribuido"].includes(estado.fase) || !!timer;
     el("atualizar").disabled = estado.fase !== "atribuido" || !!timer;
@@ -157,7 +159,7 @@ export function iniciarSimuladorPasso(elemento, dados) {
   function fazerAtualizar() {
     estado.atualizar();
     if (estado.fase === "convergiu") dizer("simp.msg.convergiu", { iteracao: estado.iteracao });
-    else dizer("simp.msg.atualizado", { deslocamento: formatar(estado.deslocamento, 2, idiomaAtual()) });
+    else dizer("simp.msg.atualizado", { deslocamento: estado.deslocamento });
     desenhar();
   }
   function rodar() {

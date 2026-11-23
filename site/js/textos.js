@@ -190,6 +190,7 @@ const en = {
   "sim.grupo.titulo": "Which cluster would your song fall into?",
   "sim.grupo.p": `Describe a song with the 9 controls. The simulator does the same math as the model: it standardizes the values and looks for the nearest center. That math gives the same cluster as the model for 100% of the ${d("limpeza.faixas")} tracks.`,
   "aviso.sem_js": "This simulator needs JavaScript.",
+  "aviso.grafico_sem_js": "This chart needs JavaScript.",
 
   "limites.titulo": "Limits",
   "limites.frase": "The clusters make sense, but the method has limits, and all of them showed up here.",

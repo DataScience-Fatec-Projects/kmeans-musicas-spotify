@@ -33,3 +33,16 @@ test("a página declara o idioma e tem título e descrição", () => {
   assert.match(html, /<title[^>]*>[^<]{10,}<\/title>/);
   assert.match(html, /<meta name="description" content="[^"]{40,}"/);
 });
+test("o seletor de idioma fica fora da navegação rolável, para estar sempre visível", () => {
+  const nav = html.match(/<nav[\s\S]*?<\/nav>/)[0];
+  assert.doesNotMatch(nav, /data-idioma/);
+  assert.match(html, /data-idioma="en"/);
+});
+test("sem JavaScript, cada gráfico mostra um aviso em vez de ficar em branco", () => {
+  for (const m of html.matchAll(/<figure[^>]*data-grafico="(\w+)"[^>]*>([\s\S]*?)<\/figure>/g))
+    assert.match(m[2], /class="aviso"/, "figura vazia: " + m[1]);
+});
+test("a abertura só fica alta (trecho preso) quando o script a anima", () => {
+  assert.doesNotMatch(css, /\.abertura \{[^}]*height: 340vh/);
+  assert.match(css, /\.abertura\.animada \{[^}]*height: 340vh/);
+});

@@ -66,10 +66,10 @@ em { font-style: normal; border-bottom: 1px solid var(--fraco); }
   position: absolute; left: 20px;
   font-weight: 900; letter-spacing: -0.04em; text-decoration: none; font-size: 15px;
 }
-.nav { display: flex; align-items: center; gap: clamp(14px, 3vw, 44px); width: 100%; }
+.nav { display: flex; align-items: center; gap: clamp(14px, 3vw, 44px); flex: 1 1 auto; min-width: 0; }
 .nav a { text-decoration: none; white-space: nowrap; }
 .nav a:hover { text-decoration: underline; }
-.idiomas { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--fraco); }
+.idiomas { flex: none; margin-left: 16px; display: flex; align-items: center; gap: 6px; color: var(--fraco); }
 .idiomas button {
   font: inherit; color: var(--fraco); background: none; border: 0; padding: 6px 2px; cursor: pointer;
 }
@@ -101,9 +101,13 @@ main, .rodape { position: relative; z-index: 1; }
   .grade i:nth-child(2), .grade i:nth-child(3) { display: none; }
   .grade i:nth-child(4) { left: auto; right: 19px; }
   .marca { display: none; }
-  .topo { padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
-  .topo::-webkit-scrollbar { display: none; }
-  .nav { gap: 16px; }
+  .topo { padding: 0 12px 0 20px; }
+  /* só os links rolam; o seletor PT / EN fica fixo à direita, sempre visível */
+  .nav { gap: 16px; overflow-x: auto; scrollbar-width: none;
+         mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a:last-child { padding-right: 26px; }
+  .idiomas { margin-left: 6px; }
   .rodape-links { max-width: none; }
 }
 
