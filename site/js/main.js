@@ -4,6 +4,8 @@ import { iniciarIdioma, idiomaAtual } from "./idioma.js";
 import { t } from "./textos.js";
 import { iniciarAbertura } from "./abertura.js";
 import { iniciarGraficos } from "./graficos.js";
+import { iniciarSimuladorPasso } from "./sim-passo.js";
+import { iniciarSimuladorGrupo } from "./sim-grupo.js";
 
 /** Busca o aula.json (caminho relativo: a página fica numa subpasta do domínio). */
 export async function carregarDados() {
@@ -55,6 +57,8 @@ async function iniciar() {
   if (!dados) return;
   iniciarAbertura(document.getElementById("abertura"), dados);
   iniciarGraficos(dados, idiomaAtual);
+  iniciarSimuladorPasso(document.querySelector('[data-simulador="passo"]'), dados);
+  iniciarSimuladorGrupo(document.querySelector('[data-simulador="grupo"]'), dados);
 }
 
 iniciar();

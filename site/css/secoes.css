@@ -106,9 +106,53 @@
 .grafico .linha-eixo { stroke: var(--linha); stroke-width: 1; }
 .aviso { color: var(--fraco); font-size: 14px; border: 1px dashed var(--linha); padding: 18px; margin: 0; }
 
+/* ───────── Simuladores ───────── */
+.sim-titulo { margin: 9vh 0 14px; font-size: clamp(22px, 2.4vw, 34px); font-weight: 600; letter-spacing: -0.03em; }
+.simulador { border: 1px solid var(--linha); background: var(--cartao); padding: clamp(14px, 2vw, 26px); }
+.simulador button, .simulador select, .simulador input[type=number] {
+  font: inherit; font-size: 13.5px; color: var(--texto); background: transparent;
+  border: 1px solid #4a4a4a; border-radius: 999px; padding: 8px 15px; cursor: pointer;
+}
+.simulador select, .simulador input[type=number] { border-radius: 8px; padding: 7px 9px; background: var(--fundo); }
+.simulador input[type=number] { width: 76px; cursor: text; }
+.simulador button:hover:not(:disabled) { border-color: var(--texto); }
+.simulador button:disabled { opacity: 0.35; cursor: default; }
+.simulador button.sim-passo { background: var(--texto); color: var(--fundo); border-color: var(--texto); font-weight: 650; }
+.sim-controles { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; margin-bottom: 16px; }
+.sim-controles label, .sim-comecar { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fraco); }
+.sim-area { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(14px, 2vw, 28px); align-items: start; }
+.sim-area canvas { width: 100%; height: auto; display: block; background: var(--fundo); border: 1px solid var(--linha); cursor: crosshair; }
+.sim-painel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.sim-numeros { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sim-numeros > div { border-top: 1px solid var(--linha); padding-top: 8px; }
+.sim-numeros b { display: block; font-size: clamp(28px, 3.4vw, 48px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+.sim-rotulo { font-size: 12px; color: var(--fraco); }
+.sim-status { margin: 0; font-size: 14.5px; min-height: 5.6em; }
+.sim-legenda { margin: 0 0 8px; font-size: 12.5px; color: var(--fraco); }
+.sim-comecar { margin-bottom: 18px; max-width: 420px; }
+.sim-comecar select { width: 100%; }
+.sim-grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(18px, 3vw, 44px); align-items: start; }
+.sim-deslizantes { display: flex; flex-direction: column; gap: 10px; }
+.sim-deslizante { display: grid; grid-template-columns: 8.2em minmax(0, 1fr) 5.4em; gap: 10px; align-items: center; font-size: 14px; }
+.sim-deslizante input { width: 100%; accent-color: var(--texto); }
+.sim-valor { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; }
+.sim-resultado { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.sim-grupo { border-left: 8px solid var(--cor, #888); padding: 4px 0 4px 16px; display: flex; flex-direction: column; }
+.sim-grupo b { font-size: clamp(26px, 3.2vw, 46px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.08; }
+.sim-barra { display: grid; grid-template-columns: 11.5em minmax(0, 1fr) 3.2em; gap: 10px; align-items: center; font-size: 13px; margin: 5px 0; color: var(--fraco); }
+.sim-barra.perto { color: var(--texto); font-weight: 650; }
+.sim-barra > i { display: block; height: 8px; background: #262626; }
+.sim-barra > i > i { display: block; height: 100%; opacity: 0.5; }
+.sim-barra.perto > i > i { opacity: 1; }
+.sim-num { text-align: right; font-variant-numeric: tabular-nums; }
+.sim-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sim-chip { border: 1px solid #3a3a3a; border-radius: 999px; padding: 3px 10px; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+
 /* ───────── Responsivo ───────── */
 @media (max-width: 900px) {
   .cap-colunas { grid-template-columns: minmax(0, 1fr); }
+  .sim-area, .sim-grade { grid-template-columns: minmax(0, 1fr); }
+  .sim-status { min-height: 0; }
   .cap-texto { max-width: 60ch; }
 }
 @media (max-width: 760px) {
@@ -123,6 +167,9 @@
   .lista-limites li { grid-template-columns: 2.4em minmax(0, 1fr); }
   .lista-limites p { grid-column: 2; }
   .abertura-nomes span { font-size: 11px; padding: 2px 7px; }
+  .sim-deslizante { grid-template-columns: 6.6em minmax(0, 1fr) 4.6em; gap: 8px; font-size: 13px; }
+  .sim-barra { grid-template-columns: 9.4em minmax(0, 1fr) 2.8em; gap: 6px; font-size: 12px; }
+  .simulador button { padding: 8px 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
