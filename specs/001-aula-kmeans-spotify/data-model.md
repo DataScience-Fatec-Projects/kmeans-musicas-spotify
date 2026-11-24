@@ -78,6 +78,10 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
 - `rotulos = modelo.labels_`, com um valor por faixa de `df_faixas`. Ficam guardados também em
   `df_faixas['cluster']` (IV.2), que a Seção V usa para exemplos e para o merge.
 - `centroides_padronizados = modelo.cluster_centers_` (K × 9)
+- Estabilidade (IV.2): `estabilidade_sementes` treina o mesmo modelo com `SEMENTES_TESTE = [0, 1, 2, 3, 4]`
+  (só neste teste; o modelo continua com `RANDOM_STATE`), com `n_init` = 10 e 1, e compara com
+  `rotulos` pelo ARI e pela inércia. `sem_repeticao` deixa uma faixa por grupo de `audio_repetido`;
+  `ari_sem_repetidas` compara com `rotulos` o modelo treinado sem as repetições.
 - `centroides_originais = DataFrame(scaler.inverse_transform(...), columns=FEATURES)`
 - `perfil_clusters`: tabela por cluster com tamanho, % do total e centroides originais (V.1). A
   coluna `nome` entra na V.2, depois que `NOMES_CLUSTERS` existe.
