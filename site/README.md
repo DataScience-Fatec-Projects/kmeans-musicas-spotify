@@ -55,6 +55,7 @@ arquivo (`--rolar`, `--ancora`, `--lang`, `--script`, `--menos-movimento`, `--se
 | `js/formato.js`, `js/kmeans.js` | Lógica pura: formatação de números e o K-Means dos simuladores |
 | `js/abertura.js` | Os 6.000 pontos que se organizam conforme o scroll |
 | `js/graficos.js` | Os cinco gráficos, em SVG |
+| `js/escala.js` | A animação do capítulo Escala: dançabilidade × andamento na mesma régua, do valor original ao padronizado conforme o scroll |
 | `js/sim-passo.js`, `js/sim-grupo.js` | Os dois simuladores |
 
 ## Publicação

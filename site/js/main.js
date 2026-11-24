@@ -3,6 +3,7 @@ import { formatar } from "./formato.js";
 import { iniciarIdioma, idiomaAtual } from "./idioma.js";
 import { t } from "./textos.js";
 import { iniciarAbertura } from "./abertura.js";
+import { iniciarEscala } from "./escala.js";
 import { iniciarGraficos } from "./graficos.js";
 import { iniciarSimuladorPasso } from "./sim-passo.js";
 import { iniciarSimuladorGrupo } from "./sim-grupo.js";
@@ -48,7 +49,7 @@ function aplicarCores(dados) {
 }
 
 function avisarSemDados() {
-  document.querySelectorAll("[data-grafico], [data-simulador]").forEach(el => {
+  document.querySelectorAll("[data-grafico], [data-simulador], [data-animacao]").forEach(el => {
     const aviso = document.createElement("p");
     aviso.className = "aviso";
     aviso.dataset.i18n = "aviso.sem_dados";
@@ -76,6 +77,7 @@ async function iniciar() {
   if (!dados) return;
   iniciarAbertura(document.getElementById("abertura"), dados);
   iniciarGraficos(dados, idiomaAtual);
+  iniciarEscala(document.querySelector(".escala-palco"), dados);
   iniciarSimuladorPasso(document.querySelector('[data-simulador="passo"]'), dados);
   iniciarSimuladorGrupo(document.querySelector('[data-simulador="grupo"]'), dados);
 }

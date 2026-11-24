@@ -108,6 +108,36 @@
 .grafico .linha-eixo { stroke: var(--linha); stroke-width: 1; }
 .aviso { color: var(--fraco); font-size: 14px; border: 1px dashed var(--linha); padding: 18px; margin: 0; }
 
+/* ───────── Animação da escala (capítulo 02) ───────── */
+/* Como a abertura: o palco só fica alto (o scroll comanda a animação) quando o script o liga. */
+.esc-intro { margin-top: 9vh; }
+.escala-palco { position: relative; }
+.escala-palco.animada { height: 240vh; }
+.escala-palco.animada .escala-fixa {
+  position: sticky; top: 52px; height: calc(100vh - 52px); height: calc(100svh - 52px);
+  display: flex; align-items: center;
+}
+.escala-figura {
+  width: 100%; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 64px); align-items: center;
+}
+.escala-figura svg { width: 100%; max-width: min(560px, calc(100vh - 120px)); height: auto; overflow: visible; }
+.esc-moldura { fill: none; stroke: var(--linha); }
+.esc-ponto { fill: #8a8a8a; opacity: 0.55; }
+.esc-ab { stroke: #e2524a; stroke-width: 3; }
+.esc-cateto { stroke: var(--fraco); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.esc-a { fill: var(--g0); stroke: var(--fundo); stroke-width: 2; }
+.esc-b { fill: var(--g1); stroke: var(--fundo); stroke-width: 2; }
+.esc-rot { font-size: 15px; font-weight: 800; }
+.esc-nota { fill: var(--fraco); font-size: 13px; }
+.esc-estado { margin: 0 0 22px; font-size: clamp(26px, 3vw, 44px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
+.esc-titulo-barras { margin: 0 0 12px; font-size: 13px; color: var(--fraco); }
+.esc-barra { display: grid; grid-template-columns: 8.5em minmax(0, 1fr) 4em; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+.esc-barra i { display: block; height: 10px; background: #262626; }
+.esc-barra s { display: block; height: 100%; background: var(--texto); text-decoration: none; }
+.esc-barra b { text-align: right; font-variant-numeric: tabular-nums; }
+.esc-faixas { margin: 18px 0 0; font-size: 12.5px; color: var(--fraco); }
+
 /* ───────── Simuladores ───────── */
 .sim-titulo { margin: 9vh 0 14px; font-size: clamp(22px, 2.4vw, 34px); font-weight: 600; letter-spacing: -0.03em; }
 .simulador { border: 1px solid var(--linha); background: var(--cartao); padding: clamp(14px, 2vw, 26px); }
@@ -153,6 +183,14 @@
 /* ───────── Responsivo ───────── */
 @media (max-width: 900px) {
   .cap-colunas { grid-template-columns: minmax(0, 1fr); }
+  .escala-figura { grid-template-columns: minmax(0, 1fr); gap: 10px; justify-items: center; }
+  .escala-figura svg { max-width: min(520px, calc(100svh - 330px)); }
+  .esc-leitura { width: 100%; max-width: 520px; }
+  .esc-estado { margin-bottom: 10px; }
+  .esc-faixas { margin-top: 8px; }
+  .escala-figura .eixo { font-size: 17px; }
+  .escala-figura .esc-rot { font-size: 20px; }
+  .escala-figura .esc-nota { font-size: 15px; }
   .sim-area, .sim-grade { grid-template-columns: minmax(0, 1fr); }
   .sim-status { min-height: 0; }
   .cap-texto { max-width: 60ch; }
