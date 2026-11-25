@@ -46,6 +46,8 @@ Uma linha por `track_id`. É a **base de treino**.
 
 **Regras de validação**
 - `track_id` único em `df_faixas`.
+- `audio_repetido` (III.3): máscara das faixas com os 9 valores de áudio idênticos aos de outra faixa
+  (`track_id` diferente). Ficam na base; a IV.2 testa o modelo sem elas (`ari_sem_repetidas`).
 - Nenhum ausente nas `FEATURES`.
 - `tempo` > 0.
 - As features de uma faixa são iguais em todas as suas cópias de `df_pares` (verificado na
@@ -61,6 +63,8 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
 - `X = scaler.fit_transform(df_faixas[FEATURES])`. Depois disso, a média de cada coluna é ≈ 0 e o
   desvio-padrão ≈ 1 (verificado com uma tabela, FR-036).
 - `scaler` é guardado para reverter os centroides (`inverse_transform`).
+- `EIXOS_ESCALA = ['danceability', 'tempo']` e `idx_escala` (3.000 faixas sorteadas com
+  `RANDOM_STATE`): só para a figura da III.5 que compara a mesma régua sem e com padronização.
 
 ### Escolha de k: `inercias`, `silhuetas`, `K_ESCOLHIDO`
 - `inercias`: lista com a inércia de `KMeans(k, n_init=10, random_state=RANDOM_STATE).fit(X)` para
@@ -74,6 +78,10 @@ Uma linha por par (faixa, `track_genre`). Uma faixa tem de 1 a 9 gêneros.
 - `rotulos = modelo.labels_`, com um valor por faixa de `df_faixas`. Ficam guardados também em
   `df_faixas['cluster']` (IV.2), que a Seção V usa para exemplos e para o merge.
 - `centroides_padronizados = modelo.cluster_centers_` (K × 9)
+- Estabilidade (IV.2): `estabilidade_sementes` treina o mesmo modelo com `SEMENTES_TESTE = [0, 1, 2, 3, 4]`
+  (só neste teste; o modelo continua com `RANDOM_STATE`), com `n_init` = 10 e 1, e compara com
+  `rotulos` pelo ARI e pela inércia. `sem_repeticao` deixa uma faixa por grupo de `audio_repetido`;
+  `ari_sem_repetidas` compara com `rotulos` o modelo treinado sem as repetições.
 - `centroides_originais = DataFrame(scaler.inverse_transform(...), columns=FEATURES)`
 - `perfil_clusters`: tabela por cluster com tamanho, % do total e centroides originais (V.1). A
   coluna `nome` entra na V.2, depois que `NOMES_CLUSTERS` existe.
