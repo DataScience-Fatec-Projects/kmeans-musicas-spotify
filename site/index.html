@@ -91,6 +91,12 @@
           </div>
           <figure class="grafico" data-grafico="contribuicao"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
+        <p class="cap-texto largo esc-intro" data-i18n="escala.anim"><strong>Role e veja a régua mudar.</strong> Abaixo estão 600 faixas da base, desenhadas com a mesma régua nos dois eixos, que é como a distância euclidiana enxerga os dados. Sem padronizar, toda a dançabilidade cabe numa linha, e a distância entre as faixas A e B é quase só andamento. Conforme você rola, os dois eixos são padronizados.</p>
+        <div class="escala-palco">
+          <div class="escala-fixa">
+            <figure class="grafico escala-figura" data-animacao="escala"><p class="aviso" data-i18n="aviso.animacao_sem_js">Esta animação precisa de JavaScript.</p></figure>
+          </div>
+        </div>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=06560053" target="_blank" rel="noopener" data-i18n="link.aula3">Ver na aula (seções III.5 e IV.4) ↗</a>
       </div>
     </section>
@@ -106,6 +112,7 @@
             <p data-i18n="quantos.p1"><strong>Cotovelo.</strong> A curva da inércia é suave, sem uma dobra nítida, o que é comum em dados reais. Ela mostra que, depois de 7 grupos, cada grupo a mais rende pouco, e deixa como candidatos k = 5, 6 e 7.</p>
             <p data-i18n="quantos.p2"><strong>Silhueta.</strong> Entre os candidatos, ela cresce de <span data-dado="k.silhuetas.4" data-casas="3">0,177</span> para <span data-dado="k.silhuetas.5" data-casas="3">0,189</span> e chega a <span data-dado="k.silhuetas.6" data-casas="3">0,196</span> com k = 7, a maior para três grupos ou mais.</p>
             <p data-i18n="quantos.p3"><strong>Interpretação.</strong> Com 7 grupos, cada um tem um perfil que dá para descrever e nomear. Com menos, perfis diferentes se misturam.</p>
+            <p data-i18n="quantos.p4"><strong>Estabilidade.</strong> O K-Means parte de centros sorteados, então treinei o mesmo modelo com outras 5 sementes. Com 10 inicializações por treino, os grupos se repetem: ARI de <span data-dado="estabilidade.ari_n10_min" data-casas="3">0,986</span> a <span data-dado="estabilidade.ari_n10_max" data-casas="3">0,999</span>, numa escala em que 1 é idêntico. Com uma inicialização só, um dos sorteios parou numa solução pior (ARI de <span data-dado="estabilidade.ari_n1_min" data-casas="3">0,690</span>). E <span data-dado="estabilidade.audio_repetido" data-casas="0">9.255</span> faixas têm o áudio idêntico ao de outra, quase sempre a mesma gravação publicada duas vezes: treinar sem as repetições também dá quase o mesmo resultado (ARI de <span data-dado="estabilidade.ari_sem_repetidas" data-casas="3">0,975</span>).</p>
           </div>
           <figure class="grafico" data-grafico="k"><p class="aviso" data-i18n="aviso.grafico_sem_js">Este gráfico precisa de JavaScript.</p></figure>
         </div>
@@ -181,8 +188,9 @@
           <li><b data-i18n="limites.2t">Os grupos se sobrepõem.</b><p data-i18n="limites.2p">A silhueta é <span data-dado="k.silhuetas.6" data-casas="3">0,196</span>, numa escala que vai até 1. Uma música pode ser dançante e intensa, mas o K-Means obriga cada uma a ter um grupo só.</p></li>
           <li><b data-i18n="limites.3t">O método supõe grupos "redondos".</b><p data-i18n="limites.3p">Grupos alongados ou muito espalhados, como o de fala, acabam cortados de forma artificial.</p></li>
           <li><b data-i18n="limites.4t">Nem toda característica descreve estilo.</b><p data-i18n="limites.4p">A característica "ao vivo" mede a gravação. Por isso um grupo inteiro reflete o palco, e não o gênero.</p></li>
+          <li><b data-i18n="limites.5t">Nenhuma faixa fica de fora.</b><p data-i18n="limites.5p">O K-Means não tem a opção "nenhum grupo": toda faixa entra em algum, até as atípicas. Não fiz uma análise de outliers antes de agrupar, e as faixas de fala, as mais atípicas, acabaram formando um grupo próprio.</p></li>
         </ol>
-        <p class="cap-texto largo" data-i18n="limites.proximo"><strong>O que eu faria em seguida:</strong> testar modelos que aceitam sobreposição e dispensam a escolha de k (GMM e DBSCAN), e treinar de novo sem a característica "ao vivo", para ver onde o pagode, o samba e o sertanejo vão parar quando só o estilo conta.</p>
+        <p class="cap-texto largo" data-i18n="limites.proximo"><strong>O que eu faria em seguida:</strong> testar modelos que aceitam sobreposição e dispensam a escolha de k (GMM e DBSCAN), analisar os outliers antes de agrupar e treinar de novo sem a característica "ao vivo", para ver onde o pagode, o samba e o sertanejo vão parar quando só o estilo conta. Mais adiante, com uma base que tenha o áudio, eu agruparia embeddings de espectrogramas gerados por uma rede neural convolucional (CNN), em vez das 9 medidas do Spotify.</p>
         <a class="cap-link" href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb#scrollTo=6e60b772" target="_blank" rel="noopener" data-i18n="link.aula7">Ver na aula (seção V.4) ↗</a>
       </div>
     </section>
@@ -196,6 +204,7 @@
       <li><a href="https://colab.research.google.com/github/DataScience-Fatec-Projects/kmeans-musicas-spotify/blob/main/notebooks/aula_kmeans_spotify.ipynb" target="_blank" rel="noopener" data-i18n="rodape.colab">Abrir a aula completa no Colab ↗</a></li>
       <li><a href="https://github.com/DataScience-Fatec-Projects/kmeans-musicas-spotify" target="_blank" rel="noopener" data-i18n="rodape.repo">Repositório do projeto ↗</a></li>
       <li><a href="https://github.com/WellingtonTorres" target="_blank" rel="noopener">GitHub ↗</a></li>
+      <li><a href="https://www.linkedin.com/in/wellington-torres-79208158/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
     </ul>
     <p class="rodape-credito" data-i18n="rodape.credito">Dados: Spotify Tracks Dataset, de Maharshi Pandya (Hugging Face, licença BSD). Página feita em HTML, CSS e JavaScript puro; todos os números vêm do notebook da análise.</p>
   </footer>

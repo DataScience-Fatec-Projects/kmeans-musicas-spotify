@@ -38,6 +38,17 @@ test("o seletor de idioma fica fora da navegação rolável, para estar sempre v
   assert.doesNotMatch(nav, /data-idioma/);
   assert.match(html, /data-idioma="en"/);
 });
+test("o capítulo da escala tem a animação com scroll, com aviso sem JavaScript", () => {
+  assert.deepEqual(atributos("data-animacao"), ["escala"]);
+  const figura = html.match(/<figure[^>]*data-animacao="escala"[^>]*>([\s\S]*?)<\/figure>/);
+  assert.match(figura[1], /class="aviso"/);
+  const escala = html.match(/<section id="escala"[\s\S]*?<\/section>/)[0];
+  assert.match(escala, /class="escala-palco"/);
+});
+test("o palco da escala só fica alto (trecho preso) quando o script o anima", () => {
+  assert.doesNotMatch(css, /\.escala-palco \{[^}]*height/);
+  assert.match(css, /\.escala-palco\.animada \{[^}]*height: 240vh/);
+});
 test("sem JavaScript, cada gráfico mostra um aviso em vez de ficar em branco", () => {
   for (const m of html.matchAll(/<figure[^>]*data-grafico="(\w+)"[^>]*>([\s\S]*?)<\/figure>/g))
     assert.match(m[2], /class="aviso"/, "figura vazia: " + m[1]);

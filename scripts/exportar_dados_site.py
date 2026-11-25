@@ -29,6 +29,8 @@ import json as _json
 
 _generos = GENEROS_BR + GENEROS_CONTRASTE
 _centroides_originais = scaler.inverse_transform(centroides_padronizados)
+_sementes_n10 = estabilidade_sementes[estabilidade_sementes["n_init"] == 10]
+_sementes_n1 = estabilidade_sementes[estabilidade_sementes["n_init"] == 1]
 _dados = {
     "meta": {"notebook": "notebooks/aula_kmeans_spotify.ipynb", "k": int(K_ESCOLHIDO),
              "random_state": int(RANDOM_STATE)},
@@ -77,6 +79,31 @@ _dados = {
     ],
     "simulador_passo": dados_passo_a_passo,
     "simulador_grupo": dados_simulador,
+    # animação da escala (III.5): as faixas A e B, 600 das faixas de idx_escala e a média e o
+    # desvio do scaler nos dois eixos, para padronizar no navegador com a mesma conta da aula
+    "escala_anim": {
+        "eixos": list(EIXOS_ESCALA),
+        "media": [float(scaler.mean_[FEATURES.index(f)]) for f in EIXOS_ESCALA],
+        "desvio": [float(scaler.scale_[FEATURES.index(f)]) for f in EIXOS_ESCALA],
+        "a": [float(v) for v in df_faixas.iloc[0][EIXOS_ESCALA]],
+        "b": [float(v) for v in df_faixas.iloc[1][EIXOS_ESCALA]],
+        "pontos": [[round(float(x), 3), round(float(y), 2)]
+                   for x, y in df_faixas[EIXOS_ESCALA].to_numpy()[idx_escala[:600]]],
+    },
+    # estabilidade dos grupos (IV.2), copiada da tabela estabilidade_sementes
+    "estabilidade": {
+        "sementes": [int(s) for s in SEMENTES_TESTE],
+        "ari_n10": [float(v) for v in _sementes_n10["ARI com o modelo"]],
+        "ari_n1": [float(v) for v in _sementes_n1["ARI com o modelo"]],
+        "inercia_n1": [float(v) for v in _sementes_n1["inércia (% acima)"]],
+        "ari_n10_min": float(_sementes_n10["ARI com o modelo"].min()),
+        "ari_n10_max": float(_sementes_n10["ARI com o modelo"].max()),
+        "ari_n1_min": float(_sementes_n1["ARI com o modelo"].min()),
+        "inercia_n1_max": float(_sementes_n1["inércia (% acima)"].max()),
+        "ari_sem_repetidas": float(ari_sem_repetidas),
+        "audio_repetido": int(audio_repetido.sum()),
+        "faixas_sem_repeticao": int(sem_repeticao.sum()),
+    },
 }
 print("<<<DADOS_DO_SITE" + _json.dumps(_dados, ensure_ascii=False) + "DADOS_DO_SITE>>>")
 '''

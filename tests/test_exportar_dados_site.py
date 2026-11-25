@@ -54,3 +54,13 @@ def test_porcentagens_inteiras_arredondadas_pelo_python(dados):
     assert pagode["pct_int"][0] == 34 and pagode["pct_int"][6] == 50
     for a in dados["ao_vivo"]:
         assert isinstance(a["no_grupo_int"], int) and isinstance(a["fora_int"], int)
+
+
+def test_animacao_da_escala_e_estabilidade(dados):
+    anim = dados["escala_anim"]
+    assert anim["eixos"] == ["danceability", "tempo"] and len(anim["pontos"]) == 600
+    assert anim["a"] == [0.676, 87.917] and anim["b"] == [0.42, 77.489]
+    est = dados["estabilidade"]
+    assert est["sementes"] == [0, 1, 2, 3, 4] and len(est["ari_n10"]) == len(est["ari_n1"]) == 5
+    assert est["ari_n10_min"] == 0.986 and est["ari_n10_max"] == 0.999 and est["ari_n1_min"] == 0.69
+    assert round(est["ari_sem_repetidas"], 3) == 0.975 and est["audio_repetido"] == 9255

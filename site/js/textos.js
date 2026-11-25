@@ -82,6 +82,19 @@ const pt = {
   "graf.generos.legenda": "% das faixas de cada gênero em cada grupo. Acima da linha, os gêneros brasileiros; abaixo, gêneros internacionais de contraste.",
   "graf.generos.desc": "Mapa de calor de 13 gêneros pelos 7 grupos. No grupo {grupo}: pagode {pagode}%, sertanejo {sertanejo}% e samba {samba}%.",
 
+  "esc.titulo": "Animação: dançabilidade × andamento com a mesma régua, sem e com padronização",
+  "esc.desc": "Gráfico de dispersão de {n} faixas, dançabilidade × andamento, com a mesma escala nos dois eixos. Sem padronizar, a nuvem é uma linha vertical e o andamento responde por {sem}% da distância entre as faixas A e B. Padronizada, a nuvem se abre e a dançabilidade responde por {com}%.",
+  "esc.sem": "Sem padronizar",
+  "esc.meio": "Padronizando…",
+  "esc.com": "Padronizado",
+  "esc.eixo_x_sem": "dançabilidade (0 a 1)",
+  "esc.eixo_x_com": "dançabilidade (desvios-padrão)",
+  "esc.eixo_y_sem": "andamento (BPM)",
+  "esc.eixo_y_com": "andamento (desvios-padrão)",
+  "esc.nota": "← toda a dançabilidade,|de 0 a 1, cabe nesta linha",
+  "esc.parte": "Parte de cada característica na distância entre A e B",
+  "esc.faixas": "A: {a} · B: {b}",
+
 };
 
 // ───────── Inglês: textos dinâmicos e tradução dos textos do HTML ─────────
@@ -153,6 +166,19 @@ const en = {
   "graf.generos.legenda": "% of each genre's tracks in each cluster. Above the line, Brazilian genres; below, international genres for contrast.",
   "graf.generos.desc": "Heatmap of 13 genres across the 7 clusters. In the {grupo} cluster: pagode {pagode}%, sertanejo {sertanejo}% and samba {samba}%.",
 
+  "esc.titulo": "Animation: danceability × tempo on the same ruler, raw and standardized",
+  "esc.desc": "Scatter plot of {n} tracks, danceability × tempo, with the same scale on both axes. Raw, the cloud is a vertical line and tempo accounts for {sem}% of the distance between tracks A and B. Standardized, the cloud opens up and danceability accounts for {com}%.",
+  "esc.sem": "Raw values",
+  "esc.meio": "Standardizing…",
+  "esc.com": "Standardized",
+  "esc.eixo_x_sem": "danceability (0 to 1)",
+  "esc.eixo_x_com": "danceability (standard deviations)",
+  "esc.eixo_y_sem": "tempo (BPM)",
+  "esc.eixo_y_com": "tempo (standard deviations)",
+  "esc.nota": "← all of danceability,|from 0 to 1, fits in this line",
+  "esc.parte": "Share of each feature in the distance between A and B",
+  "esc.faixas": "A: {a} · B: {b}",
+
 
   // ── Textos do HTML ──
   "meta.titulo": "K-Means: 89,583 tracks, 7 sound profiles · Wellington Melo",
@@ -178,6 +204,7 @@ const en = {
   "escala.frase": "K-Means measures distance. Without standardization, only loudness and tempo would be heard.",
   "escala.p1": `Tempo ranges from 30 to 243 BPM, while most other features range from 0 to 1. In the distance between two tracks from the dataset, without standardization, loudness accounts for ${d("escala.sem_padronizar.2", 1)}% and tempo for ${d("escala.sem_padronizar.8", 1)}%. The other seven features together add up to less than 1%.`,
   "escala.p2": `With standardization (mean 0 and standard deviation 1), every feature is weighed in the same currency. Trained without it, the 7 clusters turn into 7 tempo bands, and agreement with the standardized model drops to an ARI of ${d("escala.ari_sem_padronizar", 3)}, on a scale where 1 is identical and 0 is chance.`,
+  "escala.anim": "<strong>Scroll and watch the ruler change.</strong> Below are 600 tracks from the dataset, drawn with the same ruler on both axes, which is how Euclidean distance sees the data. Raw, all of danceability fits in a single line, and the distance between tracks A and B is almost all tempo. As you scroll, both axes get standardized.",
   "link.aula3": "See it in the lesson, in Portuguese (sections III.5 and IV.4) ↗",
 
   "quantos.titulo": "How many clusters",
@@ -185,6 +212,7 @@ const en = {
   "quantos.p1": "<strong>Elbow.</strong> The inertia curve is smooth, with no sharp bend, which is common in real data. It shows that beyond 7 clusters each extra cluster buys little, and it leaves k = 5, 6 and 7 as candidates.",
   "quantos.p2": `<strong>Silhouette.</strong> Among the candidates, it rises from ${d("k.silhuetas.4", 3)} to ${d("k.silhuetas.5", 3)} and reaches ${d("k.silhuetas.6", 3)} at k = 7, the highest for three or more clusters.`,
   "quantos.p3": "<strong>Interpretability.</strong> With 7 clusters, each one has a profile I can describe and name. With fewer, different profiles get merged.",
+  "quantos.p4": `<strong>Stability.</strong> K-Means starts from randomly drawn centers, so I trained the same model with 5 other seeds. With 10 initializations per run, the clusters repeat: ARI from ${d("estabilidade.ari_n10_min", 3)} to ${d("estabilidade.ari_n10_max", 3)}, on a scale where 1 is identical. With a single initialization, one of the draws got stuck in a worse solution (ARI of ${d("estabilidade.ari_n1_min", 3)}). And ${d("estabilidade.audio_repetido")} tracks have the exact same audio as another one, almost always the same recording released twice: training without the repeats also gives nearly the same result (ARI of ${d("estabilidade.ari_sem_repetidas", 3)}).`,
   "link.aula4": "See it in the lesson, in Portuguese (section IV.1) ↗",
 
   "grupos.titulo": "The 7 clusters",
@@ -207,6 +235,7 @@ const en = {
   "sim.grupo.p": `Describe a song with the 9 controls. The simulator does the same math as the model: it standardizes the values and looks for the nearest center. That math gives the same cluster as the model for 100% of the ${d("limpeza.faixas")} tracks.`,
   "aviso.sem_js": "This simulator needs JavaScript.",
   "aviso.grafico_sem_js": "This chart needs JavaScript.",
+  "aviso.animacao_sem_js": "This animation needs JavaScript.",
 
   "limites.titulo": "Limits",
   "limites.frase": "The clusters make sense, but the method has limits, and all of them showed up here.",
@@ -218,7 +247,9 @@ const en = {
   "limites.3p": "Elongated or widely spread clusters, like the speech one, end up cut artificially.",
   "limites.4t": "Not every feature describes style.",
   "limites.4p": "The liveness feature measures the recording. That is why a whole cluster reflects the stage, not the genre.",
-  "limites.proximo": "<strong>What I would do next:</strong> try models that allow overlap and don't require choosing k (GMM and DBSCAN), and retrain without the liveness feature, to see where pagode, samba and sertanejo end up when only style counts.",
+  "limites.5t": "No track is left out.",
+  "limites.5p": "K-Means has no \"no cluster\" option: every track lands in one, even the atypical ones. I did not run an outlier analysis before clustering, and the speech tracks, the most atypical, ended up forming a cluster of their own.",
+  "limites.proximo": "<strong>What I would do next:</strong> try models that allow overlap and don't require choosing k (GMM and DBSCAN), analyze outliers before clustering, and retrain without the liveness feature, to see where pagode, samba and sertanejo end up when only style counts. Further ahead, with a dataset that includes the audio, I would cluster spectrogram embeddings produced by a convolutional neural network (CNN) instead of Spotify's 9 measurements.",
   "link.aula7": "See it in the lesson, in Portuguese (section V.4) ↗",
   "link.aula8": "See it in the lesson, in Portuguese (sections I.3 and V.2) ↗",
 
